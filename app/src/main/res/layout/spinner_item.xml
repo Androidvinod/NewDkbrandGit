@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="12sp"
+    android:gravity="center|left"
+    android:layout_marginTop="@dimen/padding8"
+    android:fontFamily="@font/montserrat_medium"
+    android:textColor="@color/black"
+    android:paddingLeft="@dimen/padding8"
+    android:paddingBottom="@dimen/padding8"
+    android:includeFontPadding="false"
+    android:paddingTop="@dimen/padding8"
+    android:paddingRight="@dimen/padding8"
+    />

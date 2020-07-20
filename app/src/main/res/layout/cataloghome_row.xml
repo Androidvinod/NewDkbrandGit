@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="@drawable/rounded_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/lv_category_click"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding5"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_catalog_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:lines="2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/montserrat_medium"
+            android:paddingLeft="@dimen/padding5"
+            android:paddingRight="@dimen/padding5"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_14"
+            />
+        <!--android:src="@drawable/one"-->
+    </LinearLayout>
+
+</LinearLayout>

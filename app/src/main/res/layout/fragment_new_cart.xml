@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/lightblue"
+    android:id="@+id/lv_cart_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:gravity="center"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_cart"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_20"
+                        app:titleTextAppearance="@style/Toolbar.TitleText"
+                        android:text="@string/cartlist"
+                        android:padding="@dimen/padding5"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.3"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/lv_nodata_cart"
+        layout="@layout/datanotfound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/lv_cartlist_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/lv_cart_Main">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="@dimen/padding5"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginTop="@dimen/padding10"
+            android:text="@string/cartlist_swipe_text"
+            android:textSize="@dimen/text_12" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cordinator_cart"
+            android:orientation="vertical">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_marginBottom="?attr/actionBarSize"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/padding5"
+                    android:paddingLeft="@dimen/padding5"
+                    android:paddingTop="@dimen/padding5"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    android:orientation="vertical">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_cartlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:visibility="visible"
+                        android:orientation="vertical"
+                        shimmer:duration="800">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+                            <include layout="@layout/rifles_row_placeholder" />
+
+
+
+
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recv_cart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:layout_marginBottom="?attr/actionBarSize"
+                        android:layoutAnimation="@anim/layout_animation_fall_down"
+                        />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:id="@+id/lv_subtotal_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="bottom|center"
+                    android:layout_marginBottom="@dimen/margin10">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center|start"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|center"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="Additional amount needed for Free Shipping : "
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_10" />
+                            <TextView
+                                android:id="@+id/tv_addlinal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|center"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text=""
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/text_10" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:fontFamily="@font/montserratbold"
+                                android:id="@+id/tv_cartt_subtotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center|start|top"
+                                android:text="@string/subtotal"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_14" />
+
+                            <TextView
+                                android:fontFamily="@font/montserratbold"
+                                android:id="@+id/tv_subtotal_valuecart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.8"
+                                android:gravity="center|end|top"
+                                android:text="$120,00"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:fontFamily="@font/montserratbold"
+                                android:id="@+id/tv_cart_tax"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center|start|top"
+                                android:text="@string/tax"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_14" />
+
+                            <TextView
+                                android:fontFamily="@font/montserratbold"
+                                android:id="@+id/tv_taxt_value_cart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.8"
+                                android:gravity="center|end|top"
+                                android:text="$100,00"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_weight="1.2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|start|top"
+                                android:text="Total : "
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/tetx_16"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_weight="2.8"
+                                android:id="@+id/tv_cart_subtotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|end|top"
+                                android:text="$000.00"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="@dimen/tetx_16"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:visibility="gone"
+                                android:layout_gravity="end"
+                                android:gravity="end"
+                                android:layout_marginLeft="100dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_update_cart"
+                                android:text="Update Cart"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lv_cart_checkout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding10"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/rounded_button_fill"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/padding10"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="@dimen/padding10">
+
+                        <TextView
+                            android:id="@+id/tv_stock_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Checkout"
+                            android:padding="@dimen/padding2"
+                            android:gravity="center"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_16" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

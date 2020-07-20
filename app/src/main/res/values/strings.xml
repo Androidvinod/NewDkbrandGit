@@ -1,0 +1,258 @@
+<resources>
+    <string name="app_name">DKBrænde</string>
+    <string name="title_activity_navigation">Zanders</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="back">Please press back again to exit</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favourite">Wishlist</string>
+    <string name="cart">Cart</string>
+    <string name="account">Account</string>
+    <string name="manufacturer">Manufacturers</string>
+    <string name="apply">Apply</string>
+    <string name="reset">RESET</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="instock">IN STOCK</string>
+    <string name="addtocart">Add to cart</string>
+    <string name="overview">QUICK OVERVIEW</string>
+    <string name="features">FEATURES</string>
+    <string name="info">ADDITIONAL INFORMATION</string>
+    <string name="close">close</string>
+    <string name="nointernet">Please connect to internet and try again</string>
+    <string name="retry">RETRY</string>
+    <string name="nointernett">No Connection.</string>
+    <string name="password">PASSWORD</string>
+    <string name="email_id">EMAIL ID</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="verifypassword">Verify Password</string>
+
+    <string name="createaccount">Create Account</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="alreadyaccount">Already have an account?</string>
+    <string name="forgot">Forgot Password ?</string>
+    <string name="createnewaccount">Create a new account</string>
+    <string name="forgot_title">Forgot Password</string>
+    <string name="Cancel">Cancel</string>
+    <string name="internet">Please connect to internet and try again</string>
+    <string name="wentwrong">Something went wrong..</string>
+    <string name="subcategorynotfound"></string>
+    <string name="productnot_found"></string>
+    <string name="offer">Offers</string>
+    <string name="favourits_swipe_text">Right swipe for add to cart and  left swipe for remove from wishlist</string>
+    <string name="cartlist_swipe_text">Right swipe for add to wishlist and  left swipe for remove from cartlist</string>
+    <string name="vall">Please enter 3 or more characters</string>
+    <string name="removeitemm">Are you sure you want to remove this item ?</string>
+    <string name="removeitem">Remove Item</string>
+    <string name="Remove">Remove</string>
+    <string name="cancel">Cancel</string>
+    <string name="pwsixval">Please enter 6 or more characters without leading or trailing spaces.</string>
+
+    <string name="enteremail">Please enter your email address</string>
+    <string name="enterpw">Please enter your password</string>
+    <string name="entervalidemail">Please enter valid email address</string>
+    <string name="checkout">Checkout</string>
+    <string name="billing">BILLING ADDRESS</string>
+    <string name="change">Change</string>
+    <string name="shippoing">SHIPPING INFORMATION</string>
+    <string name="shippoingmethod">SHIPPING METHOD</string>
+    <string name="paymentinfo">PAYMENT METHOD</string>
+    <string name="orderreview">ORDER REVIEW</string>
+    <string name="snippable">Shippable Subtotal : </string>
+    <string name="subtotal">Subtotal : </string>
+    <string name="shippinghandling"><![CDATA[Shipping & Handling :]]></string>
+    <string name="grandtotal">Grand Total : </string>
+    <string name="shippablemain">Grand Total : </string>
+    <string name="order_now">Place Order</string>
+
+
+    <!-- my account -->
+    <string name="Accountdeashbord">Account Dashboard</string>
+    <string name="Accountinformation">Account Information</string>
+    <string name="addressbook">Address Book</string>
+    <string name="chnagepassword">Change Password</string>
+    <string name="myorder">My Orders</string>
+    <string name="myivoice">My Invoice</string>
+    <string name="mywishlist">My wishlist</string>
+    <string name="closeoutproduct">Closeout Product</string>
+    <string name="aboutus">About Us</string>
+    <string name="termsandcondition">Terms &amp; Conditions</string>
+    <string name="freightpolicy">Freight Policy</string>
+    <string name="logout">Logout</string>
+
+    <string name="logoutmessge">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="intcon">Please Check your Internet Connection</string>
+    <!-- address book -->
+    <string name="defaultmessge">Default Billing Address</string>
+    <string name="defaultmessgeshipping">Default Shipping Address</string>
+    <string name="additionaladdress">Additional Address Entries</string>
+    <string name="addbook">Address Book</string>
+    <string name="additionaladdressmessge">You have no additional address entries in your address book.</string>
+
+
+    <string name="contact_info">Contact Information</string>
+    <string name="customer_info">Customer Information</string>
+    <string name="customer_number">Customer Number : </string>
+    <string name="address_book">Address Book</string>
+    <string name="default_billing_address">DEFAULT BILLING ADDRESS</string>
+    <string name="default_shipping_address">DEFAULT SHIPPING ADDRESS</string>
+    <string name="cartempty">Shopping cart is empty.</string>
+    <string name="orderno">Order No : </string>
+    <string name="status">Status : </string>
+    <string name="date">Date : </string>
+    <string name="shipto">Ship to : </string>
+    <string name="ordertotal">Order Total : </string>
+    <string name="Favourites">Wishlist</string>
+    <string name="offers">Offers</string>
+    <string name="cartlist">Cart list</string>
+    <string name="price">Price : </string>
+    <string name="special">Special Price : </string>
+    <string name="quantity">Please enter quantity</string>
+    <string name="quantity_messge">Please enter a number greater than 0</string>
+    <string name="addtowishlist">Add to Wishlist</string>
+    <string name="removeformwishlist">Remove from Wishlist</string>
+
+    <!-- Change password-->
+    <string name="Changepw">Change Password</string>
+    <string name="current_pw">CURRENT PASSWORD</string>
+    <string name="new_pw">NEW PASSWORD</string>
+    <string name="confirm_new_pw">CONFIRM NEW PASSWORD</string>
+    <string name="entercurrentpw">Enter current password</string>
+    <string name="enternewpw">Enter New password</string>
+    <string name="enterconfirmpw">Enter confirm password</string>
+    <string name="pwmatch">Password does not match</string>
+
+    <string name="msrp">MSRP : </string>
+        <string name="logout_message">Logged out successfully</string>
+
+    <string name="currentterms">Your Current Terms</string>
+    <string name="select">Select</string>
+    <string name="shiporpick">SHIP OR PICK UP DATE(YYYY/MM/DD) <font fgcolor="red">*</font></string>
+    <string name="hint"><![CDATA[SHIP OR PICK UP DATE(YYYY/MM/DD)<font color=\'#cc0029\'>*</font>]]></string>
+
+    <string name="ordernumber">PURCHASE ORDER NUMBER</string>
+    <string name="comment">COMMENTS</string>
+    <string name="creditcards">Credit Card</string>
+    <string name="pricequoted">Prices quoted reflect a 3%  cash discount that can not be earned  for credit  card orders (See Terms)</string>
+    <string name="shipdate">SHIP DATE <font fgcolor="red">*</font></string>
+    <string name="cardnumber">CREDIT CARD NUMBER <font fgcolor="red">*</font></string>
+    <string name="varificationno">CARD VERIFICATION NUMBER <font fgcolor="red">*</font></string>
+    <string name="month">Month</string>
+    <string name="expirationdate">EXPIRATION DATE <font fgcolor="red">*</font></string>
+    <string name="year">Year</string>
+    <string name="pickupdate_validation">Please Enter shipping or pick up date</string>
+    <string name="order_success">Order placed Sucessfully</string>
+    <string name="thankyou">Thank you so much for your order.</string>
+    <string name="shippingdate"> Please enter ship date</string>
+    <string name="shippingdateinvalid">ship date is in invalid format</string>
+    <string name="creditcardnumer">Please enter credit card number </string>
+    <string name="cardno_invalid">Credit card number is invalid </string>
+    <string name="monthvaidate">Please Enter Month</string>
+    <string name="exirationdate">Please enter expiration date </string>
+    <string name="yearvalidate">Please enter Year</string>
+    <string name="varify_number">Please enter card verification number </string>
+    <string name="varify_inalid"> Card verification number is invalid </string>
+    <string name="Manufacturers">Manufacturers</string>
+    <string name="outofstock">Out of stock</string>
+    <string name="closeout">Closeout Product</string>
+    <string name="searcgnofound">Search not found.</string>
+
+
+    <string name="name">Name <font fgcolor="red">*</font></string>
+    <string name="address">ADDRESS<font fgcolor="red">*</font></string>
+    <string name="name_hint">Enter your name</string>
+    <string name="emailtitle">EMAIL ADDRESS <font fgcolor="red">*</font></string>
+    <string name="requerd"><font fgcolor="red">*</font> Required Field</string>
+    <string name="nameeee">NAME <font fgcolor="red">*</font></string>
+
+    <string name="order">My Orders</string>
+    <string name="vieworder">View Order</string>
+    <string name="noorder">You have not requested any order yet..</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort : </string>
+    <string name="namee">NAME *</string>
+    <string name="map">MAP : </string>
+    <string name="Catalogs">Catalogs</string>
+    <string name="search_hint">Search Here..</string>
+    <string name="war">WARNING</string>
+    <string name="ok">OK</string>
+
+
+    <string name="enterfirstname">Please Enter First name</string>
+    <string name="enterlastname">Please Enter Last name</string>
+    <string name="enteremailaddress">Please Enter Email Address</string>
+    <string name="entermobilenumber">Please Enter Mobile Number</string>
+    <string name="entercivilid">Please Enter Civil ID</string>
+    <string name="enterweight">Please Enter Weight</string>
+    <string name="enterheight">Please Enter Height</string>
+    <string name="selectoption">Please Select Any Option</string>
+    <string name="enteraddress">Please Enter Address</string>
+    <string name="enterzip">Please Enter Zip</string>
+    <string name="enterdistrict">Please Enter District</string>
+    <string name="enterphonenumber">Please Enter Phone Number</string>
+    <string name="validemail">Please Enter Valid Email Address</string>
+    <string name="validpassword">Password must be at least 8 characters long</string>
+
+    <string name="tax">Tax :</string>
+    <string name="discount">Discount :</string>
+    <string name="total">Total :</string>
+    <string name="edit">Edit</string>
+    <string name="userinfo">User Info</string>
+    <string name="createadd">Add New Address</string>
+
+
+    <string name="accinfo">Account Information</string>
+    <string name="addnewAddress"> ADD NEW ADDRESS </string>
+    <string name="save"> SAVE </string>
+    <string name="fullname">Enter Fullname</string>
+    <string name="phoneno">Enter Phone number</string>
+    <string name="myaccount">MY ACCOUNT</string>
+    <string name="my_details">My Details</string>
+
+    <string name="typeyourfname">Type your first name</string>
+
+    <string name="typeyourlname">Type your last name</string>
+    <string name="phonenumber">Phone Number</string>
+    <string name="typephonewithcc">Type your country code and phone number</string>
+    <string name="streetadd">Street Address</string>
+    <string name="typeyourstreetadd">Type our street address</string>
+    <string name="district">District</string>
+    <string name="typeyourdistrict">Type your district</string>
+    <string name="city">City</string>
+    <string name="choosecity">Choose your city</string>
+    <string name="country">Country</string>
+    <string name="choosecountry">Choose your country</string>
+    <string name="emailaddresss">Email Address</string>
+
+    <string name="updatemydetails">Update my Details</string>
+    <string name="postalcode">Postal Code</string>
+
+    <string name="editadd">Edit Address</string>
+    <string name="editdetails">Edit Details</string>
+
+    <string name="entercity">Please Enter City</string>
+    <string name="entercountry">Please Enter Country</string>
+    <string name="enterpostalcode">Please Enter PodtalCode</string>
+    <string name="entervalidmobileno">Please enter valid mobile no</string>
+    <string name="selectcountry">Select Country</string>
+    <string name="selectecountry">Select Country</string>
+    <string name="privacypolicy">Privacy Policy</string>
+    <string name="vouchercode">Copoun Code</string>
+    <string name="spprice">Sp. Price :</string>
+    <string name="remove">REMOVE</string>
+</resources>

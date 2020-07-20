@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="@dimen/padding8"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="2"
+        android:visibility="visible"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginLeft="@dimen/padding5"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Short Description"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+</LinearLayout>

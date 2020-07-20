@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lv_main_product_row_verticle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding10"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="@dimen/padding5"
+    app:cardCornerRadius="@dimen/padding5"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/padding20"
+        android:layout_marginTop="@dimen/padding20"
+        android:visibility="gone"
+        android:id="@+id/lv_pb_prod_verticle">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/lv_prod_verticle_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lv_varticale"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="visible"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.6"
+                android:orientation="vertical"
+                android:paddingRight="@dimen/padding10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding5">
+
+                    <ImageView
+                        android:id="@+id/iv_product_verticle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1.4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_product_name_verticle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.4"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:lines="2"
+                        android:text="ffffffffffffffffff"
+                        android:maxLines="2"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/lv_product_wishlist_verticle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="end|top"
+                        android:layout_weight="1.5"
+                        android:gravity="top|center">
+
+                        <ImageView
+                            android:id="@+id/iv_product_add_wishlist"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="@dimen/padding3"
+                            android:tint="@color/colorPrimaryDark"
+                            android:src="@drawable/ic_favorite_border_black_24dp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:tint="@color/colorPrimaryDark"
+                            android:id="@+id/iv_product_remove_wishlist"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="@dimen/padding3"
+                            android:src="@drawable/ic_favorite_black_24dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lv_pricel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_rifles_lv_price_titlel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Price : "
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rifles_lv_pricel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding5"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lv_Specialprice_verticle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start|top"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginTop="@dimen/padding5"
+                        android:id="@+id/tv_specialprice_title_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/spprice"
+                        android:textColor="@color/black"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:textSize="@dimen/text_12"
+                        android:visibility="visible"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/padding5"
+                        android:includeFontPadding="false"
+                        android:id="@+id/tv_specialprice_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:layout_marginLeft="@dimen/padding5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_12"
+                        android:text=" "
+                        android:visibility="visible"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:text="gfhfhfhgfh"
+                    android:id="@+id/tv_verticle_tierprice"
+                    android:layout_width="match_parent"
+                    android:gravity="center|start"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="@dimen/padding8"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_14"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/lv_product_add_to_cart_verticle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:background="@drawable/rounded_button_fill"
+                    android:gravity="center"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="@dimen/padding5"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="@dimen/padding5">
+
+                    <TextView
+                        android:id="@+id/tv_product_add_to_cart_verticle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:text="@string/addtocart"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

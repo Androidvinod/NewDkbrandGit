@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lv_closeout_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_closeout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserratbold"
+                android:gravity="center"
+                android:padding="@dimen/padding5"
+                android:text="@string/closeout"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_14"
+                android:textStyle="bold"
+                app:titleTextAppearance="@style/Toolbar.TitleText" />
+                    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lv_closeout_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/lvnodata_closeout"
+        layout="@layout/datanotfound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_closeout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightblue"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/lv_maincategoty_products_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/padding10"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3.7"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:layout_weight="1.7"
+                    android:gravity="center|start"
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Filter"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/lv_filter_closeout"
+                        android:layout_width="match_parent"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="@dimen/padding10"
+                        android:background="@drawable/rounded_corner_layout"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/padding10"
+                        android:paddingRight="@dimen/padding10">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Total Filter[4]"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/padding5"
+                    android:layout_weight="1.5"
+                    android:gravity="center|end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_sort_by_closout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Sort:"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <!--   <LinearLayout
+                           android:id="@+id/lv_spinner_closeout"
+                           android:layout_width="wrap_content"
+                           android:layout_height="30sp"
+                           android:layout_marginLeft="@dimen/padding10"
+                           android:layout_marginTop="5dp"
+                           android:layout_marginBottom="@dimen/padding5"
+                           android:background="@drawable/rounded_corner_layout"
+                           android:gravity="center">
+
+                           <Spinner
+                               android:id="@+id/spinner_closeout"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+
+                       </LinearLayout>-->
+                    <RelativeLayout
+                        android:id="@+id/lv_spinner_closeout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding5"
+                        android:background="@drawable/rounded_corner_layout"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/spinner_closeout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:gravity="center|start"
+                            android:overlapAnchor="false"
+                            android:spinnerMode="dropdown" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/padding5"
+                            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lv_asc_desc_arrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center"
+                    android:layout_weight="2.8"
+                    android:gravity="center|end">
+
+                    <ImageView
+                        android:id="@+id/iv_product_up_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_red_up" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nested_scroll_closeout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_closeout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:orientation="vertical"
+                            android:visibility="visible"
+                            shimmer:duration="800">
+
+                            <!-- Adding 7 rows of placeholders -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                                <include layout="@layout/rifles_row_placeholder" />
+
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_closeout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding10"
+                            android:layoutAnimation="@anim/layout_animation_fall_down" />
+
+                        <LinearLayout
+                            android:id="@+id/lv_progress_closeout_bottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding10"
+                            android:gravity="center"
+                            android:visibility="gone">
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:indeterminateDrawable="@drawable/progressbar_ui" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_fab_closeout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_view_list_white_36dp"
+            android:tint="@color/white"
+            android:visibility="gone"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:rippleColor="@color/white" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

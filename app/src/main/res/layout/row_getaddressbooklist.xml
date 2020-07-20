@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/padding10"
+    android:background="@drawable/rounded_layout"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/padding20"
+        android:id="@+id/lv_add_progress"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lv_add_mainnn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:padding="@dimen/padding10"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_adderss"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Order will be delivered between 3-5 bussiness days"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="@dimen/text_14"
+                    android:textSize="@dimen/tetx_16"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center|right"
+                android:layout_weight="1.5">
+                <LinearLayout
+                    android:id="@+id/lv_edit_addrss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:padding="@dimen/padding3"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/pen_ic" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lv_delete_add"
+                    android:gravity="center|right"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/bin"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/padding10"
+            android:background="@color/grey_popup_line"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

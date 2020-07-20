@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue"
+    android:orientation="vertical"
+    android:id="@+id/lv_order_main"
+    tools:context=".Fragment.CurrentOrder">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/lightblue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_myorders"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:id="@+id/tv_account_myorder"
+                        android:textSize="@dimen/text_20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserratbold"
+                        android:gravity="center"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/order"
+                        android:textColor="@color/black"
+
+                        android:textStyle="bold"
+                        app:titleTextAppearance="@style/Toolbar.TitleText" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.3" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/lv_nodata_muorder"
+        layout="@layout/datanotfound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_myorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding5"
+            android:orientation="vertical">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                shimmer:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_current_orders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/padding10"
+                android:layoutAnimation="@anim/layout_animation_fall_down"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/lv_progress_myorder_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/progressbar_ui" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

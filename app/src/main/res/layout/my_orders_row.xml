@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="@dimen/padding5"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="@dimen/padding10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:background="@drawable/rounded_layout"
+        android:id="@+id/lv_order_click">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|top"
+            android:layout_weight="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center|start|top"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/orderno"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:id="@+id/tv_order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="end|center|top"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/status"
+                    android:textAllCaps="false"
+                    android:id="@+id/tv_status"
+                    android:gravity="start|center|top"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12" />
+
+                <TextView
+                    android:text="Pending"
+                    android:id="@+id/tv_order_status_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="top|center|start"
+                    android:layout_marginLeft="@dimen/padding8"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center|top"
+            android:layout_marginTop="@dimen/padding5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/date"
+                android:textAllCaps="false"
+                android:gravity="center|start|top"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_order_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAllCaps="false"
+                android:gravity="center|start|top"
+                android:layout_marginLeft="@dimen/padding5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center|top"
+            android:layout_marginTop="@dimen/padding5"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_order_shipto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/shipto"
+                android:textAllCaps="false"
+                android:gravity="center|start|top"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_order_shipto_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAllCaps="false"
+                android:gravity="center|start|top"
+                android:layout_marginLeft="@dimen/padding5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/padding5"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center|start|top"
+                android:layout_weight="0.8">
+
+                <TextView
+                    android:id="@+id/tv_order_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="top|start|center"
+                    android:text="@string/ordertotal"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14"
+                    android:fontFamily="@font/montserrat_semibold"/>
+
+                <TextView
+                    android:id="@+id/tv_order_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="top|start|center"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_14"
+                    android:fontFamily="@font/montserrat_semibold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="end|center"
+                android:layout_weight="1.2">
+
+                <LinearLayout
+                    android:id="@+id/lv_view_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@drawable/rounded_button_fill"
+                    android:padding="@dimen/padding5">
+
+                    <TextView
+                        android:id="@+id/tv_view_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vieworder"
+                        android:layout_marginRight="@dimen/padding10"
+                        android:layout_marginLeft="@dimen/padding10"
+                        android:textSize="@dimen/text_12"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/montserrat_semibold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/padding10"
+    android:background="@drawable/round_ceckout"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lv_main_terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/padding10">
+
+        <TextView
+            android:id="@+id/tv_credit_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:padding="@dimen/padding5"
+            android:text="@string/creditcards"
+            android:textColor="@color/black"
+            android:textSize="@dimen/tetx_16" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding10"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:padding="@dimen/padding5"
+            android:text="@string/pricequoted"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_10" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?attr/actionBarSize"
+                android:background="@color/white"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/padding10"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/shipdate"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:id="@+id/et_creditcard_shipping"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding3"
+                        android:background="@drawable/line_checkout"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="none"
+                        android:paddingBottom="@dimen/padding5"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/cursored"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/ordernumber"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+                    <EditText
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:id="@+id/et_creditcard_ordernumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding3"
+                        android:background="@drawable/line_checkout"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingBottom="@dimen/padding5"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/cursored"
+                        android:textSize="@dimen/text_14" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/comment"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+
+                    <EditText
+                        android:id="@+id/et_creditcard_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding3"
+                        android:background="@drawable/line_checkout"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:paddingBottom="@dimen/padding5"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/cursored"
+                        android:textSize="@dimen/text_14" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/cardnumber"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/credit_card_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:textColor="#aaa"
+                            tools:text="American Express"/>
+                    </FrameLayout>
+
+                    <EditText
+                        android:id="@+id/et_creditcard_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding3"
+                        android:background="@drawable/line_checkout"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:paddingBottom="@dimen/padding5"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/cursored"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/expirationdate"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding10"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/padding10"
+                            android:layout_weight="2"
+                            android:background="@drawable/line_checkout"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/et_card_month"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center"
+                                android:background="@null"
+                                android:hint="@string/month"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:paddingBottom="@dimen/padding5"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/black"
+                                android:textCursorDrawable="@drawable/cursored"
+                                android:textSize="@dimen/text_14" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/padding10"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/padding10"
+                            android:layout_weight="2"
+                            android:background="@drawable/line_checkout"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/et_creditcard_year"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center"
+                                android:hint="@string/year"
+                                android:focusable="false"
+                                android:inputType="number"
+                                android:background="@null"
+                                android:paddingBottom="@dimen/padding5"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/black"
+                                android:textCursorDrawable="@drawable/cursored"
+                                android:textSize="@dimen/text_14" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/padding10"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="?attr/actionBarSize">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding15"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/varificationno"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_12" />
+
+                    <EditText
+                        android:id="@+id/et_creditcard_varification_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding3"
+                        android:background="@drawable/line_checkout"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:paddingBottom="@dimen/padding5"
+                        android:textColorHint="@color/black"
+                        android:textCursorDrawable="@drawable/cursored"
+                        android:textSize="@dimen/text_14" />
+
+
+                </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:layout_marginBottom="@dimen/margin10"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lv_select_creditcard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:background="@drawable/rounded_button_fill"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="@dimen/padding10"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="@dimen/padding10">
+
+                        <TextView
+                            android:id="@+id/tv_credit_card_select"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:gravity="center"
+                            android:text="@string/select"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_16"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

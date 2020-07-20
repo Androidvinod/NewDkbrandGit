@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">shop2.gzanders.com</domain>
+        <domain includeSubdomains="true">dkbraende.demoproject.info</domain>
+        <domain includeSubdomains="true">173.255.217.134</domain>
+        <domain includeSubdomains="true">166.78.82.103</domain>
+        <domain includeSubdomains="true">172.24.32.113</domain>
+        <domain includeSubdomains="true">172.24.32.100</domain>
+        <domain includeSubdomains="true">testgz.shop2.gzanders.com</domain>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="320dp"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lv_product_click"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lv_daily_special_see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_button_fill"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:id="@+id/tv_stock_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IN STOCK"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_daily_specials"
+                    android:layout_width="160dp"
+                    android:layout_height="120dp"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_daily_special_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:maxLines="3"
+                android:lines="2"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:id="@+id/lv_ds_main_availbleqty"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_number_availbleqty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AVAILABLE : "
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_availbleqty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/grey"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_masrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_msrp_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/msrp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_daily_special_msrp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$00.00"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_price_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$00.00"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_specialprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_specialprice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/special"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textStyle="bold"
+                    android:includeFontPadding="false"/>
+
+                <TextView
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:id="@+id/tv_specialprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$00.00"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_map_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_special_map_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/map"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:includeFontPadding="false"/>
+
+                <TextView
+                    android:id="@+id/tv_special_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$00.00"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:includeFontPadding="false"
+                    android:layout_marginLeft="@dimen/padding5"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

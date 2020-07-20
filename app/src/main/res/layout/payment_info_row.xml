@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingLeft="@dimen/padding5"
+    android:paddingRight="@dimen/padding5"
+    android:paddingTop="@dimen/padding5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/lv_radio_text_click"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:gravity="center|start"
+            android:id="@+id/lv_radio_click"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:paddingStart="@dimen/margin10"
+                android:id="@+id/rad_text"
+                android:button="@drawable/checkbox_background"
+                android:gravity="center|start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_14" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lv_right_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3.6"
+            android:gravity="center|end"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewpayment"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/padding5"
+        android:background="@color/lightblue" />
+</LinearLayout>

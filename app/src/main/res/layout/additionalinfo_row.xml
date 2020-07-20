@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/padding5"
+    android:layout_marginRight="@dimen/padding5"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/tabla_cuerpo"
+        android:layout_width="match_parent"
+        android:stretchColumns="*"
+        android:shrinkColumns="*"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/cell_shape"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dip"
+                android:background="@drawable/cell_shape"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_nametitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/padding8"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center_horizontal|start"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:background="@drawable/cell_shape"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding8"
+                    android:gravity="center_horizontal|start"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12"/>
+            </LinearLayout>
+
+
+                </TableRow>
+
+
+    </TableLayout>
+
+
+</LinearLayout>

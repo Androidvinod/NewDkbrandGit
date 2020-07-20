@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightblue"
+    android:id="@+id/lv_parent_manufacturer"
+    tools:context=".Fragment.Manufacturerslist">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_manufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserratbold"
+                        android:gravity="center"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/manufacturer"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18"
+                        android:textStyle="bold"
+                        app:titleTextAppearance="@style/Toolbar.TitleText" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.3" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/lv_nodata_manufacturer"
+        layout="@layout/datanotfound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/lv_main_manufacturer">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_manufacturerlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            shimmer:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+                <include layout="@layout/plasce_holder_subcategory" />
+
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <fastscroll.app.fastscrollalphabetindex.AlphabetIndexFastScrollRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/padding10"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/lv_progress_manufacturer_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding10"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateDrawable="@drawable/progressbar_ui" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+   <!-- <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_manufacturer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_manufacturerlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                shimmer:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+                    <include layout="@layout/plasce_holder_subcategory" />
+
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_manufacturerlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="28dip"
+                android:layout_marginBottom="@dimen/padding10"
+                android:background="@color/white"
+                android:scrollbars="vertical"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lv_progress_manufacturer_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding10"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/progressbar_ui" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>-->
+</LinearLayout>

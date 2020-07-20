@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue"
+    android:id="@+id/lv_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_accountinfo"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:layout_weight="0.8">
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_14"
+                        android:fontFamily="@font/montserratbold"
+                        app:titleTextAppearance="@style/Toolbar.TitleText"
+                        android:text="@string/Accountinformation"
+                        android:padding="@dimen/padding5"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"/>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/lv_information_progress"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui"/>
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/lv_product_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding20"
+            android:background="@drawable/rounded_layout"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding10"
+                    android:textColor="@color/black"
+                    android:text="@string/Accountinformation" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding10"
+                    android:layout_marginTop="@dimen/padding10"
+                    android:text="@string/requerd" />
+            </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/lightblue"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding15"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nameeee"
+                    android:textColor="@color/login_edit_color" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_information_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_activated"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:inputType="text"
+                    android:paddingBottom="@dimen/padding5"
+                    android:textColor="@color/login_edit_color"
+                    android:textColorHint="@color/login_edit_color"
+                    android:textCursorDrawable="@drawable/cursored"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding10"
+                    android:text="@string/emailtitle"
+                    android:textColor="@color/login_edit_color" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_information_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_activated"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:inputType="textEmailAddress"
+                    android:paddingBottom="@dimen/padding5"
+                    android:textColor="@color/login_edit_color"
+                    android:textColorHint="@color/login_edit_color"
+                    android:textCursorDrawable="@drawable/cursored"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_edit_information_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/padding30"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="@dimen/padding30"
+                android:background="@drawable/rounded_button_fill"
+                android:gravity="center"
+                android:textSize="@dimen/text_16"
+                android:paddingLeft="10dp"
+                android:paddingTop="@dimen/padding10"
+                android:paddingRight="10dp"
+                android:paddingBottom="@dimen/padding10">
+
+                <TextView
+                    android:id="@+id/tv_stock_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="center"
+                    android:padding="@dimen/padding2"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_16" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

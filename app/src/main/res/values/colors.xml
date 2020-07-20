@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#588221</color>
+    <color name="colorPrimaryDark">#588221</color>
+    <color name="colorAccent">#cf5050</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="offwhite">#86939c</color>
+    <color name="lightblue">#f9fff1</color>
+    <color name="orange">#f9b615</color>
+    <color name="tabcolor">#e5efff</color>
+    <color name="darkblue">#a4c6ff</color>
+    <color name="border">#e5e5e5</color>
+    <color name="trans">#cc06466c</color>
+    <color name="transperent">#CCFF0000</color>
+    <color name="background">#dddddd</color>
+    <color name="linecolor">#ebebeb</color>
+    <color name="rounded_blue">#d4eaff</color>
+    <color name="sqcolor">#fdfdfd</color>
+
+    <color name="login_edit_color">#898c91</color>
+    <color name="view_color">#ebebeb</color>
+    <color name="light_grey">#b7b7b7</color>
+
+    <color name="grey">#6b6b6b</color>
+    <color name="grey_popup_line">#dfdfdf</color>
+
+</resources>

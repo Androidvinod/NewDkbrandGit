@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lightblue"
+    android:orientation="vertical"
+    android:id="@+id/lv_checkout_parent"
+    tools:context=".Fragment.CheckoutFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/lightblue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.8" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:gravity="center"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/checkout"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_checkout_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_checkout_main"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="?attr/actionBarSize"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_layout"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:id="@+id/tv_billing_info"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start|top"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/billing"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_16" />
+
+                            <TextView
+                                android:id="@+id/tv_billing_change"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center|end|top"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/change"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linecolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:id="@+id/tv_billing_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start"
+                                android:padding="@dimen/padding5"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_12" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center|end"
+                                android:padding="@dimen/padding5"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:background="@drawable/rounded_layout"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:id="@+id/tv_shipping_info"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start|top"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/shippoing"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_16" />
+
+                            <TextView
+                                android:id="@+id/tv_shipping_change"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center|end|top"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/change"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linecolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:id="@+id/tv_shipping_value"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start"
+                                android:padding="@dimen/padding5"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_12" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center|end"
+                                android:padding="@dimen/padding5"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_14" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:background="@drawable/rounded_layout"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10">
+
+                            <TextView
+                                android:id="@+id/tv_shipping_mehtod"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/shippoingmethod"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_16" />
+
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linecolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmer_shipping"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/padding5"
+                                android:orientation="vertical"
+                                shimmer:duration="800">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <include layout="@layout/placeholder_payment" />
+
+                                    <include layout="@layout/placeholder_payment" />
+
+                                    <include layout="@layout/placeholder_payment" />
+
+
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                            <TextView
+                                android:id="@+id/tv_freightpolicy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:padding="@dimen/padding3"
+                                android:text="Read Our Freight Policy"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_14" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recv_shipping_method"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:id="@+id/lv_nodata_shipping"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:gravity="center"
+                                    android:text="No Data Found !!!!"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/text_12" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10">
+
+                            <TextView
+                                android:id="@+id/tv_payment_method"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/paymentinfo"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_16" />
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linecolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10"
+                            android:weightSum="4">
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmer_payment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/padding5"
+                                android:orientation="vertical"
+                                shimmer:duration="800">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <include layout="@layout/placeholder_payment" />
+
+                                    <include layout="@layout/placeholder_payment" />
+
+                                    <include layout="@layout/placeholder_payment" />
+
+
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recv_payment_information"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:id="@+id/lv_nodata_chheckout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:id="@+id/tv_nodata_checkout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:text="No Data Found !!!!"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/text_12" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:background="@drawable/rounded_layout"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding10">
+
+                            <TextView
+                                android:id="@+id/tv_order_review"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:gravity="center|start"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/orderreview"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_16" />
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linecolor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/padding10">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:id="@+id/tv_shippable_subtotal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.2"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:gravity="center|start|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:text="@string/snippable"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+
+                                <TextView
+                                    android:id="@+id/tv_shippable_subtotal_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.8"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:gravity="center|end|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:text="$2,02"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:id="@+id/tv_subtotal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:gravity="center|start|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="@string/subtotal"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+
+                                <TextView
+                                    android:id="@+id/tv_subtotal_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.8"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:gravity="center|end|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="$0,00"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:id="@+id/tv_shipping_handling_bestway"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:gravity="center|start|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="@string/shippinghandling"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+
+                                <TextView
+                                    android:id="@+id/tv_shipping_handling_bestway_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:gravity="center|end|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="$0.00"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:id="@+id/tv_grand_total"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.2"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:gravity="center|start|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="@string/grandtotal"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+
+                                <TextView
+                                    android:id="@+id/tv_grand_total_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.8"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:gravity="center|end|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="$2,138"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_12" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/padding5"
+                                android:orientation="horizontal"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:id="@+id/tv_shippable_grand_total_main"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.2"
+                                    android:fontFamily="@font/montserratbold"
+                                    android:gravity="center|start|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="@string/shippablemain"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_16" />
+
+                                <TextView
+                                    android:id="@+id/tv_shippable_grand_total_main_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2.8"
+                                    android:fontFamily="@font/montserratbold"
+                                    android:gravity="center|end|top"
+                                    android:paddingLeft="@dimen/padding5"
+                                    android:paddingTop="@dimen/padding3"
+                                    android:paddingRight="@dimen/padding5"
+                                    android:paddingBottom="@dimen/padding3"
+                                    android:text="$0.00"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="@dimen/text_16" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:text="Orders cannot be modified or canceled after you click Place Order."
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/padding5"
+                    android:layout_marginBottom="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lv_ordernow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding5"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/rounded_button_fill"
+                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/padding10"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="@dimen/padding10">
+
+                        <TextView
+                            android:id="@+id/tv_order_now"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:gravity="center"
+                            android:text="@string/order_now"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_16"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

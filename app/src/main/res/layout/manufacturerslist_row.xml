@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lv_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/border"
+        android:padding="@dimen/padding5"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/montserratbold"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_14"
+            tools:text="Title test text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_subcategory_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding5"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_weight="0.4"
+                android:gravity="center|start"
+                android:layout_marginLeft="@dimen/padding10"
+                android:orientation="vertical"
+                android:padding="@dimen/padding5">
+
+                <TextView
+                    android:id="@+id/tvmenufacturerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center"
+                    android:paddingLeft="@dimen/padding5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:id="@+id/tvmenufactureraddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="start|center"
+                    android:paddingLeft="@dimen/padding5"
+                    android:text="P.O. Box 158\r\nMiles City, MT 59301"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvmenufactureraweb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center"
+                    android:paddingLeft="@dimen/padding5"
+                    android:text="www.accuratepowder.com"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|end"
+                android:layout_marginRight="@dimen/padding10"
+                android:layout_weight="3.6"
+                android:visibility="gone"
+                android:gravity="center|end">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewsubcat"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/padding5"
+            android:background="@color/linecolor" />
+    </LinearLayout>
+
+
+</LinearLayout>

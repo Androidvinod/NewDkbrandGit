@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lv_search_mainn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_productlist"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/lightblue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_productlist"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:lines="1"
+                        android:ellipsize="end"
+                        android:textSize="@dimen/text_20"
+                        android:id="@+id/tv_product_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/padding5"
+                        android:text="fdggdgdg"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.3" />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_edt"
+        android:visibility="gone">
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="@string/search_hint"
+            android:theme="@style/BaseTheme">
+
+        </SearchView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_productlist_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/lvnodata_searchist"
+        layout="@layout/datanotfound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_productlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/lv_main_productlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightblue"
+            android:orientation="vertical"
+            android:padding="@dimen/padding10">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_productlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible"
+                shimmer:duration="800">
+
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+                    <include layout="@layout/rifles_row_placeholder" />
+
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recv_productlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_view_list_white_36dp"
+            android:tint="@color/white"
+            android:visibility="gone"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:rippleColor="@color/white" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

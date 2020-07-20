@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kal72:RackMonthPicker:1.6.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6df0d387dbf0c704177942090100f966/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6df0d387dbf0c704177942090100f966/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6df0d387dbf0c704177942090100f966/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kal72/RackMonthPicker/1.6.0/fc4e7c81d0c4753cc23be88e8232b90e46cf94a9/RackMonthPicker-1.6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
