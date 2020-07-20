@@ -42,6 +42,7 @@ import retrofit2.Response;
  */
 public class About_usFregment extends Fragment {
 
+    //rtrtrt
     TextView tv_textdata;
     ApiInterface api;
     Toolbar toolbar_about;
