@@ -241,9 +241,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:padding="@dimen/padding3"
                                 android:layout_width="@dimen/padding30"
                                 android:layout_height="@dimen/padding30"
+                                android:padding="@dimen/padding3"
                                 android:src="@drawable/ic_add_box_black_24dp" />
 
                         </LinearLayout>

@@ -138,7 +138,7 @@ public class EditAddressFragment extends Fragment {
                 et_deails_email.setActivated(false);
                 et_deails_email.setText(Login_preference.getemail(getActivity()));
 
-                tv_mydetails.setText("Generate Address");
+                tv_mydetails.setText("Tilføj ny adresse");
             }else {
                 tv_mydetails.setText(getActivity().getResources().getString(R.string.editadd));
                 et_details_fullname.setText(Login_preference.getfirstname(getActivity()));

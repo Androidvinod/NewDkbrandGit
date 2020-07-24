@@ -121,7 +121,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_information_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/padding30"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_text_activated"
                     android:fontFamily="@font/montserrat_regular"
@@ -142,7 +142,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_information_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/padding30"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_text_activated"
                     android:fontFamily="@font/montserrat_regular"

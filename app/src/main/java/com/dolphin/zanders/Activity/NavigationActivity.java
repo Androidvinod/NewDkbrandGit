@@ -12,6 +12,7 @@ import com.dolphin.zanders.Fragment.FavouriteFragment;
 import com.dolphin.zanders.Fragment.FilterListFragment;
 
 import com.dolphin.zanders.Fragment.HomeFragment_new;
+import com.dolphin.zanders.Fragment.Home_dk;
 import com.dolphin.zanders.Fragment.LoginFragment;
 
 import com.dolphin.zanders.Fragment.NewCartFragment;
@@ -525,7 +526,7 @@ public class NavigationActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.bottom_homee:
                // pushFragment(new HomeFragment(), "Home");
-                HomeFragment_new fragment = new HomeFragment_new();
+                Home_dk fragment = new Home_dk();
                 if (fragment == null)
                     return;
                 FragmentManager fragmentManager = getSupportFragmentManager();

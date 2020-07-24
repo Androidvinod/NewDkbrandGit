@@ -67,12 +67,8 @@ public class SplashActivity extends AppCompatActivity {
                 {
                     Login_preference.settoken(SplashActivity.this,response.body());
                     Log.e("token_63",""+Login_preference.gettoken(SplashActivity.this));
-
-
                     callCurrencycodeApi();
-
                 }else {
-
                 }
 
             }

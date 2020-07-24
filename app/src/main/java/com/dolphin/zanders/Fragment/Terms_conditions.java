@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,10 +23,20 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.dolphin.zanders.Activity.NavigationActivity;
+import com.dolphin.zanders.Model.PrivacyModel;
 import com.dolphin.zanders.R;
+import com.dolphin.zanders.Retrofit.ApiClientcusome;
+import com.dolphin.zanders.Retrofit.ApiInterface;
+import com.dolphin.zanders.Util.CheckNetwork;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,8 +45,10 @@ public class Terms_conditions extends Fragment {
     LinearLayout lv_termsandcondition_progress;
     WebView webView;
     Toolbar toolbar_termscondition;
+    TextView tv_termscondition;
     ProgressDialog dialog;
     NavigationActivity parent;
+    ApiInterface api;
 
 
     public Terms_conditions() {
@@ -50,9 +64,10 @@ public class Terms_conditions extends Fragment {
 
         //pb_tnc = v.findViewById(R.id.pb_tnc);
         parent=(NavigationActivity) getActivity();
-        webView = v.findViewById(R.id.webView);
+        api = ApiClientcusome.getClient().create(ApiInterface.class);
         lv_termsandcondition_progress = v.findViewById(R.id.lv_termsandcondition_progress);
         toolbar_termscondition = v.findViewById(R.id.toolbar_termscondition);
+        tv_termscondition = v.findViewById(R.id.tv_termscondition);
 
         setHasOptionsMenu(true);
         ((NavigationActivity) parent).setSupportActionBar(toolbar_termscondition);
@@ -60,74 +75,51 @@ public class Terms_conditions extends Fragment {
                 .setDisplayHomeAsUpEnabled(true);
         ((NavigationActivity) parent).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_36dp);
 
+        if (CheckNetwork.isNetworkAvailable(parent)) {
+            termscondition();
+        } else {
+            Toast.makeText(parent, parent.getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
+        }
 
-        final ProgressDialog progressBar = new ProgressDialog(getContext());
-        progressBar.setMessage("Please wait...");
-
-        webView.getSettings().setJavaScriptEnabled(true);
-        String pdf = "http://testgz.shop2.gzanders.com/media/docs/TERMSANDCONDITIONS.pdf";
-        webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + pdf);
-        webView.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                if (!progressBar.isShowing()) {
-                    progressBar.show();
-                }
-            }
-
-            public void onPageFinished(WebView view, String url) {
-                if (progressBar.isShowing()) {
-                    progressBar.dismiss();
-                }
-            }
-
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                if (progressBar.isShowing()) {
-                    progressBar.dismiss();
-                }
-            }
-        });
-
-        /*webView.getSettings().setJavaScriptEnabled(true);
-        String pdf = "http://testgz.shop2.gzanders.com/media/docs/TERMSANDCONDITIONS.pdf";
-        webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + pdf);
-
-        webView.setWebViewClient(new WebViewClient() {
-
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
-            public void onLoadResource(WebView view, String url) {
-                if (dialog == null) {
-                    dialog = new ProgressDialog(getContext());
-                    dialog.setMessage("Loading...");
-                    dialog.show();
-                }
-            }
-
-            public void onPageFinished(WebView view, String url) {
-                try {
-                    if (dialog.isShowing()) {
-                        dialog.dismiss();
-                        dialog = null;
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-        });*/
 
         return v;
     }
 
+    private void termscondition() {
+        lv_termsandcondition_progress.setVisibility(View.VISIBLE);
+        callCategoryApi().enqueue(new Callback<PrivacyModel>() {
+            @Override
+            public void onResponse(Call<PrivacyModel> call, Response<PrivacyModel> response) {
+                //  shimmer_view_catalog.stopShimmerAnimation();
+                //   shimmer_view_catalog.setVisibility(View.GONE);
+                Log.e("response",""+response.toString());
+                Log.e("response99",""+response.body());
+                lv_termsandcondition_progress.setVisibility(View.GONE);
+                PrivacyModel categoryModel = response.body();
+                tv_termscondition.setText(HtmlCompat.fromHtml(categoryModel.getContent(), 0));
+              /*  if (categoryModel.get().equalsIgnoreCase("Success")) {
+                    //   shimmer_view_catalog.stopShimmerAnimation();
+                    //   shimmer_view_catalog.setVisibility(View.GONE);
+                    tv_privacypolicy.setText(HtmlCompat.fromHtml(categoryModel.getMainContent(), 0));
+                } else {
+                    //      shimmer_view_catalog.stopShimmerAnimation();
+                    //    shimmer_view_catalog.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), categoryModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }*/
+            }
+            @Override
+            public void onFailure(Call<PrivacyModel> call, Throwable t) {
+                lv_termsandcondition_progress.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), ""+t, Toast.LENGTH_SHORT).show();
+                Log.e("debug_175125", "pages: " + t);
+            }
+        });
+    }
+
+    private Call<PrivacyModel> callCategoryApi() {
+        return api.gettrems();
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();

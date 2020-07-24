@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Html;
@@ -27,8 +28,10 @@ import android.widget.Toast;
 import com.dolphin.zanders.Activity.NavigationActivity;
 import com.dolphin.zanders.Adapter.Filterlist_Adapter;
 import com.dolphin.zanders.Model.AboutUsModel.AboutusModel;
+import com.dolphin.zanders.Model.PrivacyModel;
 import com.dolphin.zanders.R;
 import com.dolphin.zanders.Retrofit.ApiClient;
+import com.dolphin.zanders.Retrofit.ApiClientcusome;
 import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
 
@@ -62,7 +65,7 @@ public class About_usFregment extends Fragment {
         hideKeyboard(parent);
         setupUI(lv_parent_aboutus);
         Filterlist_Adapter.filter_child_value_list.clear();
-        api = ApiClient.getClient().create(ApiInterface.class);
+        api = ApiClientcusome.getClient().create(ApiInterface.class);
 
         ((NavigationActivity) parent).setSupportActionBar(toolbar_about);
         ((NavigationActivity) parent).getSupportActionBar()
@@ -85,29 +88,41 @@ public class About_usFregment extends Fragment {
         lv_parent_aboutus=v.findViewById(R.id.lv_parent_aboutus);
 
     }
-
+///  tv_textdata.setText( Html.fromHtml(response.body().getPage().getContent()));
     private void Aboutusapi() {
-        callaboutusapi().enqueue(new Callback<AboutusModel>() {
+        lv_about_progress.setVisibility(View.VISIBLE);
+        callCategoryApi().enqueue(new Callback<PrivacyModel>() {
             @Override
-            public void onResponse(Call<AboutusModel> call, Response<AboutusModel> response) {
-                Log.e("response",""+response.body());
-                Log.e("response_77",""+response);
-                Log.e("status",""+response.body().getStatus());
-                if (response.body().getStatus().equals("Success")){
-                   tv_textdata.setText( Html.fromHtml(response.body().getPage().getContent()));
+            public void onResponse(Call<PrivacyModel> call, Response<PrivacyModel> response) {
+                //  shimmer_view_catalog.stopShimmerAnimation();
+                //   shimmer_view_catalog.setVisibility(View.GONE);
+                Log.e("response",""+response.toString());
+                Log.e("response99",""+response.body());
+                lv_about_progress.setVisibility(View.GONE);
+                PrivacyModel categoryModel = response.body();
+                tv_textdata.setText(HtmlCompat.fromHtml(categoryModel.getContent(), 0));
+              /*  if (categoryModel.get().equalsIgnoreCase("Success")) {
+                    //   shimmer_view_catalog.stopShimmerAnimation();
+                    //   shimmer_view_catalog.setVisibility(View.GONE);
+                    tv_privacypolicy.setText(HtmlCompat.fromHtml(categoryModel.getMainContent(), 0));
+                } else {
+                    //      shimmer_view_catalog.stopShimmerAnimation();
+                    //    shimmer_view_catalog.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), categoryModel.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }else {
-                }
+                }*/
             }
             @Override
-            public void onFailure(Call<AboutusModel> call, Throwable t) {
-                Toast.makeText(parent, ""+t, Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<PrivacyModel> call, Throwable t) {
+                lv_about_progress.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), ""+t, Toast.LENGTH_SHORT).show();
+                Log.e("debug_175125", "pages: " + t);
             }
         });
     }
 
-    private Call<AboutusModel> callaboutusapi() {
-        return api.aboutus("about-us");
+    private Call<PrivacyModel> callCategoryApi() {
+        return api.getaboutus();
     }
     @Override
 

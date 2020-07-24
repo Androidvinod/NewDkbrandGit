@@ -64,7 +64,7 @@
                     android:lines="2"
                     android:layout_marginTop="@dimen/padding5"
                     android:gravity="center|start|top"
-                    android:text="rtrtfyrtttg"
+                    android:text=""
                     android:ellipsize="end"
                     android:textColor="@color/black"
                     android:textSize="@dimen/tetx_16"
@@ -82,20 +82,14 @@
                         android:padding="@dimen/padding3"
                         android:id="@+id/lv_delete"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="35dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="23dp"
+                            android:layout_height="wrap_content"
                             android:src="@drawable/bin"/>
                     </LinearLayout>
-
                 </LinearLayout>
-
-
-
             </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -215,7 +215,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<String> call, Response<String> response) {
                 Log.e("response20066",""+response.toString());
                 Log.e("response20166",""+response.body());
-
               if(response.code()==200)
               {
                   Login_preference.setCustomertoken(getActivity(),response.body());
@@ -224,7 +223,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                   Login_preference.settokenemail(getActivity(),email);
                   Login_preference.settokenepassword(getActivity(),password);
               }else {
-                  Toast.makeText(getActivity(), "The password doesn't match this account. Verify the password and try again.", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(getActivity(), "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.", Toast.LENGTH_SHORT).show();
                   scroll_login.setVisibility(View.VISIBLE);
                   lv_login_progress.setVisibility(View.GONE);
               }
@@ -531,7 +530,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         String title = "login";
                         b.putString("title", "" + title);
                         AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                        HomeFragment_new myFragment = new HomeFragment_new();
+                        Home_dk myFragment = new Home_dk();
                         myFragment.setArguments(b);
                         activity.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in,

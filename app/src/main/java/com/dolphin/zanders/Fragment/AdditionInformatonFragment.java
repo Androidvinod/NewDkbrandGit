@@ -39,12 +39,9 @@ public class AdditionInformatonFragment extends Fragment {
     LinearLayout lv_addition_pd;
     NavigationActivity parent;
 
-
     public AdditionInformatonFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -989,28 +989,22 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 Log.e("response200",""+response.toString());
                 Log.e("response201",""+response.body());
-
                 if(response.code()==200)
                 {  lv_checkout_progress.setVisibility(View.GONE);
                     cordinator_checkout.setVisibility(View.VISIBLE);
 
                     if(response.body()==true)
                     {
-
                         Toast.makeText(getActivity(), "Copoun Code Removed  Successfully", Toast.LENGTH_SHORT).show();
                         edt_coupon_code.setText("");
                         tv_apply.setText(getActivity().getResources().getString(R.string.apply));
                         tv_apply.setTextColor(getActivity().getResources().getColor(R.color.black));
                     }
-
                 }else {
                     lv_checkout_progress.setVisibility(View.GONE);
                     cordinator_checkout.setVisibility(View.VISIBLE);
-
                 }
-
             }
-
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -1021,8 +1015,6 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             }
         });
     }
-
-
     private void callCopounCodeApi(String code) {
         hideKeyboard(getActivity());
         lv_checkout_progress.setVisibility(View.VISIBLE);
@@ -1064,7 +1056,6 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             }
         });
     }
-
     private Call<Boolean> addcoponcode(String code) {
         ApiInterface customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
 

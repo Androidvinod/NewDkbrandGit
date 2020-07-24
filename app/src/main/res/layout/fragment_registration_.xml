@@ -23,16 +23,17 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <!--<TextView
+            <TextView
                 android:id="@+id/tv_login_to_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
-                android:gravity="center|start"
+                android:gravity="center"
                 android:textColor="@color/black"
+                android:text="Opret en konto"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:visibility="visible" />-->
+                android:visibility="visible" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -139,7 +140,7 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textCursorDrawable="@drawable/cursored"
-                                android:textSize="@dimen/text_14" />
+                                android:textSize="@dimen/text_14"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,12 +162,13 @@
                                 android:fontFamily="@font/montserrat_regular"
                                 android:hint="@string/lastname"
                                 android:gravity="bottom"
-                                android:inputType="textEmailAddress"
+                                android:inputType="text"
                                 android:paddingBottom="@dimen/padding5"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textCursorDrawable="@drawable/cursored"
-                                android:textSize="@dimen/text_14" />
+                                android:textSize="@dimen/text_14"
+                                />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,7 +195,7 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textCursorDrawable="@drawable/cursored"
-                                android:textSize="@dimen/text_14" />
+                                android:textSize="@dimen/text_14"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -212,15 +214,16 @@
                                 android:layout_height="30dp"
                                 android:layout_marginTop="@dimen/padding10"
                                 android:background="@drawable/edit_text_activated"
+                                android:fontFamily="@font/montserrat_regular"
                                 android:hint="@string/password"
                                 android:gravity="bottom"
                                 android:inputType="textPassword"
                                 android:paddingBottom="@dimen/padding5"
-                                android:fontFamily="@font/montserrat_regular"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textCursorDrawable="@drawable/cursored"
-                                android:textSize="@dimen/text_14" />
+                                android:textSize="@dimen/text_14"
+                                />
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/text_inputlayout_veryfiypassword"
@@ -237,15 +240,15 @@
                                 android:layout_height="30dp"
                                 android:layout_marginTop="@dimen/padding10"
                                 android:background="@drawable/edit_text_activated"
+                                android:fontFamily="@font/montserrat_regular"
                                 android:hint="@string/verifypassword"
                                 android:gravity="bottom"
                                 android:inputType="textPassword"
                                 android:paddingBottom="@dimen/padding5"
-                                android:fontFamily="@font/montserrat_regular"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textCursorDrawable="@drawable/cursored"
-                                android:textSize="@dimen/text_14" />
+                                android:textSize="@dimen/text_14"/>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 

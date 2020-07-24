@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dolphin.zanders.Activity.NavigationActivity;
@@ -59,6 +60,7 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
     LinearLayout  lv_register;
     ApiInterface apiInterface;
     ScrollView scroll_register;
+    TextView tv_alredayaccount;
     LinearLayout lv_register_progress,lv_register_main;
     View v;
     @Override
@@ -86,6 +88,7 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
         });
 
         lv_register.setOnClickListener(this);
+        tv_alredayaccount.setOnClickListener(this);
         return v;
     }
     public void setupUI(View view) {
@@ -131,6 +134,7 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
         scroll_register=v.findViewById(R.id.scroll_register);
         lv_register_progress=v.findViewById(R.id.lv_register_progress);
         lv_register_main=v.findViewById(R.id.lv_register_main);
+        tv_alredayaccount=v.findViewById(R.id.tv_alredayaccount);
 
     }
 
@@ -191,11 +195,12 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
 
                 Toast.makeText(getActivity(), getResources().getString(R.string.enterpw), Toast.LENGTH_SHORT).show();
                 et_password_register.requestFocus();
-            }else if (et_veryfiy_password.getText().toString().length() <= 7) {
-                Toast.makeText(getActivity(), ""+getResources().getString(R.string.validpassword), Toast.LENGTH_SHORT).show();
             }else if(et_veryfiy_password.getText().toString().equalsIgnoreCase(et_password_register.getText().toString())==false)
             {
-                Toast.makeText(getActivity(), "Password and verify password should be same ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),  getResources().getString(R.string.pwmatch), Toast.LENGTH_SHORT).show();
+            }
+            else if (et_veryfiy_password.getText().toString().length() <= 7) {
+                Toast.makeText(getActivity(), ""+getResources().getString(R.string.validpassword), Toast.LENGTH_SHORT).show();
             }
            else {
                 if (CheckNetwork.isNetworkAvailable(getActivity())) {
@@ -212,7 +217,14 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
                     Toast.makeText(getActivity(), getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
                 }
             }
-        }
+        }else if (v==tv_alredayaccount){
+           LoginFragment myFragment = new LoginFragment();
+           getFragmentManager().beginTransaction()
+                   .setCustomAnimations(R.anim.fade_in,
+                           0, 0, R.anim.fade_out)
+                   .replace(R.id.framlayout, myFragment)
+                   .commit();
+       }
     }
 
     private void register(String firstname, String lastname, String email, String passowrd, String psw) {

@@ -15,6 +15,7 @@ import com.dolphin.zanders.Model.FavouriteModel.GetFavouriteslist;
 import com.dolphin.zanders.Model.Forgotpassword.Forgotpassword_model;
 import com.dolphin.zanders.Model.GetAddresslistModel.GetAddressModel;
 import com.dolphin.zanders.Model.Home_model.HomePage;
+import com.dolphin.zanders.Model.Homedk.Homedata;
 import com.dolphin.zanders.Model.LoginModel.Login_Model;
 import com.dolphin.zanders.Model.Manufacturerslist_model.GetManufacturelistModel;
 import com.dolphin.zanders.Model.NewOrderDetailModel.NewOrderDetailModel;
@@ -24,6 +25,7 @@ import com.dolphin.zanders.Model.NewShippingModel;
 import com.dolphin.zanders.Model.OrderView_model.OrderviewModel;
 import com.dolphin.zanders.Model.Ordermodel.OrderModel;
 import com.dolphin.zanders.Model.PaymentMethodModel.PaymentMehtodModel;
+import com.dolphin.zanders.Model.PrivacyModel;
 import com.dolphin.zanders.Model.ProductDetailModel.GetProductdetails;
 import com.dolphin.zanders.Model.ProductDetailModelNew.ProductDetailModelNEW;
 import com.dolphin.zanders.Model.ProductlistModel.GetCategoryProductlist;
@@ -64,12 +66,11 @@ public interface ApiInterface {
     Call<Boolean> deletecopouncode(@Header("Authorization") String authHeader, @Url String url);
 
 
-     //add copon code
+    //add copon code
     //http://dkbraende.demoproject.info/rest/V1/carts/192029/coupons/test
      //pass auth token
      @PUT()
      Call<Boolean> addCoponCode(@Header("Authorization") String authHeader, @Url String url);
-
 
      //orderdetail
     //http://dkbraende.demoproject.info/rest/V1/orders/61989
@@ -646,6 +647,25 @@ public interface ApiInterface {
     //http://dkbraende.demoproject.info/rest/V1/store/storeGroups
     @GET("store/storeGroups")
     Call<ResponseBody> getstorename(@Header("Authorization") String authHeader);
+
+//http://dkbraende.demoproject.info/customapi/AppHomePage.php?store=1
+  @GET()
+  Call<Homedata> gethomedata(@Url String url);
+
+  //store group
+  //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+  @GET("cmsPage/13")
+  Call<PrivacyModel> getprivacy();
+
+ //store group
+ //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+ @GET("cmsPage/3")
+ Call<PrivacyModel> getaboutus();
+
+  //store group
+  //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+  @GET("cmsPage/4")
+  Call<PrivacyModel> gettrems();
 
 
 }

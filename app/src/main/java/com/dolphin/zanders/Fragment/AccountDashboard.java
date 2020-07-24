@@ -189,9 +189,6 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
         return getAddressModel.getAddresses();
     }
 
-
-
-
     private Call<AddressModell> calladdressgapi() {
         Log.e("debug_111",""+Login_preference.getcustomer_id(parent));
         Log.e("debug_111token",""+Login_preference.gettoken(getActivity()));

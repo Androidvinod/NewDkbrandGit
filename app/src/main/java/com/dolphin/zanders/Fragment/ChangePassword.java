@@ -81,7 +81,7 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
                 parent.onBackPressed();
             }
         });
-        tv_change_pw.setText("Change Password");
+        tv_change_pw.setText("Skift kodeord");
 
         lv_change_pw_save.setOnClickListener(this);
 

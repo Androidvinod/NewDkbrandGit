@@ -21,18 +21,41 @@
             android:background="@color/white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <!--<TextView
-                android:id="@+id/tv_login_to_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:gravity="center|start"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:visibility="visible" />-->
+                android:orientation="horizontal"
+                android:weightSum="6">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.7"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/tv_login_to_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="Kunde login"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.3"/>
+
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -121,14 +144,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/google_login"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:textColorHint="@color/login_edit_color"
                             app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
-                            <com.google.android.material.textfield.TextInputEditText
+                            <EditText
                                 android:id="@+id/et_Email_login"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/padding30"
                                 android:layout_marginTop="@dimen/padding10"
                                 android:background="@drawable/edit_text_activated"
                                 android:fontFamily="@font/montserrat_regular"
@@ -155,7 +178,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_Email_password"
                                 android:layout_width="match_parent"
-                                android:layout_height="30dp"
+                                android:layout_height="@dimen/padding30"
                                 android:layout_marginTop="@dimen/padding10"
                                 android:background="@drawable/edit_text_activated"
                                 android:hint="@string/password"
