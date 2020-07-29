@@ -57,7 +57,7 @@ public class Productlistvieworder_Adapter extends RecyclerView.Adapter<Productli
 
 
         Log.e("qtyyyyyyy_50",""+product.getSku());
-        holder.tv_qty.setText(""+Integer.toString(product.getQtyOrdered()));
+        holder.tv_qty.setText(""+product.getQtyOrdered());
     }
 
     @Override

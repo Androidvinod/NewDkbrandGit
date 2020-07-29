@@ -64,24 +64,28 @@ public class Home_dk extends Fragment {
         bottom_navigation.getMenu().getItem(0).setChecked(true);
         AttachRecyclerview(v);
 
-        logingflag = Login_preference.getLogin_flag(getActivity());
-        ((NavigationActivity) getActivity()).setSupportActionBar(toolbar_homedk);
-        ((NavigationActivity) getActivity()).getSupportActionBar()
-                .setDisplayHomeAsUpEnabled(true);
-        ((NavigationActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+        if(getActivity()!=null)
+        {
+            logingflag = Login_preference.getLogin_flag(getActivity());
+            ((NavigationActivity) getActivity()).setSupportActionBar(toolbar_homedk);
+            ((NavigationActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(true);
+            ((NavigationActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
-        toolbar_homedk.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawer.openDrawer(GravityCompat.START);
+            toolbar_homedk.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            });
+
+            if (CheckNetwork.isNetworkAvailable(getActivity())) {
+                gethomedata();
+            } else {
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
             }
-        });
-
-        if (CheckNetwork.isNetworkAvailable(getActivity())) {
-            gethomedata();
-        } else {
-            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
         }
+
         return v;
     }
 
@@ -105,14 +109,23 @@ public class Home_dk extends Fragment {
                 if (categoryModel.getStatus().equalsIgnoreCase("Success")) {
                  //   shimmer_view_catalog.stopShimmerAnimation();
                  //   shimmer_view_catalog.setVisibility(View.GONE);
-                    Glide.with(getActivity()).load(categoryModel.getMobileHomeBanner().getImage()).into(iv_banner);
-                    tv_description.setText(HtmlCompat.fromHtml(categoryModel.getMainContent(), 0));
+
+                    if(getActivity()!=null)
+                    {
+                        Glide.with(getActivity()).load(categoryModel.getMobileHomeBanner().getImage()).into(iv_banner);
+                        tv_description.setText(HtmlCompat.fromHtml(categoryModel.getMainContent(), 0));
+
+                    }
 
 
                 } else {
               //      shimmer_view_catalog.stopShimmerAnimation();
                 //    shimmer_view_catalog.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(), categoryModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    if(getActivity()!=null)
+                    {
+                        Toast.makeText(getActivity(), categoryModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
             }
@@ -121,7 +134,11 @@ public class Home_dk extends Fragment {
                 //shimmer_view_catalog.stopShimmerAnimation();
                // shimmer_view_catalog.setVisibility(View.GONE);
                 lv_login_progress.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), ""+t, Toast.LENGTH_SHORT).show();
+                if(getActivity()!=null)
+                {
+                    Toast.makeText(getActivity(), ""+t, Toast.LENGTH_SHORT).show();
+                }
+
                 // String error=  t.printStackTrace();
               //  Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
                 Log.e("debug_175125", "pages: " + t);

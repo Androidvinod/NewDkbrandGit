@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/lightblue"
     android:id="@+id/lv_checkout_main_paren"
     tools:context=".Fragment.NewCheckoutFragment">
 
@@ -482,7 +483,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2.8"
                             android:gravity="center|end|top"
-                            android:text="$120,00"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_14" />
@@ -502,7 +502,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1.2"
                             android:gravity="center|start|top"
-                            android:text="@string/tax"
+                            android:text="@string/saltax"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_14" />
 
@@ -513,7 +513,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2.8"
                             android:gravity="center|end|top"
-                            android:text="$100,00"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_14" />
@@ -544,7 +543,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2.8"
                             android:gravity="center|end|top"
-                            android:text="$10,00"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_14" />
@@ -578,7 +576,6 @@
                             android:gravity="center|end|top"
                             android:paddingLeft="@dimen/padding5"
                             android:paddingRight="@dimen/padding5"
-                            android:text="$0,00"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_12" />
                     </LinearLayout>
@@ -607,7 +604,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2.8"
                             android:gravity="center|end|top"
-                            android:text="$40,00"
                             android:fontFamily="@font/montserratbold"
                             android:textStyle="bold"
                             android:textColor="@color/colorAccent"

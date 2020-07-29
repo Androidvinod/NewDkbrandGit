@@ -37,6 +37,8 @@ import com.dolphin.zanders.Retrofit.ApiClientcusome;
 import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
 import com.dolphin.zanders.Util.MyBounceInterpolator;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 
 
 import org.json.JSONArray;
@@ -52,7 +54,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dolphin.zanders.Activity.NavigationActivity.bottom_navigation;
 import static com.dolphin.zanders.Activity.NavigationActivity.drawer;
+import static com.dolphin.zanders.Activity.NavigationActivity.tv_bottomcount;
 import static com.dolphin.zanders.Activity.NavigationActivity.tv_wishlist_count;
 import static com.dolphin.zanders.Fragment.ProductListFragment.subcat_id;
 import static com.dolphin.zanders.Fragment.ProductListFragment.subcatename;
@@ -69,12 +73,13 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<Integer> wishlitProductidList = new ArrayList<>();
     private List<Integer> wishlitItemId = new ArrayList<>();
 
-    public ProductListAdater(Context context,List<com.dolphin.zanders.Model.NewProductListModel.Item> ItemList) {
+    public ProductListAdater(Context context, List<com.dolphin.zanders.Model.NewProductListModel.Item> ItemList) {
         this.context = context;
         //this.ItemList = new ArrayList<>();
         this.ItemList = ItemList;
     }
-    public ProductListAdater(Context context,String scree) {
+
+    public ProductListAdater(Context context, String scree) {
         this.context = context;
         this.ItemList = new ArrayList<>();
         //this.ItemList = ItemList;
@@ -105,37 +110,41 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                 //  Log.e("list", ApiClientcusome.VIEWTYPE + "");
                 final MyNewHolder listHolder = (MyNewHolder) holder;
                 listHolder.tv_product_name_verticle.setText(item.getName());
-              //  listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice());
+                //  listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice());
 
 
-                Log.e("debu_22tierpricelistt","="+item.getTierprice());
-                if(item.getTierprice()==null || item.getTierprice().equalsIgnoreCase("null") || item.getTierprice().equalsIgnoreCase(null))
-                {
+                Log.e("debu_22tierpricelistt", "=" + item.getTierprice());
+                if (item.getTierprice() == null || item.getTierprice().equalsIgnoreCase("null") || item.getTierprice().equalsIgnoreCase(null)) {
                     listHolder.tv_verticle_tierprice.setVisibility(View.INVISIBLE);
-                }else {
-                    if(item.getTierprice().equalsIgnoreCase("0"))
-                    {
+                } else {
+                    if (item.getTierprice().equalsIgnoreCase("0")) {
                         listHolder.tv_verticle_tierprice.setVisibility(View.INVISIBLE);
-                    }else {
+                    } else {
                         listHolder.tv_verticle_tierprice.setVisibility(View.VISIBLE);
-                        listHolder.tv_verticle_tierprice.setText(item.getTierprice()+" "+Login_preference.getcurrencycode(context));
+                        listHolder.tv_verticle_tierprice.setText(item.getTierprice() + " " + Login_preference.getcurrencycode(context));
 
                     }
                 }
-                Log.e("debu_22list","="+item.getSpecial_price());
+                Log.e("debu_22list", "=" + item.getSpecial_price());
+                Log.e("debu_22listname", "=" + item.getName());
 
-                if(item.getSpecial_price().equalsIgnoreCase("0.0"))
-                {
+                if (item.getSpecial_price().equalsIgnoreCase("0.0")) {
+                    Log.e("debug_if_130", "=" + item.getPrice());
                     listHolder.lv_Specialprice_verticle.setVisibility(View.INVISIBLE);
-                    listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice()+" "+Login_preference.getcurrencycode(context));
+                    listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice() + " " + Login_preference.getcurrencycode(context));
                     listHolder.tv_rifles_lv_price_titlel.setTextColor(context.getResources().getColor(R.color.black));
                     listHolder.tv_rifles_lv_pricel.setTextColor(context.getResources().getColor(R.color.black));
-                }else {
+                    //reomve strike through
+                    listHolder.tv_rifles_lv_pricel.setPaintFlags(listHolder.tv_rifles_lv_pricel.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
+
+                } else {
+                    Log.e("debug_else_130", "=" + item.getPrice());
                     listHolder.tv_rifles_lv_pricel.setPaintFlags(listHolder.tv_rifles_lv_pricel.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     listHolder.lv_Specialprice_verticle.setVisibility(View.VISIBLE);
 
-                    listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice()+" "+Login_preference.getcurrencycode(context));
-                    listHolder.tv_specialprice_list.setText("" + item.getSpecial_price()+" "+Login_preference.getcurrencycode(context));
+                    listHolder.tv_rifles_lv_pricel.setText("" + item.getPrice() + " " + Login_preference.getcurrencycode(context));
+                    listHolder.tv_specialprice_list.setText("" + item.getSpecial_price() + " " + Login_preference.getcurrencycode(context));
 
                     listHolder.tv_rifles_lv_price_titlel.setTextColor(context.getResources().getColor(R.color.grey));
                     listHolder.tv_rifles_lv_pricel.setTextColor(context.getResources().getColor(R.color.grey));
@@ -207,7 +216,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                         if (CheckNetwork.isNetworkAvailable(context)) {
                             if (Login_preference.getLogin_flag(context).equalsIgnoreCase("1")) {
                                 String sku = ItemList.get(position).getSku();
-                                CallAddtoCartApi(listHolder,sku);
+                                CallAddtoCartApi(listHolder, sku);
                             } else {
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
@@ -269,8 +278,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 Log.e("position_476", "=" + position);
                                 Log.e("position_476", "=" + wishlitItemId.size());
 
-                                if(wishlitProductidList.size()>0)
-                                {
+                                if (wishlitProductidList.size() > 0) {
                                     if (wishlitProductidList.contains(ItemList.get(position).getId())) {
                                         int pos = wishlitProductidList.indexOf(ItemList.get(position).getId());
                                         Log.e("wishlist_it222", "=" + pos);
@@ -283,7 +291,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                                     } else {
                                         ItemList.get(position).setWishlist_item_id("0");
                                     }
-                                }else {
+                                } else {
                                     final String itemid = String.valueOf(ItemList.get(position).getWishlist_item_id());
                                     Log.e("debg", "=" + itemid);
 
@@ -332,33 +340,32 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ///grid holderr
                 MyViewHolder gridholder = (MyViewHolder) holder;
                 gridholder.tv_package_name.setText(item.getName());
-                Log.e("debu_22tierprice","="+item.getTierprice());
-                if(item.getTierprice()==null || item.getTierprice().equalsIgnoreCase("null") || item.getTierprice().equalsIgnoreCase(null))
-                {
+                Log.e("debu_22tierprice", "=" + item.getTierprice());
+                if (item.getTierprice() == null || item.getTierprice().equalsIgnoreCase("null") || item.getTierprice().equalsIgnoreCase(null)) {
                     gridholder.tv_rifles_tierprice.setVisibility(View.INVISIBLE);
-                }else {
-                    if(item.getTierprice().equalsIgnoreCase("0"))
-                    {
+                } else {
+                    if (item.getTierprice().equalsIgnoreCase("0")) {
                         gridholder.tv_rifles_tierprice.setVisibility(View.INVISIBLE);
-                    }else {
+                    } else {
                         gridholder.tv_rifles_tierprice.setVisibility(View.VISIBLE);
-                        gridholder.tv_rifles_tierprice.setText(item.getTierprice()+" "+Login_preference.getcurrencycode(context));
+                        gridholder.tv_rifles_tierprice.setText(item.getTierprice() + " " + Login_preference.getcurrencycode(context));
 
                     }
                 }
-                Log.e("debu_22","="+item.getSpecial_price());
+                Log.e("debu_22", "=" + item.getSpecial_price());
 
-                if(item.getSpecial_price().equalsIgnoreCase("0.0"))
-                {
+                if (item.getSpecial_price().equalsIgnoreCase("0.0")) {
                     gridholder.lv_Specialprice.setVisibility(View.INVISIBLE);
-                    gridholder.tv_package_price.setText("" + item.getPrice()+" "+Login_preference.getcurrencycode(context));
+                    gridholder.tv_package_price.setText("" + item.getPrice() + " " + Login_preference.getcurrencycode(context));
                     gridholder.tv_package_price.setTextColor(context.getResources().getColor(R.color.black));
                     gridholder.tv_rifles_lv_price_title.setTextColor(context.getResources().getColor(R.color.black));
-                }else {
+                    gridholder.tv_package_price.setPaintFlags(gridholder.tv_package_price.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
+                } else {
                     gridholder.tv_package_price.setPaintFlags(gridholder.tv_package_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     gridholder.lv_Specialprice.setVisibility(View.VISIBLE);
-                    gridholder.tv_package_price.setText("" + item.getPrice()+" "+Login_preference.getcurrencycode(context));
-                    gridholder.tv_rifles_Specialprice.setText("" + item.getSpecial_price()+" "+Login_preference.getcurrencycode(context));
+                    gridholder.tv_package_price.setText("" + item.getPrice() + " " + Login_preference.getcurrencycode(context));
+                    gridholder.tv_rifles_Specialprice.setText("" + item.getSpecial_price() + " " + Login_preference.getcurrencycode(context));
 
                     gridholder.tv_package_price.setTextColor(context.getResources().getColor(R.color.grey));
                     gridholder.tv_rifles_lv_price_title.setTextColor(context.getResources().getColor(R.color.grey));
@@ -376,8 +383,6 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .setDefaultRequestOptions(requestOptions1)
                         .load("http://dkbraende.demoproject.info/pub/media/catalog/product" + item.getMediaGalleryEntries().get(0).getFile()).into(gridholder.iv_package_img);
            */     // ProductListActivity.shimmer_productlist.setVisibility(View.GONE);
-
-
 
 
                 gridholder.lv_main_rifles_row.setOnClickListener(new View.OnClickListener() {
@@ -488,7 +493,6 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                 });
 
 
-
                 //remove from wishlist
                 gridholder.iv_rifles__remove_wishlist.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -500,8 +504,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 Log.e("position_476", "=" + position);
                                 Log.e("position_476", "=" + wishlitItemId.size());
 
-                                if(wishlitProductidList.size()>0)
-                                {
+                                if (wishlitProductidList.size() > 0) {
                                     if (wishlitProductidList.contains(ItemList.get(position).getId())) {
                                         int pos = wishlitProductidList.indexOf(ItemList.get(position).getId());
                                         Log.e("wishlist_it222", "=" + pos);
@@ -514,7 +517,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                                     } else {
                                         ItemList.get(position).setWishlist_item_id("0");
                                     }
-                                }else {
+                                } else {
                                     final String itemid = String.valueOf(ItemList.get(position).getWishlist_item_id());
                                     Log.e("debg", "=" + itemid);
 
@@ -581,9 +584,9 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_package_price, tv_package_name,tv_rifles_tierprice,tv_rifles_Specialprice,tv_rifles_lv_price_title;
+        TextView tv_package_price, tv_package_name, tv_rifles_tierprice, tv_rifles_Specialprice, tv_rifles_lv_price_title;
         ImageView iv_package_img, iv_rifles_add_wishlist, iv_rifles__remove_wishlist;
-        LinearLayout lv_product_add_to_cart, lv_pb_prod, lv_product_main,lv_Specialprice;
+        LinearLayout lv_product_add_to_cart, lv_pb_prod, lv_product_main, lv_Specialprice;
         CardView lv_main_rifles_row;
 
         public MyViewHolder(@NonNull View view) {
@@ -606,9 +609,9 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     public class MyNewHolder extends RecyclerView.ViewHolder {
-        LinearLayout lv_varticale, lv_product_add_to_cart_verticle, lv_pb_prod_verticle, lv_prod_verticle_main,lv_Specialprice_verticle;
+        LinearLayout lv_varticale, lv_product_add_to_cart_verticle, lv_pb_prod_verticle, lv_prod_verticle_main, lv_Specialprice_verticle;
         ImageView iv_product_add_wishlist, iv_product_remove_wishlist, iv_product_verticle;
-        TextView tv_product_name_verticle,tv_verticle_tierprice,tv_specialprice_title_list,tv_specialprice_list,tv_rifles_lv_price_titlel;
+        TextView tv_product_name_verticle, tv_verticle_tierprice, tv_specialprice_title_list, tv_specialprice_list, tv_rifles_lv_price_titlel;
         TextView tv_rifles_lv_pricel;
         CardView lv_main_product_row_verticle;
 
@@ -634,7 +637,6 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
             iv_product_verticle = itemView.findViewById(R.id.iv_product_verticle);
         }
     }
-
 
 
     //list holder add to wishlsit
@@ -741,7 +743,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                     holder.lv_pb_prod_verticle.setVisibility(View.GONE);
                     NavigationActivity.get_Customer_tokenapi();
 
-                   // callRemoveFromWishlistApi_listHolder(itemid,position,v,holder,itemList);
+                    // callRemoveFromWishlistApi_listHolder(itemid,position,v,holder,itemList);
                 }
 
             }
@@ -805,7 +807,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                     holder.lv_pb_prod.setVisibility(View.GONE);
                     NavigationActivity.get_Customer_tokenapi();
 
-                   // callRemoveFromWishlistApi(itemid,position,v,holder,itemList);
+                    // callRemoveFromWishlistApi(itemid,position,v,holder,itemList);
                 }
 
             }
@@ -910,7 +912,6 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-
     //get wishlist api
     private void callWishistApi(final String prod_id, final List<Item> itemList, final int position) {
         wishlitProductidList.clear();
@@ -984,6 +985,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         });
     }
+
     private void CallAddtoCartApigrid(MyViewHolder listHolder, String sku) {
         ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
         listHolder.lv_product_main.setVisibility(View.GONE);
@@ -1008,22 +1010,11 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                             listHolder.lv_product_main.setVisibility(View.VISIBLE);
                             listHolder.lv_pb_prod.setVisibility(View.GONE);
                             jsonObject = new JSONObject(response.body().string());
-                            String name = jsonObject.getString("name");
-                            String price = jsonObject.getString("price");
-                            String product_type = jsonObject.getString("product_type");
-                            String quote_id = jsonObject.getString("quote_id");
-                            String sku = jsonObject.getString("sku");
-                            String item_id = jsonObject.getString("item_id");
+
                             String qty = jsonObject.getString("qty");
 
                             Toast.makeText(context, "Add to cart SuccessFully", Toast.LENGTH_SHORT).show();
-                            Log.e("jsonObjectss", "=" + jsonObject);
-                            Log.e("names", "=" + name);
-                            Log.e("prices", "=" + price);
-                            Log.e("product_types", "=" + product_type);
-                            Log.e("quote_ids", "=" + quote_id);
-                            Log.e("skus", "=" + sku);
-                            Log.e("item_ids", "=" + item_id);
+                            callCartCcountApi();
                             Log.e("qtys", "=" + qty);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1037,8 +1028,8 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                     listHolder.lv_pb_prod.setVisibility(View.GONE);
 
                     NavigationActivity.get_Customer_tokenapi();
-                   // CallAddtoCartApigrid(listHolder, sku);
-                    Toast.makeText(context, "The product that was requested doesn't exist. Verify the product and try again.", Toast.LENGTH_SHORT).show();
+                    // CallAddtoCartApigrid(listHolder, sku);
+                    Toast.makeText(context, "" + context.getResources().getString(R.string.productoutofstock), Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -1079,22 +1070,12 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                             listHolder.lv_prod_verticle_main.setVisibility(View.VISIBLE);
                             listHolder.lv_pb_prod_verticle.setVisibility(View.GONE);
                             jsonObject = new JSONObject(response.body().string());
-                            String name = jsonObject.getString("name");
-                            String price = jsonObject.getString("price");
-                            String product_type = jsonObject.getString("product_type");
-                            String quote_id = jsonObject.getString("quote_id");
-                            String sku = jsonObject.getString("sku");
-                            String item_id = jsonObject.getString("item_id");
+
                             String qty = jsonObject.getString("qty");
 
                             Toast.makeText(context, "Add to cart SuccessFully", Toast.LENGTH_SHORT).show();
-                            Log.e("jsonObjectss", "=" + jsonObject);
-                            Log.e("names", "=" + name);
-                            Log.e("prices", "=" + price);
-                            Log.e("product_types", "=" + product_type);
-                            Log.e("quote_ids", "=" + quote_id);
-                            Log.e("skus", "=" + sku);
-                            Log.e("item_ids", "=" + item_id);
+                            callCartCcountApi();
+
                             Log.e("qtys", "=" + qty);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1109,7 +1090,7 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     NavigationActivity.get_Customer_tokenapi();
                     //CallAddtoCartApi(listHolder, sku);
-                    Toast.makeText(context, "The product that was requested doesn't exist. Verify the product and try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "" + context.getResources().getString(R.string.productoutofstock), Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -1121,6 +1102,78 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                 listHolder.lv_pb_prod_verticle.setVisibility(View.GONE);
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+            }
+        });
+    }
+
+    public Call<ResponseBody> callcartlistapi() {
+        ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
+        Log.e("email_237", "=" + Login_preference.getCustomertoken(context));
+        return api.getcartlistapi("Bearer " + Login_preference.getCustomertoken(context));
+    }
+
+    private void callCartCcountApi() {
+        callcartlistapi().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody cartlist = response.body();
+                if (response.code() == 200 || response.isSuccessful()) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response.body().string());
+                        Log.e("jsonArray111", "=" + jsonArray.length());
+                        if (jsonArray.length() == 0) {
+                            if (context != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                View notificationBadge = LayoutInflater.from(context).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(context,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(context,cartitem_count);
+                                }
+                                itemView.addView(notificationBadge);
+                            }
+                        } else {
+                            if (context != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                NavigationActivity.notificationBadge = LayoutInflater.from(context).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) NavigationActivity.notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(context,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(context,cartitem_count);
+                                }
+                                itemView.addView(NavigationActivity.notificationBadge);
+                            }
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    NavigationActivity.get_Customer_tokenapi();
+                    //  CallCartlistApi();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(context, "" + context.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Log.e("debug_175125", "pages: " + t);
             }
         });
     }
@@ -1139,10 +1192,36 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (response.code() == 200 || response.isSuccessful()) {
                     try {
                         JSONArray jsonObject = new JSONArray(response.body().string());
-
                         String count = jsonObject.getJSONObject(0).getString("total_items");
-                        tv_wishlist_count.setText(count);
+
+                        // String count = jsonObject.getJSONObject(0).getString("total_items");
+                        // tv_wishlist_count.setText(count);
                         Login_preference.set_wishlist_count(context, count);
+
+
+                        if (context != null) {
+                            BottomNavigationMenuView menuView1 = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+
+                            BottomNavigationItemView itemView_wishlist = (BottomNavigationItemView) menuView1.getChildAt(2);
+                            View wishlist_badge = LayoutInflater.from(context).inflate(R.layout.wishlist_count, menuView1, false);
+                            tv_wishlist_count = (TextView) wishlist_badge.findViewById(R.id.badge_wishlist);
+                            Log.e("debug_309", "fg" + Login_preference.get_wishlist_count(context));
+                            if (count.equalsIgnoreCase("null") || count.equals("") || count.equals("0")) {
+                                tv_wishlist_count.setVisibility(View.GONE);
+                                Login_preference.set_wishlist_count(context, "0");
+
+                            } else {
+                                tv_wishlist_count.setVisibility(View.VISIBLE);
+                                tv_wishlist_count.setText(count);
+
+                                tv_wishlist_count.setText(count);
+                                Login_preference.set_wishlist_count(context, count);
+
+                            }
+
+                            itemView_wishlist.addView(wishlist_badge);
+
+                        }
                         Log.e("wishcount", "" + count);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1168,7 +1247,6 @@ public class ProductListAdater extends RecyclerView.Adapter<RecyclerView.ViewHol
         Log.e("debug_11token22", "==" + Login_preference.getCustomertoken(context));
         return api.defaultgetWishlistData("Bearer " + Login_preference.getCustomertoken(context));
     }
-
 
 
 }

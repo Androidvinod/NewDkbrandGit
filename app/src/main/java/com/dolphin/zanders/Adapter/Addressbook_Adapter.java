@@ -96,7 +96,7 @@ public class  Addressbook_Adapter  extends RecyclerView.Adapter<Addressbook_Adap
         street=address.getStreet();
         Log.e("addres9999","43   "+address.getFirstname()+"\n"+street.get(0)+"\n"+address.getRegion()+","+address.getCity()+","+address.getPostcode()+"\n"+address.getLastname()+"\n"+"T :"+address.getTelephone());
         Log.e("address7777","43   "+address.getFirstname()+"\n"+address.getStreet()+"\n"+address.getRegion()+","+address.getCity()+","+address.getPostcode()+"\n"+address.getLastname()+"\n"+"T :"+address.getTelephone());
-        holder.tv_adderss.setText(address.getFirstname()+" "+address.getLastname()+", \n"+street.get(0)+" "+","+address.getCity()+","+address.getPostcode()+"\n"+"T :"+address.getTelephone());
+        holder.tv_adderss.setText(address.getFirstname()+" "+address.getLastname()+", \n"+street.get(0)+","+address.getCity()+","+address.getPostcode()+"\n"+"T :"+address.getTelephone());
 
     }
 
@@ -149,7 +149,7 @@ public class  Addressbook_Adapter  extends RecyclerView.Adapter<Addressbook_Adap
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
                 holder.lv_add_progress.setVisibility(View.GONE);
-                holder.lv_add_mainnn.setVisibility(View.VISIBLE);
+                holder.lv_add_mainnn.setVisibility(View.GONE);
 
                 Log.e("debug1111",""+ response.body());
                 Log.e("debug1111dsgdf",""+ response);
@@ -165,7 +165,7 @@ public class  Addressbook_Adapter  extends RecyclerView.Adapter<Addressbook_Adap
                             AppCompatActivity activity = (AppCompatActivity) v.getContext();
                             AccountDashboard myFragment = new AccountDashboard();
                             activity.getSupportFragmentManager().beginTransaction()
-                                    .addToBackStack("account").replace(R.id.framlayout, myFragment)
+                                    .replace(R.id.framlayout, myFragment)
                                     .commit();
                         }
                         else if(screenname.equalsIgnoreCase("AddressBook"))
@@ -173,13 +173,13 @@ public class  Addressbook_Adapter  extends RecyclerView.Adapter<Addressbook_Adap
                             AppCompatActivity activity = (AppCompatActivity) v.getContext();
                             Address_Book myFragment = new Address_Book();
                             activity.getSupportFragmentManager().beginTransaction()
-                                    .addToBackStack("Address_Book").replace(R.id.framlayout, myFragment)
+                                    .replace(R.id.framlayout, myFragment)
                                     .commit();
                         }else if(screenname.equalsIgnoreCase("AccountDashboard")){
                             AppCompatActivity activity = (AppCompatActivity) v.getContext();
                             AccountDashboard myFragment = new AccountDashboard();
                             activity.getSupportFragmentManager().beginTransaction()
-                                    .addToBackStack("account").replace(R.id.framlayout, myFragment)
+                                    .replace(R.id.framlayout, myFragment)
                                     .commit();
                         }
 
@@ -187,6 +187,8 @@ public class  Addressbook_Adapter  extends RecyclerView.Adapter<Addressbook_Adap
                     }
                 }else {
                     //   Toast.makeText(context(), "The password doesn't match this account. Verify the password and try again.", Toast.LENGTH_SHORT).show();
+                    holder.lv_add_progress.setVisibility(View.GONE);
+                    holder.lv_add_mainnn.setVisibility(View.VISIBLE);
 
                 }
 

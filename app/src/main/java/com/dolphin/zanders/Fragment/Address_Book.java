@@ -191,7 +191,7 @@ public class Address_Book extends Fragment implements View.OnClickListener {
 
     private Call<AddressModell> calladdressgapi() {
         Log.e("debug_111",""+Login_preference.getcustomer_id(parent));
-        return apiinterface.address("Bearer "+Login_preference.gettoken(getActivity()),"http://dkbraende.demoproject.info/rest//V1/customers/"+Login_preference.getcustomer_id(parent));
+        return apiinterface.address("Bearer "+Login_preference.gettoken(parent),"http://dkbraende.demoproject.info/rest//V1/customers/"+Login_preference.getcustomer_id(parent));
     }
 
     private void AllocateMemory(View v) {
@@ -211,10 +211,14 @@ public class Address_Book extends Fragment implements View.OnClickListener {
 
         tv_account_book.setTypeface(NavigationActivity.montserrat_semibold);
 
-        addressbookAdapter = new Addressbook_Adapter(getActivity(),"AddressBook");
-        recv_address.setLayoutManager(new LinearLayoutManager(parent, LinearLayoutManager.VERTICAL, false));
-        recv_address.setItemAnimator(new DefaultItemAnimator());
-        recv_address.setAdapter(addressbookAdapter);
+        if(getActivity()!=null)
+        {
+            addressbookAdapter = new Addressbook_Adapter(getActivity(),"AddressBook");
+            recv_address.setLayoutManager(new LinearLayoutManager(parent, LinearLayoutManager.VERTICAL, false));
+            recv_address.setItemAnimator(new DefaultItemAnimator());
+            recv_address.setAdapter(addressbookAdapter);
+        }
+
     }
 
 

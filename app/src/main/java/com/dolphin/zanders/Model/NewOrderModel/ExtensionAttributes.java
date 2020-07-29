@@ -12,7 +12,7 @@ public class ExtensionAttributes {
     private List<ShippingAssignment> shippingAssignments = null;
     @SerializedName("payment_additional_info")
     @Expose
-    private List<Object> paymentAdditionalInfo = null;
+    private List<PaymentAdditionalInfo> paymentAdditionalInfo = null;
     @SerializedName("applied_taxes")
     @Expose
     private List<Object> appliedTaxes = null;
@@ -28,11 +28,11 @@ public class ExtensionAttributes {
         this.shippingAssignments = shippingAssignments;
     }
 
-    public List<Object> getPaymentAdditionalInfo() {
+    public List<PaymentAdditionalInfo> getPaymentAdditionalInfo() {
         return paymentAdditionalInfo;
     }
 
-    public void setPaymentAdditionalInfo(List<Object> paymentAdditionalInfo) {
+    public void setPaymentAdditionalInfo(List<PaymentAdditionalInfo> paymentAdditionalInfo) {
         this.paymentAdditionalInfo = paymentAdditionalInfo;
     }
 

@@ -8,109 +8,109 @@ public class Item {
 
     @SerializedName("amount_refunded")
     @Expose
-    private Integer amountRefunded;
+    private Double amountRefunded;
     @SerializedName("base_amount_refunded")
     @Expose
-    private Integer baseAmountRefunded;
+    private Double baseAmountRefunded;
     @SerializedName("base_cost")
     @Expose
-    private Integer baseCost;
+    private Double baseCost;
     @SerializedName("base_discount_amount")
     @Expose
-    private Integer baseDiscountAmount;
+    private Double baseDiscountAmount;
     @SerializedName("base_discount_invoiced")
     @Expose
-    private Integer baseDiscountInvoiced;
+    private Double baseDiscountInvoiced;
     @SerializedName("base_original_price")
     @Expose
-    private Integer baseOriginalPrice;
+    private Double baseOriginalPrice;
     @SerializedName("base_price")
     @Expose
-    private Integer basePrice;
+    private Double basePrice;
     @SerializedName("base_price_incl_tax")
     @Expose
-    private Integer basePriceInclTax;
+    private Double basePriceInclTax;
     @SerializedName("base_row_invoiced")
     @Expose
-    private Integer baseRowInvoiced;
+    private Double baseRowInvoiced;
     @SerializedName("base_row_total")
     @Expose
-    private Integer baseRowTotal;
+    private Double baseRowTotal;
     @SerializedName("base_tax_amount")
     @Expose
-    private Integer baseTaxAmount;
+    private Double baseTaxAmount;
     @SerializedName("base_tax_invoiced")
     @Expose
-    private Integer baseTaxInvoiced;
+    private Double baseTaxInvoiced;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("discount_amount")
     @Expose
-    private Integer discountAmount;
+    private Double discountAmount;
     @SerializedName("discount_invoiced")
     @Expose
-    private Integer discountInvoiced;
+    private Double discountInvoiced;
     @SerializedName("discount_percent")
     @Expose
-    private Integer discountPercent;
+    private Double discountPercent;
     @SerializedName("free_shipping")
     @Expose
-    private Integer freeShipping;
+    private Double freeShipping;
     @SerializedName("item_id")
     @Expose
-    private Integer itemId;
+    private Double itemId;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("no_discount")
     @Expose
-    private Integer noDiscount;
+    private Double noDiscount;
     @SerializedName("order_id")
     @Expose
-    private Integer orderId;
+    private Double orderId;
     @SerializedName("original_price")
     @Expose
-    private Integer originalPrice;
+    private Double originalPrice;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("price_incl_tax")
     @Expose
-    private Integer priceInclTax;
+    private Double priceInclTax;
     @SerializedName("product_id")
     @Expose
-    private Integer productId;
+    private Double productId;
     @SerializedName("qty_backordered")
     @Expose
-    private Integer qtyBackordered;
+    private Double qtyBackordered;
     @SerializedName("qty_canceled")
     @Expose
-    private Integer qtyCanceled;
+    private Double qtyCanceled;
     @SerializedName("qty_invoiced")
     @Expose
-    private Integer qtyInvoiced;
+    private Double qtyInvoiced;
     @SerializedName("qty_ordered")
     @Expose
     private Integer qtyOrdered;
     @SerializedName("qty_refunded")
     @Expose
-    private Integer qtyRefunded;
+    private Double qtyRefunded;
     @SerializedName("qty_shipped")
     @Expose
-    private Integer qtyShipped;
+    private Double qtyShipped;
     @SerializedName("row_invoiced")
     @Expose
-    private Integer rowInvoiced;
+    private Double rowInvoiced;
     @SerializedName("row_total")
     @Expose
-    private Integer rowTotal;
+    private Double rowTotal;
     @SerializedName("row_total_incl_tax")
     @Expose
-    private Integer rowTotalInclTax;
+    private Double rowTotalInclTax;
     @SerializedName("row_weight")
     @Expose
-    private Integer rowWeight;
+    private Double rowWeight;
 
 
     public String getSku() {
@@ -126,116 +126,116 @@ public class Item {
     private String sku;
     @SerializedName("tax_amount")
     @Expose
-    private Integer taxAmount;
+    private Double taxAmount;
     @SerializedName("tax_invoiced")
     @Expose
-    private Integer taxInvoiced;
+    private Double taxInvoiced;
     @SerializedName("tax_percent")
     @Expose
-    private Integer taxPercent;
+    private Double taxPercent;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
     @SerializedName("weight")
     @Expose
-    private Integer weight;
+    private Double weight;
     @SerializedName("base_row_total_incl_tax")
     @Expose
-    private Integer baseRowTotalInclTax;
+    private Double baseRowTotalInclTax;
 
-    public Integer getAmountRefunded() {
+    public Double getAmountRefunded() {
         return amountRefunded;
     }
 
-    public void setAmountRefunded(Integer amountRefunded) {
+    public void setAmountRefunded(Double amountRefunded) {
         this.amountRefunded = amountRefunded;
     }
 
-    public Integer getBaseAmountRefunded() {
+    public Double getBaseAmountRefunded() {
         return baseAmountRefunded;
     }
 
-    public void setBaseAmountRefunded(Integer baseAmountRefunded) {
+    public void setBaseAmountRefunded(Double baseAmountRefunded) {
         this.baseAmountRefunded = baseAmountRefunded;
     }
 
-    public Integer getBaseCost() {
+    public Double getBaseCost() {
         return baseCost;
     }
 
-    public void setBaseCost(Integer baseCost) {
+    public void setBaseCost(Double baseCost) {
         this.baseCost = baseCost;
     }
 
-    public Integer getBaseDiscountAmount() {
+    public Double getBaseDiscountAmount() {
         return baseDiscountAmount;
     }
 
-    public void setBaseDiscountAmount(Integer baseDiscountAmount) {
+    public void setBaseDiscountAmount(Double baseDiscountAmount) {
         this.baseDiscountAmount = baseDiscountAmount;
     }
 
-    public Integer getBaseDiscountInvoiced() {
+    public Double getBaseDiscountInvoiced() {
         return baseDiscountInvoiced;
     }
 
-    public void setBaseDiscountInvoiced(Integer baseDiscountInvoiced) {
+    public void setBaseDiscountInvoiced(Double baseDiscountInvoiced) {
         this.baseDiscountInvoiced = baseDiscountInvoiced;
     }
 
-    public Integer getBaseOriginalPrice() {
+    public Double getBaseOriginalPrice() {
         return baseOriginalPrice;
     }
 
-    public void setBaseOriginalPrice(Integer baseOriginalPrice) {
+    public void setBaseOriginalPrice(Double baseOriginalPrice) {
         this.baseOriginalPrice = baseOriginalPrice;
     }
 
-    public Integer getBasePrice() {
+    public Double getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(Integer basePrice) {
+    public void setBasePrice(Double basePrice) {
         this.basePrice = basePrice;
     }
 
-    public Integer getBasePriceInclTax() {
+    public Double getBasePriceInclTax() {
         return basePriceInclTax;
     }
 
-    public void setBasePriceInclTax(Integer basePriceInclTax) {
+    public void setBasePriceInclTax(Double basePriceInclTax) {
         this.basePriceInclTax = basePriceInclTax;
     }
 
-    public Integer getBaseRowInvoiced() {
+    public Double getBaseRowInvoiced() {
         return baseRowInvoiced;
     }
 
-    public void setBaseRowInvoiced(Integer baseRowInvoiced) {
+    public void setBaseRowInvoiced(Double baseRowInvoiced) {
         this.baseRowInvoiced = baseRowInvoiced;
     }
 
-    public Integer getBaseRowTotal() {
+    public Double getBaseRowTotal() {
         return baseRowTotal;
     }
 
-    public void setBaseRowTotal(Integer baseRowTotal) {
+    public void setBaseRowTotal(Double baseRowTotal) {
         this.baseRowTotal = baseRowTotal;
     }
 
-    public Integer getBaseTaxAmount() {
+    public Double getBaseTaxAmount() {
         return baseTaxAmount;
     }
 
-    public void setBaseTaxAmount(Integer baseTaxAmount) {
+    public void setBaseTaxAmount(Double baseTaxAmount) {
         this.baseTaxAmount = baseTaxAmount;
     }
 
-    public Integer getBaseTaxInvoiced() {
+    public Double getBaseTaxInvoiced() {
         return baseTaxInvoiced;
     }
 
-    public void setBaseTaxInvoiced(Integer baseTaxInvoiced) {
+    public void setBaseTaxInvoiced(Double baseTaxInvoiced) {
         this.baseTaxInvoiced = baseTaxInvoiced;
     }
 
@@ -247,43 +247,43 @@ public class Item {
         this.createdAt = createdAt;
     }
 
-    public Integer getDiscountAmount() {
+    public Double getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(Integer discountAmount) {
+    public void setDiscountAmount(Double discountAmount) {
         this.discountAmount = discountAmount;
     }
 
-    public Integer getDiscountInvoiced() {
+    public Double getDiscountInvoiced() {
         return discountInvoiced;
     }
 
-    public void setDiscountInvoiced(Integer discountInvoiced) {
+    public void setDiscountInvoiced(Double discountInvoiced) {
         this.discountInvoiced = discountInvoiced;
     }
 
-    public Integer getDiscountPercent() {
+    public Double getDiscountPercent() {
         return discountPercent;
     }
 
-    public void setDiscountPercent(Integer discountPercent) {
+    public void setDiscountPercent(Double discountPercent) {
         this.discountPercent = discountPercent;
     }
 
-    public Integer getFreeShipping() {
+    public Double getFreeShipping() {
         return freeShipping;
     }
 
-    public void setFreeShipping(Integer freeShipping) {
+    public void setFreeShipping(Double freeShipping) {
         this.freeShipping = freeShipping;
     }
 
-    public Integer getItemId() {
+    public Double getItemId() {
         return itemId;
     }
 
-    public void setItemId(Integer itemId) {
+    public void setItemId(Double itemId) {
         this.itemId = itemId;
     }
 
@@ -295,75 +295,75 @@ public class Item {
         this.name = name;
     }
 
-    public Integer getNoDiscount() {
+    public Double getNoDiscount() {
         return noDiscount;
     }
 
-    public void setNoDiscount(Integer noDiscount) {
+    public void setNoDiscount(Double noDiscount) {
         this.noDiscount = noDiscount;
     }
 
-    public Integer getOrderId() {
+    public Double getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Double orderId) {
         this.orderId = orderId;
     }
 
-    public Integer getOriginalPrice() {
+    public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Integer originalPrice) {
+    public void setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getPriceInclTax() {
+    public Double getPriceInclTax() {
         return priceInclTax;
     }
 
-    public void setPriceInclTax(Integer priceInclTax) {
+    public void setPriceInclTax(Double priceInclTax) {
         this.priceInclTax = priceInclTax;
     }
 
-    public Integer getProductId() {
+    public Double getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Double productId) {
         this.productId = productId;
     }
 
-    public Integer getQtyBackordered() {
+    public Double getQtyBackordered() {
         return qtyBackordered;
     }
 
-    public void setQtyBackordered(Integer qtyBackordered) {
+    public void setQtyBackordered(Double qtyBackordered) {
         this.qtyBackordered = qtyBackordered;
     }
 
-    public Integer getQtyCanceled() {
+    public Double getQtyCanceled() {
         return qtyCanceled;
     }
 
-    public void setQtyCanceled(Integer qtyCanceled) {
+    public void setQtyCanceled(Double qtyCanceled) {
         this.qtyCanceled = qtyCanceled;
     }
 
-    public Integer getQtyInvoiced() {
+    public Double getQtyInvoiced() {
         return qtyInvoiced;
     }
 
-    public void setQtyInvoiced(Integer qtyInvoiced) {
+    public void setQtyInvoiced(Double qtyInvoiced) {
         this.qtyInvoiced = qtyInvoiced;
     }
 
@@ -375,76 +375,76 @@ public class Item {
         this.qtyOrdered = qtyOrdered;
     }
 
-    public Integer getQtyRefunded() {
+    public Double getQtyRefunded() {
         return qtyRefunded;
     }
 
-    public void setQtyRefunded(Integer qtyRefunded) {
+    public void setQtyRefunded(Double qtyRefunded) {
         this.qtyRefunded = qtyRefunded;
     }
 
-    public Integer getQtyShipped() {
+    public Double getQtyShipped() {
         return qtyShipped;
     }
 
-    public void setQtyShipped(Integer qtyShipped) {
+    public void setQtyShipped(Double qtyShipped) {
         this.qtyShipped = qtyShipped;
     }
 
-    public Integer getRowInvoiced() {
+    public Double getRowInvoiced() {
         return rowInvoiced;
     }
 
-    public void setRowInvoiced(Integer rowInvoiced) {
+    public void setRowInvoiced(Double rowInvoiced) {
         this.rowInvoiced = rowInvoiced;
     }
 
-    public Integer getRowTotal() {
+    public Double getRowTotal() {
         return rowTotal;
     }
 
-    public void setRowTotal(Integer rowTotal) {
+    public void setRowTotal(Double rowTotal) {
         this.rowTotal = rowTotal;
     }
 
-    public Integer getRowTotalInclTax() {
+    public Double getRowTotalInclTax() {
         return rowTotalInclTax;
     }
 
-    public void setRowTotalInclTax(Integer rowTotalInclTax) {
+    public void setRowTotalInclTax(Double rowTotalInclTax) {
         this.rowTotalInclTax = rowTotalInclTax;
     }
 
-    public Integer getRowWeight() {
+    public Double getRowWeight() {
         return rowWeight;
     }
 
-    public void setRowWeight(Integer rowWeight) {
+    public void setRowWeight(Double rowWeight) {
         this.rowWeight = rowWeight;
     }
 
 
-    public Integer getTaxAmount() {
+    public Double getTaxAmount() {
         return taxAmount;
     }
 
-    public void setTaxAmount(Integer taxAmount) {
+    public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
     }
 
-    public Integer getTaxInvoiced() {
+    public Double getTaxInvoiced() {
         return taxInvoiced;
     }
 
-    public void setTaxInvoiced(Integer taxInvoiced) {
+    public void setTaxInvoiced(Double taxInvoiced) {
         this.taxInvoiced = taxInvoiced;
     }
 
-    public Integer getTaxPercent() {
+    public Double getTaxPercent() {
         return taxPercent;
     }
 
-    public void setTaxPercent(Integer taxPercent) {
+    public void setTaxPercent(Double taxPercent) {
         this.taxPercent = taxPercent;
     }
 
@@ -456,19 +456,19 @@ public class Item {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public Integer getBaseRowTotalInclTax() {
+    public Double getBaseRowTotalInclTax() {
         return baseRowTotalInclTax;
     }
 
-    public void setBaseRowTotalInclTax(Integer baseRowTotalInclTax) {
+    public void setBaseRowTotalInclTax(Double baseRowTotalInclTax) {
         this.baseRowTotalInclTax = baseRowTotalInclTax;
     }
 

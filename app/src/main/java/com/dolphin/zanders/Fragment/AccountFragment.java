@@ -114,7 +114,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         if (Login_preference.getLogin_flag(parent).equalsIgnoreCase("1")) {
             tv_login_ititle.setText("Logout");
         } else {
-            tv_login_ititle.setText("Login");
+            tv_login_ititle.setText("Kunde login");
         }
 
         tv_account_title.setTypeface(NavigationActivity.montserrat_semibold);
@@ -230,7 +230,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                         .setPositiveListener(getString(R.string.yes), new iOSDialogClickListener() {
                             @Override
                             public void onClick(iOSDialog dialog) {
-                                Intent intent = new Intent(getActivity(), NavigationActivity.class);
+                                Intent intent = new Intent(parent, NavigationActivity.class);
                                 startActivity(intent);
 
                                /* if(getActivity()!=null)
@@ -238,7 +238,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                                     Login_preference.setLogin_flag(getActivity(), "0");
                                 }*/
 
-                                Login_preference.setLogin_flag(getActivity(), "0");
+                                Login_preference.setLogin_flag(parent, "0");
                                 Login_preference.prefsEditor.remove("storeid").apply();
                                 Login_preference.prefsEditor.remove("storeName").apply();
                                 Login_preference.prefsEditor.remove("customeremail").apply();
@@ -251,6 +251,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                                 Login_preference.prefsEditor.remove("customer_id").apply();
                                 Login_preference.prefsEditor.remove("email").apply();
                                 Login_preference.prefsEditor.remove("fullname").apply();
+                                Login_preference.prefsEditor.remove("item_count").apply();
                                 ///   Login_preference.prefsEditor.remove("items_qty").apply();
                                 //Login_preference.prefsEditor.remove("login_flag").apply();
                                 Login_preference.prefsEditor.remove("wishlist_count").apply();

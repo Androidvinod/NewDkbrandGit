@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/lv_main_freight"
+    android:background="@color/lightblue"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -78,6 +79,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="none">
         <LinearLayout
+            android:layout_marginTop="@dimen/padding20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"

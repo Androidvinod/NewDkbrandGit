@@ -111,7 +111,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                android:layout_marginBottom="?attr/actionBarSize"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,7 +123,7 @@
                     <com.facebook.shimmer.ShimmerFrameLayout
                         android:id="@+id/shimmer_cartlist"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:visibility="visible"
@@ -172,6 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="visible"
+                        android:paddingBottom="?attr/actionBarSize"
                         android:layout_marginBottom="?attr/actionBarSize"
                         android:layoutAnimation="@anim/layout_animation_fall_down"
                         />
@@ -250,7 +250,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2.8"
                                 android:gravity="center|end|top"
-                                android:text="$120,00"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_14" />
@@ -269,7 +268,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1.2"
                                 android:gravity="center|start|top"
-                                android:text="@string/tax"
+                                android:text="@string/saltax"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_14" />
 
@@ -280,7 +279,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2.8"
                                 android:gravity="center|end|top"
-                                android:text="$100,00"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_14" />
@@ -309,7 +307,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center|end|top"
-                                android:text="$000.00"
                                 android:fontFamily="@font/montserrat_semibold"
                                 android:textColor="@color/colorAccent"
                                 android:textSize="@dimen/tetx_16"

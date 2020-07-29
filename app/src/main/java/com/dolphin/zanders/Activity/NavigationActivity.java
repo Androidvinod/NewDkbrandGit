@@ -99,25 +99,20 @@ public class NavigationActivity extends AppCompatActivity {
     public static AssetManager am;
     public static Typeface montserrat_medium, montserrat_regular, montserrat_semibold, montserratbold, montserrat_light;
     boolean doubleBackToExitPressedOnce = false;
-   public static ApiInterface customeapi;
+    public static ApiInterface customeapi;
 
     ImageView nav_iv_close;
     CategoryAdapter categoryAdapter;
-    public static TextView tv_bottomcount,tv_wishlist_count;
+    public static TextView tv_bottomcount, tv_wishlist_count;
     LinearLayout lv_nodata_category;
-    String cartitem_count,wishlist_count;
-    private View notificationBadge,wishlist_badge;
+    String cartitem_count, wishlist_count;
+    public static View notificationBadge, wishlist_badge;
     MenuItem login;
     public static NavigationActivity parent;
 
     ShimmerFrameLayout shimmer_nav_category;
 
     //hjkkjl
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +126,7 @@ public class NavigationActivity extends AppCompatActivity {
         //api = ApiClient.getClient().create(ApiInterface.class);
         customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
         parent = (NavigationActivity) NavigationActivity.this;
-        Log.e("debug_tokemn","="+Login_preference.gettoken(getApplicationContext()));
+        Log.e("debug_tokemn", "=" + Login_preference.gettoken(getApplicationContext()));
         //setSupportActionBar(toolbar);
         //toolbar.setTitle("");
         setNavigationIcon_headerview();
@@ -146,28 +141,28 @@ public class NavigationActivity extends AppCompatActivity {
         AttachRecyclerView();
         //calling api of categiry list for side menu
 
-      //  gettokenapi();
+        //  gettokenapi();
 
 
         Filterlist_Adapter.filter_child_value_list.clear();
         Filterlist_Adapter.filter_grouppp_namelist.clear();
-        FilterListFragment.selected_child="";
+        FilterListFragment.selected_child = "";
         CategoryAdapter.datumList.clear();
 
 
         if (CheckNetwork.isNetworkAvailable(NavigationActivity.this)) {
 
 
-            Log.e("111",""+Login_preference.gettoken(NavigationActivity.this));
-            if(Login_preference.gettoken(NavigationActivity.this).equalsIgnoreCase("") || Login_preference.gettoken(NavigationActivity.this) ==null)
-            {
-                Log.e("ddtooent",""+Login_preference.gettoken(NavigationActivity.this));
-            }else {
-                Log.e("c2oken",""+Login_preference.gettoken(NavigationActivity.this));
+            Log.e("111", "" + Login_preference.gettoken(NavigationActivity.this));
+            if (Login_preference.gettoken(NavigationActivity.this).equalsIgnoreCase("") || Login_preference.gettoken(NavigationActivity.this) == null) {
+                Log.e("ddtooent", "" + Login_preference.gettoken(NavigationActivity.this));
+            } else {
+                Log.e("c2oken", "" + Login_preference.gettoken(NavigationActivity.this));
                 if (Login_preference.getLogin_flag(this).equalsIgnoreCase("1")) {
                     //get_Customer_tokenapi();
                     get_Customer_QuoteId();
                     callWishlistCountApi();
+                    callCartCcountApi();
                 }
                 getCategoryList();
             }
@@ -177,19 +172,105 @@ public class NavigationActivity extends AppCompatActivity {
             Toast.makeText(NavigationActivity.this, getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
         }
     }
+
+    public Call<ResponseBody> callcartlistapi() {
+        Log.e("email_237", "=" + Login_preference.getCustomertoken(parent));
+        return customeapi.getcartlistapi("Bearer " + Login_preference.getCustomertoken(parent));
+    }
+
+    private void callCartCcountApi() {
+        callcartlistapi().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody cartlist = response.body();
+
+                if (response.code() == 200 || response.isSuccessful()) {
+
+                    try {
+                        JSONArray jsonArray = new JSONArray(response.body().string());
+                        Log.e("jsonArray111", "=" + jsonArray.length());
+
+
+                        if (jsonArray.length() == 0) {
+
+
+                            String cartitem_count = String.valueOf(jsonArray.length());
+                            BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                            //cart item count
+                            BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                            View notificationBadge = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.badge_row, menuView, false);
+                            tv_bottomcount = (TextView) notificationBadge.findViewById(R.id.badge);
+                            if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                tv_bottomcount.setVisibility(View.GONE);
+                                Login_preference.setCart_item_count(NavigationActivity.this,"0");
+                            } else {
+                                tv_bottomcount.setVisibility(View.VISIBLE);
+                                tv_bottomcount.setText(cartitem_count);
+                                Login_preference.setCart_item_count(NavigationActivity.this,cartitem_count);
+                            }
+                            itemView.addView(notificationBadge);
+
+
+                        } else {
+
+                            String cartitem_count = String.valueOf(jsonArray.length());
+                            BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                            //cart item count
+                            BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                            NavigationActivity.notificationBadge = LayoutInflater.from(NavigationActivity.this).inflate(R.layout.badge_row, menuView, false);
+                            tv_bottomcount = (TextView) NavigationActivity.notificationBadge.findViewById(R.id.badge);
+                            if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                tv_bottomcount.setVisibility(View.GONE);
+                                Login_preference.setCart_item_count(NavigationActivity.this,"0");
+                            } else {
+                                tv_bottomcount.setVisibility(View.VISIBLE);
+                                tv_bottomcount.setText(cartitem_count);
+                                Login_preference.setCart_item_count(NavigationActivity.this,cartitem_count);
+                            }
+                            itemView.addView(NavigationActivity.notificationBadge);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                //  cartid= String.valueOf(jsonArray.getJSONObject(0).getInt("item_id"));
+                            }
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    NavigationActivity.get_Customer_tokenapi();
+                    //  CallCartlistApi();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Log.e("debug_175125", "pages: " + t);
+            }
+        });
+    }
+
     public static void get_Customer_QuoteId() {
-        Log.e("customertoken",""+Login_preference.getCustomertoken(parent));
-        Call<Integer> customertoken = customeapi.getQuoteid("Bearer "+Login_preference.getCustomertoken(parent)
-                ,"http://dkbraende.demoproject.info/rest/V1/carts/mine/?customerId="+Login_preference.getcustomer_id(parent));
+        Log.e("customertoken", "" + Login_preference.getCustomertoken(parent));
+        Call<Integer> customertoken = customeapi.getQuoteid("Bearer " + Login_preference.getCustomertoken(parent)
+                , "http://dkbraende.demoproject.info/rest/V1/carts/mine/?customerId=" + Login_preference.getcustomer_id(parent));
         customertoken.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.e("res_quoteid",""+response.toString());
-                Log.e("resquoteiddd",""+response.body());
+                Log.e("res_quoteid", "" + response.toString());
+                Log.e("resquoteiddd", "" + response.body());
                 Login_preference.setdkQuoteId(parent, String.valueOf(response.body()));
                 Login_preference.setquote_id(parent, String.valueOf(response.body()));
 
             }
+
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -199,23 +280,24 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     public static void get_Customer_tokenapi() {
-        Log.e("response201tokenff",""+Login_preference.gettoken(parent));
-        String email=Login_preference.gettokenemail(parent);
-        String password=Login_preference.gettokenpassword(parent);
-        String url=ApiClientcusome.MAIN_URLL+"integration/customer/token?username="+email+"&password="+password;
+        Log.e("response201tokenff", "" + Login_preference.gettoken(parent));
+        String email = Login_preference.gettokenemail(parent);
+        String password = Login_preference.gettokenpassword(parent);
+        String url = ApiClientcusome.MAIN_URLL + "integration/customer/token?username=" + email + "&password=" + password;
         Call<String> customertoken = customeapi.getcustomerToken(url);
         customertoken.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("response200",""+response.toString());
-                Log.e("response201",""+response.body());
-                Login_preference.setCustomertoken(parent,response.body());
+                Log.e("response200", "" + response.toString());
+                Log.e("response201", "" + response.body());
+                Login_preference.setCustomertoken(parent, response.body());
                 get_Customer_QuoteId();
                 callWishlistCountApi();
             }
+
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.e("failure_messge",""+t);
+                Log.e("failure_messge", "" + t);
                 Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
@@ -224,32 +306,32 @@ public class NavigationActivity extends AppCompatActivity {
 
 
     public static void callWishlistCountApi() {
-        Log.e("response201tokenff",""+Login_preference.gettoken(parent));
-        Call<ResponseBody> customertoken = customeapi.defaultWishlistCount("Bearer "+Login_preference.getCustomertoken(parent));
+        Log.e("response201tokenff", "" + Login_preference.gettoken(parent));
+        Call<ResponseBody> customertoken = customeapi.defaultWishlistCount("Bearer " + Login_preference.getCustomertoken(parent));
         customertoken.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("response200gffgdf",""+response.toString());
-                Log.e("response201fgd",""+response.body());
-                if(response.code()==200 || response.isSuccessful())
-                {
+                Log.e("response200gffgdf", "" + response.toString());
+                Log.e("response201fgd", "" + response.body());
+                if (response.code() == 200 || response.isSuccessful()) {
                     try {
                         JSONArray jsonObject = new JSONArray(response.body().string());
 
-                        String count= jsonObject.getJSONObject(0).getString("total_items");
+                        String count = jsonObject.getJSONObject(0).getString("total_items");
                         tv_wishlist_count.setText(count);
-                        Login_preference.set_wishlist_count(parent,count);
-                        Log.e("wishcount",""+count);
+                        Login_preference.set_wishlist_count(parent, count);
+                        Log.e("wishcount", "" + count);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
 
                 }
 
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -264,9 +346,9 @@ public class NavigationActivity extends AppCompatActivity {
         homevideos.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("response200",""+response.toString());
-                Log.e("response201",""+response.body());
-                Login_preference.settoken(NavigationActivity.this,response.body());
+                Log.e("response200", "" + response.toString());
+                Log.e("response201", "" + response.body());
+                Login_preference.settoken(NavigationActivity.this, response.body());
 
             }
 
@@ -367,8 +449,7 @@ public class NavigationActivity extends AppCompatActivity {
 
                 Log.e("responseeee_cate", "=" + response.body());
                 Log.e("responseeee_cate", "=" + response);
-                if(response.code()==200 || response.isSuccessful())
-                {
+                if (response.code() == 200 || response.isSuccessful()) {
 
                     CategoriesModel categoryModel = response.body();
                     Log.e("responseeee_cate", "=" + response.body());
@@ -380,7 +461,7 @@ public class NavigationActivity extends AppCompatActivity {
                     categoryAdapter.addAll(results);
                     shimmer_nav_category.stopShimmerAnimation();
                     shimmer_nav_category.setVisibility(View.GONE);
-                }else {
+                } else {
 
                 }
             }
@@ -399,13 +480,14 @@ public class NavigationActivity extends AppCompatActivity {
     private Call<CategoriesModel> callCategoryApi() {
         customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
 
-        Log.e("debug_2211","="+Login_preference.gettoken(getApplicationContext()));
-        return customeapi.categories("Bearer "+Login_preference.gettoken(NavigationActivity.this));
+        Log.e("debug_2211", "=" + Login_preference.gettoken(getApplicationContext()));
+        return customeapi.categories("Bearer " + Login_preference.gettoken(NavigationActivity.this));
     }
-/*
-    private Call<CountModel> getcount() {
-        return api.getCount(Login_preference.getcustomer_id(NavigationActivity.this));
-    }*/
+
+    /*
+        private Call<CountModel> getcount() {
+            return api.getCount(Login_preference.getcustomer_id(NavigationActivity.this));
+        }*/
     private List<ChildData> fetchResults(Response<CategoriesModel> response) {
         Log.e("newin_home_209", "" + response.body());
         CategoriesModel CategoriesModel = response.body();
@@ -423,7 +505,7 @@ public class NavigationActivity extends AppCompatActivity {
     }*/
 
     private void SetTypeface() {
-       Menu menu = navigationView.getMenu();
+        Menu menu = navigationView.getMenu();
         for (int i = 0; i < menu.size(); i++) {
             MenuItem mi = menu.getItem(i);
 
@@ -483,7 +565,7 @@ public class NavigationActivity extends AppCompatActivity {
         BottomNavigationItemView itemView_wishlist = (BottomNavigationItemView) menuView.getChildAt(2);
         wishlist_badge = LayoutInflater.from(this).inflate(R.layout.wishlist_count, menuView, false);
         tv_wishlist_count = (TextView) wishlist_badge.findViewById(R.id.badge_wishlist);
-        Log.e("debug_309","fg"+Login_preference.get_wishlist_count(NavigationActivity.this));
+        Log.e("debug_309", "fg" + Login_preference.get_wishlist_count(NavigationActivity.this));
         if (wishlist_count.equalsIgnoreCase("null") || wishlist_count.equals("") || wishlist_count.equals("0")) {
             tv_wishlist_count.setVisibility(View.GONE);
         } else {
@@ -525,7 +607,7 @@ public class NavigationActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.bottom_homee:
-               // pushFragment(new HomeFragment(), "Home");
+                // pushFragment(new HomeFragment(), "Home");
                 Home_dk fragment = new Home_dk();
                 if (fragment == null)
                     return;
@@ -560,7 +642,7 @@ public class NavigationActivity extends AppCompatActivity {
                     myFragment.setArguments(b);
                     getSupportFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out)
+                                    0, 0, R.anim.fade_out)
                             .addToBackStack("Favourites")
                             .add(R.id.framlayout, myFragment)
                             .commit();
@@ -568,7 +650,7 @@ public class NavigationActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.bottom_cart:
-               if (Login_preference.getLogin_flag(this).equalsIgnoreCase("1")) {
+                if (Login_preference.getLogin_flag(this).equalsIgnoreCase("1")) {
                     pushFragment(new NewCartFragment(), "cart");
                 } else {
                     LoginFragment myFragment = new LoginFragment();
@@ -579,7 +661,7 @@ public class NavigationActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .addToBackStack(null)
                             .setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out)
+                                    0, 0, R.anim.fade_out)
                             .addToBackStack("Cart")
                             .add(R.id.framlayout, myFragment).commit();
 
@@ -595,7 +677,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     public static void Check_String_NULL_Value(TextView textview, String text) {
-        if (text == null|| text.equalsIgnoreCase("null") == true ) {
+        if (text == null || text.equalsIgnoreCase("null") == true) {
             //textview.setHint("");
             textview.setText("");
         } else {
@@ -617,7 +699,7 @@ public class NavigationActivity extends AppCompatActivity {
     private void AllocateMemory() {
         shimmer_nav_category = findViewById(R.id.shimmer_nav_category);
         bottom_navigation = findViewById(R.id.bottom_navigation);
-       // toolbar = findViewById(R.id.toolbar);
+        // toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         relative_layout = findViewById(R.id.relative_layout);
@@ -672,10 +754,9 @@ public class NavigationActivity extends AppCompatActivity {
         menu.clear();
         getMenuInflater().inflate(R.menu.menu_home, menu);
         login = menu.findItem(R.id.login);
-        if(Login_preference.getLogin_flag(NavigationActivity.this).equalsIgnoreCase("1"))
-        {
+        if (Login_preference.getLogin_flag(NavigationActivity.this).equalsIgnoreCase("1")) {
             login.setVisible(false);
-        }else {
+        } else {
             login.setVisible(true);
         }
         return true;
@@ -688,13 +769,13 @@ public class NavigationActivity extends AppCompatActivity {
 
             case R.id.search:
                 Filterlist_Adapter.filter_child_value_list.clear();
-                FilterListFragment.selected_child="";
+                FilterListFragment.selected_child = "";
                 FilterListFragment.filter_old_childlist.clear();
                 Filterlist_Adapter.filter_grouppp_namelist.clear();
                 pushFragment(new SearchFragment(), "search");
                 return true;
             case R.id.login:
-                pushFragment(new LoginFragment(),"login");
+                pushFragment(new LoginFragment(), "login");
                 return true;
 
             default:

@@ -120,7 +120,7 @@ public class EditAddressFragment extends Fragment {
         {
             if (CheckNetwork.isNetworkAvailable(getActivity())) {
                 CallCountrylistApi("main");
-                CallAddressApi();
+
 
             }else {
                 Toast.makeText(getContext(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
@@ -362,13 +362,14 @@ public class EditAddressFragment extends Fragment {
             Toast.makeText(getContext(), "" + getResources().getString(R.string.entercity), Toast.LENGTH_SHORT).show();
             et_deails_city.requestFocus();
         }
-        else if(countryId==null || countryId=="") {
-            Toast.makeText(getContext(), ""+getActivity().getResources().getString(R.string.selectecountry), Toast.LENGTH_SHORT).show();
-        }
         else if (et_deails_postal.getText().length() == 0) {
             Toast.makeText(getContext(), "" + getResources().getString(R.string.enterpostalcode), Toast.LENGTH_SHORT).show();
             et_deails_postal.requestFocus();
         }
+        else if(countryId==null || countryId=="") {
+            Toast.makeText(getContext(), ""+getActivity().getResources().getString(R.string.selectecountry), Toast.LENGTH_SHORT).show();
+        }
+
 
         else {
             String email,firstname,lastname,postalcode,phoneno,street,city,country;
@@ -407,7 +408,7 @@ public class EditAddressFragment extends Fragment {
                 if(response.isSuccessful() || response.code()==200)
                 {
                     lv_progress_edittead.setVisibility(View.GONE);
-                    scroll_edit.setVisibility(View.VISIBLE);
+                    scroll_edit.setVisibility(View.GONE);
 
                     try {
                         JSONObject jsonObject=new JSONObject(response.body().string());
@@ -484,13 +485,17 @@ public class EditAddressFragment extends Fragment {
                 url="http://dkbraende.demoproject.info/rest/V1/customers/"+Login_preference.getcustomer_id(getActivity())+"/?customer[addresses][0][customer_id]="+customerid+"&customer[addresses][0][countryId]="+countryid+
                         "&customer[addresses][0][street][0]="+street+"&customer[addresses][0][firstname]="+firstname+"&customer[addresses][0][lastname]="+lasname
                         +"&customer[addresses][0][telephone]="+telephone+"&customer[addresses][0][city]="+city
-                        +"&customer[addresses][0][postcode]="+postcode+"&customer[id]="+customerid+"&customer[websiteId]=1"+"&customer[email]="+email;
+                        +"&customer[addresses][0][postcode]="+postcode+"&customer[id]="+customerid+"&customer[websiteId]=1"+"&customer[email]="+email+
+                        "&customer[firstname]="+Login_preference.getfirstname(getContext())+"&customer[lastname]="+
+                        Login_preference.getlastname(getActivity());
 
             }else {
                 url="http://dkbraende.demoproject.info/rest/V1/customers/"+Login_preference.getcustomer_id(getActivity())+"/?customer[addresses][0][customer_id]="+customerid+"&customer[addresses][0][countryId]="+countryid+
                         "&customer[addresses][0][street][0]="+street+"&customer[addresses][0][firstname]="+firstname+"&customer[addresses][0][lastname]="+lasname
                         +"&customer[addresses][0][telephone]="+telephone+"&customer[addresses][0][city]="+city
-                        +"&customer[addresses][0][postcode]="+postcode+"&customer[id]="+customerid+"&customer[websiteId]=1"+"&customer[addresses][0][id]="+address_id+"&customer[email]="+email;
+                        +"&customer[addresses][0][postcode]="+postcode+"&customer[id]="+customerid+"&customer[websiteId]=1"
+                        +"&customer[addresses][0][id]="+address_id+"&customer[email]="+email+"&customer[firstname]="+Login_preference.getfirstname(getContext())+"&customer[lastname]="+
+                        Login_preference.getlastname(getActivity());
 
             }
         }
@@ -597,7 +602,7 @@ public class EditAddressFragment extends Fragment {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             if (ft != null) {
                 ft.replace(R.id.framlayout, fragment);
-                ft.addToBackStack(add_to_backstack);
+             //   ft.addToBackStack(add_to_backstack);
 
                 ft.commit();
             }
@@ -694,11 +699,14 @@ public class EditAddressFragment extends Fragment {
                             countryidlist.add(jsonObject.optString("id"));
                             countryLablelist.add(jsonObject.optString("full_name_english"));
                         }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    CallAddressApi();
                 } else {
                      if(main.equalsIgnoreCase("main"))
                     {

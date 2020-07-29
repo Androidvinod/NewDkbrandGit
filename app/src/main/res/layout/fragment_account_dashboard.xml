@@ -49,7 +49,7 @@
                         android:textSize="@dimen/text_18"
                         android:fontFamily="@font/montserratbold"
                         app:titleTextAppearance="@style/Toolbar.TitleText"
-                        android:text="Account Dashboard"
+                        android:text="@string/Accountinformation"
                         android:padding="@dimen/padding5"/>
                 </LinearLayout>
 

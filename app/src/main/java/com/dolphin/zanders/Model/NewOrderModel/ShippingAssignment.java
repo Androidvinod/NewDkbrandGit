@@ -12,7 +12,7 @@ public class ShippingAssignment {
     private Shipping shipping;
     @SerializedName("items")
     @Expose
-    private List<Item__Cart_SubArray> items = null;
+    private List<Item__> items = null;
 
     public Shipping getShipping() {
         return shipping;
@@ -22,11 +22,11 @@ public class ShippingAssignment {
         this.shipping = shipping;
     }
 
-    public List<Item__Cart_SubArray> getItems() {
+    public List<Item__> getItems() {
         return items;
     }
 
-    public void setItems(List<Item__Cart_SubArray> items) {
+    public void setItems(List<Item__> items) {
         this.items = items;
     }
 

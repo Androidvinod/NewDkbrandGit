@@ -54,6 +54,8 @@ import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
 import com.dolphin.zanders.Util.WrapContentLinearLayoutManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,14 +79,14 @@ import static com.dolphin.zanders.Fragment.ProductListFragment.subcatename;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewCartFragment extends Fragment implements View.OnClickListener{
+public class NewCartFragment extends Fragment implements View.OnClickListener {
     View v;
     Toolbar toolbar_cart;
     public static CoordinatorLayout cordinator_cart;
     public static RecyclerView recv_cart;
     public static LinearLayout lv_cart_checkout;
     public static Context context;
-    public static LinearLayout lv_cartlist_progress,lv_nodata_cart, lv_cart_Main, lv_subtotal_layout, lv_cart_parent;
+    public static LinearLayout lv_cartlist_progress, lv_nodata_cart, lv_cart_Main, lv_subtotal_layout, lv_cart_parent;
 
     public static TextView tv_messgenoti, tv_noting, tv_addlinal;
     public static TextView tv_cart_subtotal;
@@ -94,13 +96,11 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
     private Paint p = new Paint();
     public static ShimmerFrameLayout shimmer_cartlist;
     MenuItem login;
-    public static TextView tv_update_cart, tv_cart_tax,tv_taxt_value_cart,tv_cartt_subtotal,tv_subtotal_valuecart;
-    public static List<NewCartListModel> cartlistdata=new ArrayList<>();
+    public static TextView tv_update_cart, tv_cart_tax, tv_taxt_value_cart, tv_cartt_subtotal, tv_subtotal_valuecart;
+    public static List<NewCartListModel> cartlistdata = new ArrayList<>();
     NavigationActivity parent;
 
-
-    public  static  String cartid,cart_sku="",cart_product_type="";
-
+    public static String cartid, cart_sku = "", cart_product_type = "";
 
 
     public NewCartFragment() {
@@ -112,12 +112,12 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v= inflater.inflate(R.layout.fragment_new_cart, container, false);
+        v = inflater.inflate(R.layout.fragment_new_cart, container, false);
         bottom_navigation.getMenu().getItem(3).setChecked(true);
         cartlist = ApiClientcusome.getClient().create(ApiInterface.class);
 
         Filterlist_Adapter.filter_child_value_list.clear();
-        FilterListFragment.selected_child="";
+        FilterListFragment.selected_child = "";
         FilterListFragment.filter_old_childlist.clear();
         Filterlist_Adapter.filter_grouppp_namelist.clear();
 
@@ -148,35 +148,37 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
         lv_cart_checkout.setOnClickListener(this);
         return v;
     }
+
+
     private void getallpricedata() {
         callgetpricedataapi().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.e("pricelistdata150", "" + response.body());
-                if(response.isSuccessful() || response.code()==200)
-                {
+                if (response.isSuccessful() || response.code() == 200) {
                     try {
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         JSONObject image = new JSONObject(jsonObject.getString("totals"));
                         Log.e("pricereponse_158", "" + image.getString("grand_total"));
                         Log.e("pricereponse_158", "" + image.getString("base_currency_code"));
-                        tv_cart_subtotal.setText(image.getString("subtotal_incl_tax")+" "+Login_preference.getcurrencycode(context));
-                        tv_subtotal_valuecart.setText(image.getString("base_subtotal")+" "+Login_preference.getcurrencycode(context));
-                        tv_taxt_value_cart.setText(image.getString("base_tax_amount")+" "+Login_preference.getcurrencycode(context));
+                        tv_cart_subtotal.setText(image.getString("base_grand_total") + " " + Login_preference.getcurrencycode(context));
+                        tv_subtotal_valuecart.setText(image.getString("base_subtotal") + " " + Login_preference.getcurrencycode(context));
+                        tv_taxt_value_cart.setText(image.getString("base_tax_amount") + " " + Login_preference.getcurrencycode(context));
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }catch (IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
 
-                    Log.e("error_293",""+response.body());
+                    Log.e("error_293", "" + response.body());
                     NavigationActivity.get_Customer_tokenapi();
                     getallpricedata();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(context, "" + context.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
@@ -186,13 +188,14 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
     }
 
     public static Call<ResponseBody> callgetpricedataapi() {
-        Log.e("debugcustomertoen","="+Login_preference.getCustomertoken(context));
+        Log.e("debugcustomertoen", "=" + Login_preference.getCustomertoken(context));
 
         return cartlist.getpricedata("Bearer " + Login_preference.getCustomertoken(context));
     }
+
     private void AttachRecyclerView() {
-        cartlistAdapter = new NewCartListAdapter(parent,cartlistdata);//CartlistAdapter
-        WrapContentLinearLayoutManager layoutManager = new WrapContentLinearLayoutManager(parent, WrapContentLinearLayoutManager.VERTICAL, false);
+        cartlistAdapter = new NewCartListAdapter(parent, cartlistdata);//CartlistAdapter
+        WrapContentLinearLayoutManager layoutManager = new WrapContentLinearLayoutManager(parent, WrapContentLinearLayoutManager.VERTICAL, true);
         recv_cart.setLayoutManager(layoutManager);
         recv_cart.setAdapter(cartlistAdapter);
     }
@@ -209,52 +212,89 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody cartlist = response.body();
 
-                if(response.code()==200 || response.isSuccessful())
-                {
+                if (response.code() == 200 || response.isSuccessful()) {
                     shimmer_cartlist.stopShimmerAnimation();
                     shimmer_cartlist.setVisibility(View.GONE);
                     recv_cart.setVisibility(View.VISIBLE);
                     lv_cart_Main.setVisibility(View.VISIBLE);
                     lv_subtotal_layout.setVisibility(View.VISIBLE);
                     try {
-                        JSONArray jsonArray=new JSONArray(response.body().string());
+                        JSONArray jsonArray = new JSONArray(response.body().string());
                         Log.e("jsonArray", "" + jsonArray);
+                        if (jsonArray.length() == 0) {
+                            if (context != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                View notificationBadge = LayoutInflater.from(context).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(context,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(context,cartitem_count);
+                                }
+                                itemView.addView(notificationBadge);
+                            }
+                        } else {
+                            if (context != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                NavigationActivity.notificationBadge = LayoutInflater.from(context).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) NavigationActivity.notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(context,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(context,cartitem_count);
+                                }
+                                itemView.addView(NavigationActivity.notificationBadge);
 
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    // JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    //  cartid= String.valueOf(jsonArray.getJSONObject(0).getInt("item_id"));
+                                }
+                            }
+                        }
 
-                        if(jsonArray.length()==0)
-                        {
+                        if (jsonArray.length() == 0) {
                             lv_nodata_cart.setVisibility(View.VISIBLE);
                             cordinator_cart.setVisibility(View.GONE);
-                        }else {
+                            tv_noting.setText("Cart List is empty");
+                        } else {
 
                             lv_nodata_cart.setVisibility(View.GONE);
                             cordinator_cart.setVisibility(View.VISIBLE);
-                            for (int i=0;i<jsonArray.length();i++)
-                            {
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                cartid= String.valueOf(jsonArray.getJSONObject(0).getInt("item_id"));
+                                cartid = String.valueOf(jsonArray.getJSONObject(0).getInt("item_id"));
 
-                                if(cart_sku.equalsIgnoreCase(""))
-                                {
-                                    cart_sku="entity[items]"+"["+i+"]"+"[sku]="+jsonObject.optString("sku");
-                                }else {
-                                    cart_sku+="&entity[items]"+"["+i+"]"+"[sku]="+jsonObject.optString("sku");
+                                if (cart_sku.equalsIgnoreCase("")) {
+                                    cart_sku = "entity[items]" + "[" + i + "]" + "[sku]=" + jsonObject.optString("sku");
+                                } else {
+                                    cart_sku += "&entity[items]" + "[" + i + "]" + "[sku]=" + jsonObject.optString("sku");
                                 }
 
-                                if(cart_product_type.equalsIgnoreCase(""))
-                                {
-                                    cart_product_type="entity[items]"+"["+i+"]"+"[product_type]="+jsonObject.optString("product_type");
-                                }else {
-                                    cart_product_type+="&entity[items]"+"["+i+"]"+"[product_type]="+jsonObject.optString("product_type");
+                                if (cart_product_type.equalsIgnoreCase("")) {
+                                    cart_product_type = "entity[items]" + "[" + i + "]" + "[product_type]=" + jsonObject.optString("product_type");
+                                } else {
+                                    cart_product_type += "&entity[items]" + "[" + i + "]" + "[product_type]=" + jsonObject.optString("product_type");
                                 }
-                                Log.e("debug11","="+ jsonObject.getJSONObject("extension_attributes").optString("image_url"));
+                                Log.e("debug11", "=" + jsonObject.getJSONObject("extension_attributes").optString("image_url"));
                                 cartlistdata.add(new NewCartListModel(jsonObject.getInt("item_id")
-                                        ,jsonObject.optString("sku")
-                                        ,jsonObject.optInt("qty")
-                                        ,jsonObject.optString("name")
-                                        ,jsonObject.optInt("price")
-                                        ,jsonObject.optString("product_type")
-                                        ,jsonObject.optString("quote_id"),
+                                        , jsonObject.optString("sku")
+                                        , jsonObject.optInt("qty")
+                                        , jsonObject.optString("name")
+                                        , jsonObject.optInt("price")
+                                        , jsonObject.optString("product_type")
+                                        , jsonObject.optString("quote_id"),
                                         jsonObject.getJSONObject("extension_attributes").optString("image_url")
                                 ));
                             }
@@ -265,11 +305,10 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     NavigationActivity.get_Customer_tokenapi();
                     CallCartlistApi();
                 }
-
 
 
             }
@@ -284,15 +323,14 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
 
     public static Call<ResponseBody> callcartlistapi() {
         Log.e("email_237", "=" + Login_preference.getCustomertoken(context));
-        return cartlist.getcartlistapi("Bearer "+ Login_preference.getCustomertoken(context));
+        return cartlist.getcartlistapi("Bearer " + Login_preference.getCustomertoken(context));
     }
-
 
 
     private void AllocateMemory() {
         tv_cartt_subtotal = v.findViewById(R.id.tv_cartt_subtotal);
         tv_taxt_value_cart = v.findViewById(R.id.tv_taxt_value_cart);
-         tv_cart_tax = v.findViewById(R.id.tv_cart_tax);
+        tv_cart_tax = v.findViewById(R.id.tv_cart_tax);
         lv_cartlist_progress = v.findViewById(R.id.lv_cartlist_progress);
         cordinator_cart = v.findViewById(R.id.cordinator_cart);
         tv_update_cart = v.findViewById(R.id.tv_update_cart);
@@ -319,69 +357,30 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
     }
 
 
-    private void mdeletecartitem(final RecyclerView.ViewHolder viewHolder, final int direction) {
-        AlertDialog.Builder builder
-                = new AlertDialog
-                .Builder(parent);
-        SpannableString spannableString = new SpannableString(parent.getResources().getString(R.string.removeitemm));
-        builder.setTitle(spannableString);
-        builder.setCancelable(false);
-
-        builder.setPositiveButton(parent.getResources().getString(R.string.Remove), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int position = viewHolder.getAdapterPosition();
-                if (direction == ItemTouchHelper.LEFT) {
-                    cartlistAdapter.removeItem(position);
-                } else {
-                    //     removeView();
-                    cartlistAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-
-        // Set the Negative button with No name
-        builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface
-                .OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                cartlistAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                //CallGetWishlistApi();
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
-        textView.setTextColor(parent.getResources().getColor(R.color.black));
-        Button nbutton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        nbutton.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
-        Button pbutton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        pbutton.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
-    }
-
-
     @Override
     public void onClick(View v) {
         if (v == lv_cart_checkout) {
+            if (NewCartListAdapter.flag == false) {
+                Toast.makeText(context, context.getString(R.string.quantity_messge), Toast.LENGTH_SHORT).show();
+            } else {
 
+                Log.e("debug_cartod", "==" + cartid);
+                Log.e("cart_sku", "==" + cart_sku);
+                Bundle b = new Bundle();
+                b.putString("cartid", "" + cartid);
+                b.putString("cart_sku", "" + cart_sku);
+                b.putString("cart_product_type", "" + cart_product_type);
 
-            Log.e("debug_cartod","=="+cartid);
-            Log.e("cart_sku","=="+cart_sku);
-            Bundle b = new Bundle();
-            b.putString("cartid", "" + cartid);
-            b.putString("cart_sku", "" + cart_sku);
-            b.putString("cart_product_type", "" + cart_product_type);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                NewCheckoutFragment myFragment = new NewCheckoutFragment();
+                myFragment.setArguments(b);
+                activity.getSupportFragmentManager()
+                        .beginTransaction().setCustomAnimations(R.anim.fade_in,
+                        0, 0, R.anim.fade_out).addToBackStack(null).
+                        replace(R.id.framlayout, myFragment).commit();
+            }
 
-            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            NewCheckoutFragment myFragment = new NewCheckoutFragment();
-            myFragment.setArguments(b);
-            activity.getSupportFragmentManager()
-                    .beginTransaction().setCustomAnimations(R.anim.fade_in,
-                    0, 0, R.anim.fade_out).addToBackStack(null).
-                    replace(R.id.framlayout, myFragment).commit();
-                //pushFragment(new NewCheckoutFragment(), "Checkout");
+            //pushFragment(new NewCheckoutFragment(), "Checkout");
 
 
         }
@@ -424,7 +423,7 @@ public class NewCartFragment extends Fragment implements View.OnClickListener{
         switch (item.getItemId()) {
             case R.id.search:
                 Filterlist_Adapter.filter_child_value_list.clear();
-                FilterListFragment.selected_child="";
+                FilterListFragment.selected_child = "";
                 FilterListFragment.filter_old_childlist.clear();
                 Filterlist_Adapter.filter_grouppp_namelist.clear();
 

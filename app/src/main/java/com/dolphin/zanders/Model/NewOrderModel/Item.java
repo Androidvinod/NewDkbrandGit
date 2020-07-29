@@ -12,25 +12,25 @@ public class Item {
     private String baseCurrencyCode;
     @SerializedName("base_discount_amount")
     @Expose
-    private Integer baseDiscountAmount;
+    private Double baseDiscountAmount;
     @SerializedName("base_grand_total")
     @Expose
-    private Integer baseGrandTotal;
+    private Double baseGrandTotal;
     @SerializedName("base_shipping_amount")
     @Expose
-    private Integer baseShippingAmount;
+    private Double baseShippingAmount;
     @SerializedName("base_subtotal")
     @Expose
-    private Integer baseSubtotal;
+    private Double baseSubtotal;
     @SerializedName("base_tax_amount")
     @Expose
-    private Integer baseTaxAmount;
+    private Double baseTaxAmount;
     @SerializedName("base_total_due")
     @Expose
-    private Integer baseTotalDue;
+    private Double baseTotalDue;
     @SerializedName("billing_address_id")
     @Expose
-    private Integer billingAddressId;
+    private Double billingAddressId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -42,55 +42,79 @@ public class Item {
     private String customerFirstname;
     @SerializedName("customer_group_id")
     @Expose
-    private Integer customerGroupId;
+    private Double customerGroupId;
     @SerializedName("customer_id")
     @Expose
-    private Integer customerId;
+    private Double customerId;
+    @SerializedName("customer_is_guest")
+    @Expose
+    private Double customerIsGuest;
     @SerializedName("customer_lastname")
     @Expose
     private String customerLastname;
     @SerializedName("discount_amount")
     @Expose
-    private Integer discountAmount;
+    private Double discountAmount;
+    @SerializedName("email_sent")
+    @Expose
+    private Double emailSent;
     @SerializedName("entity_id")
     @Expose
-    private Integer entityId;
+    private Double entityId;
     @SerializedName("grand_total")
     @Expose
-    private Integer grandTotal;
+    private Double grandTotal;
     @SerializedName("increment_id")
     @Expose
     private String incrementId;
+    @SerializedName("is_virtual")
+    @Expose
+    private Double isVirtual;
+    @SerializedName("order_currency_code")
+    @Expose
+    private String orderCurrencyCode;
     @SerializedName("protect_code")
     @Expose
     private String protectCode;
     @SerializedName("shipping_amount")
     @Expose
-    private Integer shippingAmount;
+    private Double shippingAmount;
+    @SerializedName("shipping_description")
+    @Expose
+    private String shippingDescription;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("store_currency_code")
+    @Expose
+    private String storeCurrencyCode;
+    @SerializedName("store_id")
+    @Expose
+    private Double storeId;
     @SerializedName("store_name")
     @Expose
     private String storeName;
     @SerializedName("subtotal")
     @Expose
-    private Integer subtotal;
+    private Double subtotal;
     @SerializedName("subtotal_incl_tax")
     @Expose
-    private Integer subtotalInclTax;
+    private Double subtotalInclTax;
     @SerializedName("tax_amount")
     @Expose
-    private Integer taxAmount;
+    private Double taxAmount;
     @SerializedName("total_due")
     @Expose
-    private Integer totalDue;
+    private Double totalDue;
     @SerializedName("total_item_count")
     @Expose
-    private Integer totalItemCount;
+    private Double totalItemCount;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
     @SerializedName("items")
     @Expose
-    private List<Item__Cart_SubArray> items = null;
+    private List<Item_> items = null;
     @SerializedName("billing_address")
     @Expose
     private BillingAddress billingAddress;
@@ -104,19 +128,6 @@ public class Item {
     @Expose
     private ExtensionAttributes extensionAttributes;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @SerializedName("status")
-    @Expose
-    private String status;
-
-
     public String getBaseCurrencyCode() {
         return baseCurrencyCode;
     }
@@ -125,61 +136,10 @@ public class Item {
         this.baseCurrencyCode = baseCurrencyCode;
     }
 
-    public Integer getBaseDiscountAmount() {
-        return baseDiscountAmount;
-    }
-
-    public void setBaseDiscountAmount(Integer baseDiscountAmount) {
-        this.baseDiscountAmount = baseDiscountAmount;
-    }
-
-    public Integer getBaseGrandTotal() {
-        return baseGrandTotal;
-    }
-
-    public void setBaseGrandTotal(Integer baseGrandTotal) {
-        this.baseGrandTotal = baseGrandTotal;
-    }
-
-    public Integer getBaseShippingAmount() {
-        return baseShippingAmount;
-    }
-
-    public void setBaseShippingAmount(Integer baseShippingAmount) {
-        this.baseShippingAmount = baseShippingAmount;
-    }
-
-    public Integer getBaseSubtotal() {
-        return baseSubtotal;
-    }
-
-    public void setBaseSubtotal(Integer baseSubtotal) {
-        this.baseSubtotal = baseSubtotal;
-    }
-
-    public Integer getBaseTaxAmount() {
+    public Double getBaseTaxAmount() {
         return baseTaxAmount;
     }
 
-    public void setBaseTaxAmount(Integer baseTaxAmount) {
-        this.baseTaxAmount = baseTaxAmount;
-    }
-
-    public Integer getBaseTotalDue() {
-        return baseTotalDue;
-    }
-
-    public void setBaseTotalDue(Integer baseTotalDue) {
-        this.baseTotalDue = baseTotalDue;
-    }
-
-    public Integer getBillingAddressId() {
-        return billingAddressId;
-    }
-
-    public void setBillingAddressId(Integer billingAddressId) {
-        this.billingAddressId = billingAddressId;
-    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -205,21 +165,6 @@ public class Item {
         this.customerFirstname = customerFirstname;
     }
 
-    public Integer getCustomerGroupId() {
-        return customerGroupId;
-    }
-
-    public void setCustomerGroupId(Integer customerGroupId) {
-        this.customerGroupId = customerGroupId;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
 
     public String getCustomerLastname() {
         return customerLastname;
@@ -229,27 +174,11 @@ public class Item {
         this.customerLastname = customerLastname;
     }
 
-    public Integer getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Integer discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public Integer getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(Integer entityId) {
-        this.entityId = entityId;
-    }
-
-    public Integer getGrandTotal() {
+    public Double getGrandTotal() {
         return grandTotal;
     }
 
-    public void setGrandTotal(Integer grandTotal) {
+    public void setGrandTotal(Double grandTotal) {
         this.grandTotal = grandTotal;
     }
 
@@ -261,6 +190,15 @@ public class Item {
         this.incrementId = incrementId;
     }
 
+
+    public String getOrderCurrencyCode() {
+        return orderCurrencyCode;
+    }
+
+    public void setOrderCurrencyCode(String orderCurrencyCode) {
+        this.orderCurrencyCode = orderCurrencyCode;
+    }
+
     public String getProtectCode() {
         return protectCode;
     }
@@ -269,12 +207,28 @@ public class Item {
         this.protectCode = protectCode;
     }
 
-    public Integer getShippingAmount() {
-        return shippingAmount;
+    public String getShippingDescription() {
+        return shippingDescription;
     }
 
-    public void setShippingAmount(Integer shippingAmount) {
-        this.shippingAmount = shippingAmount;
+    public void setShippingDescription(String shippingDescription) {
+        this.shippingDescription = shippingDescription;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStoreCurrencyCode() {
+        return storeCurrencyCode;
+    }
+
+    public void setStoreCurrencyCode(String storeCurrencyCode) {
+        this.storeCurrencyCode = storeCurrencyCode;
     }
 
     public String getStoreName() {
@@ -285,43 +239,168 @@ public class Item {
         this.storeName = storeName;
     }
 
-    public Integer getSubtotal() {
-        return subtotal;
-    }
 
-    public void setSubtotal(Integer subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Integer getSubtotalInclTax() {
-        return subtotalInclTax;
-    }
-
-    public void setSubtotalInclTax(Integer subtotalInclTax) {
-        this.subtotalInclTax = subtotalInclTax;
-    }
-
-    public Integer getTaxAmount() {
+    public Double getTaxAmount() {
         return taxAmount;
     }
 
-    public void setTaxAmount(Integer taxAmount) {
+    public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
     }
 
-    public Integer getTotalDue() {
+    public Double getTotalDue() {
         return totalDue;
     }
 
-    public void setTotalDue(Integer totalDue) {
+    public void setTotalDue(Double totalDue) {
         this.totalDue = totalDue;
     }
 
-    public Integer getTotalItemCount() {
+    public Double getBaseDiscountAmount() {
+        return baseDiscountAmount;
+    }
+
+    public void setBaseDiscountAmount(Double baseDiscountAmount) {
+        this.baseDiscountAmount = baseDiscountAmount;
+    }
+
+    public Double getBaseGrandTotal() {
+        return baseGrandTotal;
+    }
+
+    public void setBaseGrandTotal(Double baseGrandTotal) {
+        this.baseGrandTotal = baseGrandTotal;
+    }
+
+    public Double getBaseShippingAmount() {
+        return baseShippingAmount;
+    }
+
+    public void setBaseShippingAmount(Double baseShippingAmount) {
+        this.baseShippingAmount = baseShippingAmount;
+    }
+
+    public Double getBaseSubtotal() {
+        return baseSubtotal;
+    }
+
+    public void setBaseSubtotal(Double baseSubtotal) {
+        this.baseSubtotal = baseSubtotal;
+    }
+
+    public void setBaseTaxAmount(Double baseTaxAmount) {
+        this.baseTaxAmount = baseTaxAmount;
+    }
+
+    public Double getBaseTotalDue() {
+        return baseTotalDue;
+    }
+
+    public void setBaseTotalDue(Double baseTotalDue) {
+        this.baseTotalDue = baseTotalDue;
+    }
+
+    public Double getBillingAddressId() {
+        return billingAddressId;
+    }
+
+    public void setBillingAddressId(Double billingAddressId) {
+        this.billingAddressId = billingAddressId;
+    }
+
+    public Double getCustomerGroupId() {
+        return customerGroupId;
+    }
+
+    public void setCustomerGroupId(Double customerGroupId) {
+        this.customerGroupId = customerGroupId;
+    }
+
+    public Double getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Double customerId) {
+        this.customerId = customerId;
+    }
+
+    public Double getCustomerIsGuest() {
+        return customerIsGuest;
+    }
+
+    public void setCustomerIsGuest(Double customerIsGuest) {
+        this.customerIsGuest = customerIsGuest;
+    }
+
+    public Double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(Double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public Double getEmailSent() {
+        return emailSent;
+    }
+
+    public void setEmailSent(Double emailSent) {
+        this.emailSent = emailSent;
+    }
+
+    public Double getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(Double entityId) {
+        this.entityId = entityId;
+    }
+
+    public Double getIsVirtual() {
+        return isVirtual;
+    }
+
+    public void setIsVirtual(Double isVirtual) {
+        this.isVirtual = isVirtual;
+    }
+
+    public Double getShippingAmount() {
+        return shippingAmount;
+    }
+
+    public void setShippingAmount(Double shippingAmount) {
+        this.shippingAmount = shippingAmount;
+    }
+
+    public Double getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Double storeId) {
+        this.storeId = storeId;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public Double getSubtotalInclTax() {
+        return subtotalInclTax;
+    }
+
+    public void setSubtotalInclTax(Double subtotalInclTax) {
+        this.subtotalInclTax = subtotalInclTax;
+    }
+
+    public Double getTotalItemCount() {
         return totalItemCount;
     }
 
-    public void setTotalItemCount(Integer totalItemCount) {
+    public void setTotalItemCount(Double totalItemCount) {
         this.totalItemCount = totalItemCount;
     }
 
@@ -333,11 +412,11 @@ public class Item {
         this.updatedAt = updatedAt;
     }
 
-    public List<Item__Cart_SubArray> getItems() {
+    public List<Item_> getItems() {
         return items;
     }
 
-    public void setItems(List<Item__Cart_SubArray> items) {
+    public void setItems(List<Item_> items) {
         this.items = items;
     }
 

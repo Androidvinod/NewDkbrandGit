@@ -221,30 +221,29 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
                 {
                     if(response.body()==true)
                     {
-                        Toast.makeText(getActivity(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
 
                         pushFragment(new AccountFragment() ,"account");
                     }
-                }else {
-                    Toast.makeText(getActivity(), "The password doesn't match this account. Verify the password and try again.", Toast.LENGTH_SHORT).show();
+                }else if(response.code()==400){
+                    Toast.makeText(parent, "The password doesn't match this account. Verify the password and try again.", Toast.LENGTH_SHORT).show();
                     lv_changepw_progress.setVisibility(View.GONE);
                     lv_product_click.setVisibility(View.VISIBLE);
-                }
-                /*if (changepassword.getStatus().equalsIgnoreCase("Success")) {
-                    Log.e("debug_mesahge",""+changepassword.getMessage());
-                    Toast.makeText(parent, "Login succesfully", Toast.LENGTH_SHORT).show();
-                    loadFragment(new AccountFragment());
-                } else if(changepassword.getStatus().equalsIgnoreCase("error")){
+                }else if(response.code()==401)
+                {
+                    NavigationActivity.get_Customer_tokenapi();
                     lv_changepw_progress.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), changepassword.getMessage(), Toast.LENGTH_SHORT).show();
-                }*/
+                    lv_product_click.setVisibility(View.VISIBLE);
+
+                }
+
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 lv_changepw_progress.setVisibility(View.GONE);
                 lv_product_click.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), ""+getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, ""+getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -254,9 +253,9 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
 
         String url="http://dkbraende.demoproject.info/rest/V1/customers/me/password?currentPassword="+current_pw+"&newPassword="+new_pw;
         Log.e("debug_url","="+url);
-        Log.e("customertoken","="+Login_preference.getCustomertoken(getActivity()));
+        Log.e("customertoken","="+Login_preference.getCustomertoken(parent));
 
-        return customeapi.changePassword("Bearer "+Login_preference.getCustomertoken(getActivity()),url);
+        return customeapi.changePassword("Bearer "+Login_preference.getCustomertoken(parent),url);
     }
 
 

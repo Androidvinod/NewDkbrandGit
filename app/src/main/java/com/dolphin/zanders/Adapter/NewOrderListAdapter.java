@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dolphin.zanders.Activity.NavigationActivity;
 import com.dolphin.zanders.Fragment.OrderView_Fragment;
 import com.dolphin.zanders.Model.NewOrderModel.Item;
-import com.dolphin.zanders.Model.OrderView_model.OrderDetail;
 import com.dolphin.zanders.Preference.Login_preference;
 import com.dolphin.zanders.R;
 
@@ -45,7 +44,7 @@ public class NewOrderListAdapter extends RecyclerView.Adapter<NewOrderListAdapte
         public void onBindViewHolder(@NonNull final com.dolphin.zanders.Adapter.NewOrderListAdapter.MyViewHolder holder, int position) {
             final Item myItem_model = currentItemModels.get(position);
             NavigationActivity.Check_String_NULL_Value(holder.tv_order_date,myItem_model.getCreatedAt());
-            NavigationActivity.Check_String_NULL_Value(holder.tv_order_total,String.valueOf(myItem_model.getSubtotalInclTax())+" "+ Login_preference.getcurrencycode(context));
+            NavigationActivity.Check_String_NULL_Value(holder.tv_order_total,String.valueOf(myItem_model.getBaseGrandTotal())+" "+ Login_preference.getcurrencycode(context));
             Log.e("debuf_11","=="+myItem_model.getIncrementId());
 
             if(myItem_model.getStatus()==null || myItem_model.getStatus().equalsIgnoreCase("null"))
@@ -73,7 +72,7 @@ public class NewOrderListAdapter extends RecyclerView.Adapter<NewOrderListAdapte
                   myFragment.setArguments(b);
                   activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
                           0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
-                          0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack("ordderlist").commit();
+                          0, 0, R.anim.fade_out).addToBackStack("ordderlist").replace(R.id.framlayout, myFragment).commit();
 
               }
           });

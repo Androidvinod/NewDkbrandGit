@@ -104,7 +104,6 @@
 
                 <LinearLayout
                     android:layout_marginBottom="@dimen/padding15"
-                    android:layout_marginTop="@dimen/padding15"
                     android:padding="@dimen/padding15"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -253,7 +252,7 @@
                                      android:layout_height="@dimen/padding30"
                                      android:background="@drawable/edit_text_activated"
                                      android:fontFamily="@font/montserrat_regular"
-                                     android:hint="@string/address"
+                                     android:hint="@string/addresss"
                                      android:inputType="text"
                                      android:paddingBottom="@dimen/padding5"
                                      android:textColor="@color/black"

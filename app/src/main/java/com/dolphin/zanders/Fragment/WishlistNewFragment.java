@@ -54,6 +54,8 @@ import com.dolphin.zanders.Retrofit.ApiClientcusome;
 import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +115,7 @@ public class WishlistNewFragment extends Fragment {
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_favourite_fregment, container, false);
         bottom_navigation.getMenu().getItem(2).setChecked(true);
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        apiInterface = ApiClientcusome.getClient().create(ApiInterface.class);
         parent=(NavigationActivity) getActivity();
         setHasOptionsMenu(true);
         AllocateMemory();
@@ -134,32 +136,83 @@ public class WishlistNewFragment extends Fragment {
         });
 
         if (CheckNetwork.isNetworkAvailable(parent)) {
-            //CallGetWishlistApi(page_no);
-
-            callWishistApi();
-
-
+            callWishlistCountApi();
+              callWishistApi();
         } else {
             Toast.makeText(parent, parent.getResources().getString(R.string.nointernet), Toast.LENGTH_SHORT).show();
         }
         AttachRecyclerview();
-        tv_noting.setText("Wishlist is empty");
-
+        tv_noting.setText(getActivity().getResources().getString(R.string.emptywishlist));
         v.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-
                 getActivity().onBackPressed();
-
                 return false;
             }
         });
 
         return v;
     }
+    private void callWishlistCountApi() {
+        Log.e("debug_tt",""+Login_preference.gettoken(getActivity()));
+        Call<ResponseBody> customertoken = apiInterface.defaultWishlistCount("Bearer "+Login_preference.getCustomertoken(getActivity()));
+        customertoken.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.e("respocc",""+response.toString());
+                Log.e("response20cc",""+response.body());
+                if(response.code()==200 || response.isSuccessful())
+                {
+                    try {
+                        JSONArray jsonObject = new JSONArray(response.body().string());
+                        String count= jsonObject.getJSONObject(0).getString("total_items");
+                        Log.e("count",""+count);
+                        if(getActivity()!=null)
+                        {
+                            BottomNavigationMenuView menuView1 = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+
+                            BottomNavigationItemView itemView_wishlist = (BottomNavigationItemView) menuView1.getChildAt(2);
+                            View  wishlist_badge = LayoutInflater.from(getActivity()).inflate(R.layout.wishlist_count, menuView1, false);
+                            tv_wishlist_count = (TextView) wishlist_badge.findViewById(R.id.badge_wishlist);
+                            Log.e("debug_309","fg"+Login_preference.get_wishlist_count(getActivity()));
+                            if (count.equalsIgnoreCase("null") || count.equals("") || count.equals("0")) {
+                                tv_wishlist_count.setVisibility(View.GONE);
+                                Login_preference.set_wishlist_count(getContext(), "0");
+                            } else {
+                                tv_wishlist_count.setVisibility(View.VISIBLE);
+                                tv_wishlist_count.setText(count);
+
+                                tv_wishlist_count.setText(count);
+                                Login_preference.set_wishlist_count(getActivity(),count);
+                            }
+
+                            itemView_wishlist.addView(wishlist_badge);
+
+                        }
+
+
+
+                        Log.e("wishcount",""+count);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+
+                }
+
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
 
     private void callWishistApi() {
-        lv_no_data_found_wishlist.setVisibility(View.GONE);
+            lv_no_data_found_wishlist.setVisibility(View.GONE);
             favouriteproductlist.clear();
             lv_progress_favoutite_bottom.setVisibility(View.GONE);
             recv_favourites.setVisibility(View.VISIBLE);
@@ -205,20 +258,20 @@ public class WishlistNewFragment extends Fragment {
 
 
                                     try {
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        JSONObject jsonObject = jsonArray.optJSONObject(i);
                                         Log.e("price", "=" + jsonObject.getJSONObject("product").optString("price"));
                                         Log.e("name", "=" + jsonObject.getJSONObject("product").optString("name"));
                                         Log.e("special_price", "=" + jsonObject.getJSONObject("product").optString("special_price"));
                                         Log.e("thumbnail", "=" + jsonObject.getJSONObject("product").optString("thumbnail"));
                                         favouriteproductlist.add(new WishlistModel
-                                                (jsonObject.getString("wishlist_item_id"),
-                                                        jsonObject.getString("wishlist_id"),
-                                                        jsonObject.getString("product_id"),
-                                                        jsonObject.getJSONObject("product").getString("sku"),
-                                                        jsonObject.getJSONObject("product").getDouble("price"),
-                                                        jsonObject.getJSONObject("product").getDouble("special_price"),
-                                                        jsonObject.getJSONObject("product").getString("name"),
-                                                        jsonObject.getJSONObject("product").getString("thumbnail")));
+                                                (jsonObject.optString("wishlist_item_id"),
+                                                        jsonObject.optString("wishlist_id"),
+                                                        jsonObject.optString("product_id"),
+                                                        jsonObject.optJSONObject("product").optString("sku"),
+                                                        jsonObject.optJSONObject("product").optDouble("price"),
+                                                        jsonObject.optJSONObject("product").optDouble("special_price"),
+                                                        jsonObject.optJSONObject("product").optString("name"),
+                                                        jsonObject.optJSONObject("product").optString("thumbnail")));
                                     } catch (Exception e) {
                                         Log.e("exception22", "=" + e.getLocalizedMessage());
                                     }
@@ -270,110 +323,8 @@ public class WishlistNewFragment extends Fragment {
         return api.defaultgetWishlistData("Bearer "+Login_preference.getCustomertoken(getActivity()));
     }
 
-    private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
 
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                Log.e("debug_255", "t" + direction);
-                if (direction == ItemTouchHelper.RIGHT) {
-                    Log.e("debug_261", "t" + direction);
-                  //  wishListAdapter.addToCartItem(position);
-                    wishListAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                } else {
-                    Log.e("debug_264", "t" + direction);
-                    mdeletecartitem(viewHolder, direction);
-                }
-            }
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView,
-                                    RecyclerView.ViewHolder viewHolder,
-                                    float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Bitmap icon;
-                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                    View itemView = viewHolder.itemView;
-                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
-                    float width = height / 3;
-                    if (dX > 0) {
-                        p.setColor(Color.parseColor("#06466c"));
-                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX, (float) itemView.getBottom());
-                        c.drawRect(background, p);
-                        icon = BitmapFactory.decodeResource(parent.getResources(), R.drawable.cart_white);
-                        RectF icon_dest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width,
-                                (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
-                        c.drawBitmap(icon, null, icon_dest, p);
-                    } else {
-                        p.setColor(Color.parseColor("#D32F2F"));
-                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
-                        c.drawRect(background, p);
-                        icon = BitmapFactory.decodeResource(parent.getResources(), R.drawable.ic_close_white_36dp);
-                        RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width,
-                                (float) itemView.getTop() + width,
-                                (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
-                        c.drawBitmap(icon, null, icon_dest, p);
-                    }
-                }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recv_favourites);
-    }
 
-    private void mdeletecartitem(final RecyclerView.ViewHolder viewHolder, final int direction) {
-        AlertDialog.Builder builder
-                = new AlertDialog
-                .Builder(parent);
-        SpannableString spannableString = new SpannableString(parent.getResources().getString(R.string.removeitemm));
-        builder.setTitle(spannableString);
-        builder.setCancelable(false);
-
-        builder.setPositiveButton(parent.getResources().getString(R.string.Remove), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int position = viewHolder.getAdapterPosition();
-                if (direction == ItemTouchHelper.LEFT) {
-                    Log.e("debug_322", "elee");
-                 //   wishListAdapter.removeItem(position);
-                } else {
-                    // Log.e("debug_339", "else");
-                    // removeView();
-                    wishListAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-
-        // Set the Negative button with No name
-        builder.setNegativeButton(parent.getResources().getString(R.string.cancel), new DialogInterface
-                .OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                wishListAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                //CallGetWishlistApi();
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
-        textView.setTextColor(parent.getResources().getColor(R.color.black));
-        Button nbutton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        nbutton.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
-        Button pbutton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        pbutton.setTextColor(parent.getResources().getColor(R.color.colorPrimary));
-    }
-
-    private void removeView() {
-        if (view.getParent() != null) {
-            ((ViewGroup) view.getParent()).removeView(view);
-        }
-    }
 
     private void AttachRecyclerview() {
         //recv_favourites.getItemAnimator().setChangeDuration(700);
@@ -385,15 +336,7 @@ public class WishlistNewFragment extends Fragment {
     }
 
 
-    private Call<GetFavouriteslist> callgetwisglistapi(int page) {
-        Log.e("customer_id", "" + Login_preference.getcustomer_id(getContext()));
-        return apiInterface.getWishlist(Login_preference.getcustomer_id(parent), page);
-    }
 
-    private List<Product> fetchResults(Response<GetFavouriteslist> response) {
-        GetFavouriteslist getFavouriteslist = response.body();
-        return getFavouriteslist.getProduct();
-    }
 
     private void AllocateMemory() {
         toolbar_favourites = v.findViewById(R.id.toolbar_favourites);

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -57,6 +58,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,6 +111,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
     LinearLayout lv_add_newadd,lv_checkout_main_paren;
     EditText edt_coupon_code;
 
+    NavigationActivity parent;
     public static String shippingMethod="";
     public NewCheckoutFragment() {
         // Required empty public constructor
@@ -120,7 +124,11 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_new_checkout, container, false);
              api = ApiClientcusome.getClient().create(ApiInterface.class);
-        quoteid=Login_preference.getdkQuoteId(getActivity());
+             if(getActivity()!=null)
+             {
+                 parent=(NavigationActivity) getActivity();
+             }
+        quoteid=Login_preference.getdkQuoteId(parent);
 
         shiping_method_order="";
         payment_method_order="";
@@ -130,10 +138,10 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         AttachRecyclerView();
         setupUI(lv_checkout_main_paren);
 
-        ((NavigationActivity) getActivity()).setSupportActionBar(toolbar_checkout);
-        ((NavigationActivity) getActivity()).getSupportActionBar()
+        ((NavigationActivity) parent).setSupportActionBar(toolbar_checkout);
+        ((NavigationActivity) parent).getSupportActionBar()
                 .setDisplayHomeAsUpEnabled(true);
-        ((NavigationActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_36dp);
+        ((NavigationActivity) parent).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_36dp);
             b=this.getArguments();
             if(b!=null)
             {
@@ -143,23 +151,25 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
                 Log.e("debug11cartid","="+cartid);
             }
 
-        customer_email=Login_preference.getemail(getActivity());
-        customer_id=Login_preference.getcustomer_id(getActivity());
-        customer_group_id=Login_preference.getgroupid(getActivity());
-        Log.e("ddfirstname","="+Login_preference.getfirstname(getActivity()));
-        Log.e("ddflasdtname","="+Login_preference.getlastname(getActivity()));
+        customer_email=Login_preference.getemail(parent);
+        customer_id=Login_preference.getcustomer_id(parent);
+        customer_group_id=Login_preference.getgroupid(parent);
+        Log.e("ddfirstname","="+Login_preference.getfirstname(parent));
+        Log.e("ddflasdtname","="+Login_preference.getlastname(parent));
 
-        if (Login_preference.getfirstname(getActivity()) == null || Login_preference.getfirstname(getActivity()).equalsIgnoreCase(null) || Login_preference.getfirstname(getActivity()).equalsIgnoreCase("")
+        if (Login_preference.getfirstname(parent) == null || Login_preference.getfirstname(parent).equalsIgnoreCase(null) ||
+                Login_preference.getfirstname(parent).equalsIgnoreCase("")
         ) {
             customer_firstname="";
         }else {
-            customer_firstname=(Login_preference.getfirstname(getActivity()));
+            customer_firstname=(Login_preference.getfirstname(parent));
         }
-        if (Login_preference.getlastname(getActivity()) == null || Login_preference.getlastname(getActivity()).equalsIgnoreCase(null) || Login_preference.getlastname(getActivity()).equalsIgnoreCase("")
+        if (Login_preference.getlastname(parent) == null || Login_preference.getlastname(parent).equalsIgnoreCase(null) ||
+                Login_preference.getlastname(parent).equalsIgnoreCase("")
         ) {
             customer_lastname="";
         }else {
-            customer_lastname=(Login_preference.getlastname(getActivity()));
+            customer_lastname=(Login_preference.getlastname(parent));
         }
 
         checkbox_shipping.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +194,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             }
         });
 
-        if (CheckNetwork.isNetworkAvailable(getActivity())) {
+        if (CheckNetwork.isNetworkAvailable(parent)) {
             callPaymentInformationApi();
             CallAddressApi();
             getNewShippingModel();
@@ -193,7 +203,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
 
         } else {
             //    noInternetDialog(NavigationActivity.this);
-            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+            Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -209,7 +219,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         if (!(view instanceof EditText)) {
             view.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
-                    hideKeyboard(getActivity());
+                    hideKeyboard(parent);
                     return false;
                 }
             });
@@ -261,7 +271,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
                 cordinator_checkout.setVisibility(View.GONE);
                 Log.e("res634", "===" + response);
                 Log.e("ressss634", "=" + response.body());
-                Log.e("6sss34", "==" + response.body().toString());
+//                Log.e("6sss34", "==" + response.body().toString());
 
                 if (response.isSuccessful() || response.code() == 200) {
                     JSONObject jsonObject = null;
@@ -277,18 +287,18 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
 
                        // JSONObject billing_address=jsonObject.getJSONObject("billing_address");
                        // Log.e("billing_address", "" + billing_address);
-                        Toast.makeText(getActivity(), "Order Placed successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent, "Order Placed successfully", Toast.LENGTH_SHORT).show();
 
-                        Intent intent=new Intent(getActivity(),NavigationActivity.class);
+                        Intent intent=new Intent(parent,NavigationActivity.class);
                         startActivity(intent);
-                        getActivity().finish();
+                        parent.finish();
 
 
 
 
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -303,7 +313,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 lv_checkout_progress.setVisibility(View.GONE);
                 cordinator_checkout.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("debug_175125", "" + t.getMessage());
             }
         });
@@ -311,28 +321,51 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
 
     private Call<ResponseBody> createordrapi() {
 
-        Log.e("debug_authtoken", "=" + Login_preference.gettoken(getActivity()));
-        Log.e("cuome3333", "=" + Login_preference.getCustomertoken(getActivity()));
-        Log.e("paymentmethod", "=" + paymentMethod_pass);
-        Log.e("cart_sku", "=" + cart_sku);
-        Log.e("shiping_method_order", "=" + shiping_method_order);
-        String url;
-        if(isShippingAddress==true)
+        Log.e("debug_authtoken", "=" + Login_preference.gettoken(parent));
+        Log.e("cuome3333", "=" + Login_preference.getCustomertoken(parent));
+     //   Log.e("paymentmethod", "=" + paymentMethod_pass);
+    //    Log.e("cart_sku", "=" + cart_sku);
+    //    Log.e("shiping_method_order", "=" + shiping_method_order);
+    //    Log.e("shiping_method_order", "=" + shiping_method_order);
+    //    Log.e("shiping_method_order", "=" + shiping_method_order);
+        String url = null;
+
+
+            url = ApiClientcusome.MAIN_URLL + "orders/create?" +"entity[payment][method]="+paymentMethod_pass+ halfUrl+"&"+cartItemsUrl+shippingAddressUrl
+                    + billingaddressurl+"&"+cart_sku + "&entity[customer_is_guest]=0"+"&entity[email_sent]=1"+"&entity[is_virtual]=0"+"&entity[order_currency_code]="
+                    +base_currency_code+"&entity[shipping_description]="+shiping_method_order+"&entity[status]=pending"+"&entity[store_currency_code]="+base_currency_code+
+                        "&entity[total_item_count]="+total_qty_ordered+"&entity[store_id]="+Login_preference.getstoreid(parent)+"&entity[store_name]="+
+                    Login_preference.getstoreName(parent)+"&"+cart_product_type;
+
+
+
+        Log.e("cart_sku","="+cart_sku);
+        Log.e("paymentMethod_pass_33","="+paymentMethod_pass);
+        Log.e("halfUrl_33","="+halfUrl);
+        Log.e("cartItemsUrl_33","="+cartItemsUrl);
+        Log.e("shippingAddressUrl_33","="+shippingAddressUrl);
+        Log.e("billingaddressurl_33","="+billingaddressurl);
+        Log.e("shiping_method_order_33","="+shiping_method_order);
+        Log.e("sbase_currency_code_33","="+base_currency_code);
+        Log.e("getstoreid_33","="+Login_preference.getstoreid(parent));
+        Log.e("store_name_33","="+Login_preference.getstoreName(parent));
+        Log.e("cart_product_type_33","="+cart_product_type);
+       /* if(isShippingAddress==true)
         {
             url = ApiClientcusome.MAIN_URLL + "orders/create?" +"entity[payment][method]="+paymentMethod_pass+ halfUrl+"&"+cartItemsUrl+shippingAddressUrl
                     + billingaddressurl+"&"+cart_sku + "&entity[customer_is_guest]=0"+"&entity[email_sent]=1"+"&entity[is_virtual]=0"+"&entity[order_currency_code]="
                     +base_currency_code+"&entity[shipping_description]="+shiping_method_order+"&entity[status]=pending"+"&entity[store_currency_code]="+base_currency_code+
-            "&entity[total_item_count]="+total_qty_ordered+"&entity[store_id]="+Login_preference.getstoreid(getActivity())+"&entity[store_name]="+
-                    Login_preference.getstoreName(getActivity())+"&"+cart_product_type;
+            "&entity[total_item_count]="+total_qty_ordered+"&entity[store_id]="+Login_preference.getstoreid(parent())+"&entity[store_name]="+
+                    Login_preference.getstoreName(parent())+"&"+cart_product_type;
         }else {
             url = ApiClientcusome.MAIN_URLL + "orders/create?"+"entity[payment][method]="+paymentMethod_pass+ halfUrl+"&"+cartItemsUrl+billingaddressurl+"&"+cart_sku
                     + "&entity[customer_is_guest]=0"+"&entity[email_sent]=1"+"&entity[is_virtual]=0"+"&entity[order_currency_code]="
                     +base_currency_code+"&entity[shipping_description]="+shiping_method_order+"&entity[status]=pending"+"&entity[store_currency_code]="+base_currency_code+
-                    "&entity[total_item_count]="+total_qty_ordered+"&entity[store_id]="+Login_preference.getstoreid(getActivity())+"&entity[store_name]="+
-                    Login_preference.getstoreName(getActivity())+"&"+cart_product_type;
-        }
+                    "&entity[total_item_count]="+total_qty_ordered+"&entity[store_id]="+Login_preference.getstoreid(parent())+"&entity[store_name]="+
+                    Login_preference.getstoreName(parent())+"&"+cart_product_type;
+        }*/
         Log.e("debug_155", "=" + url);
-        return api.createorder("Bearer " + Login_preference.gettoken(getActivity()), url);
+        return api.createorder("Bearer " + Login_preference.gettoken(parent), url);
     }
 
     private void CallAddressApi() {
@@ -451,19 +484,36 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         AddressModell getAddressModel = response.body();
         return getAddressModel.getAddresses();
     }
+/*
+
+    public Double addZeroes(Double num) {
+// Convert input string to a number and store as a variable.
+        String value = String.valueOf(num);
+// Split the input string into two arrays containing integers/decimals
+        String[] res = value.split(".");
+// If there is no decimal point or only one decimal place found.
+        if(res.length == 1 || res[1].length < 3) {
+// Set the number to two decimal places
+            value = num.toFixed(2);
+        }
+// Return updated or original number.
+        return value;
+    }*/
+
+// If you require the numb
 
     private Call<AddressModell> calladdressgapi() {
 
-        Log.e("debug_111", "=" + Login_preference.gettoken(getActivity()));
-        Log.e("custormid", "=" + Login_preference.gettoken(getActivity()));
-        String url = ApiClientcusome.MAIN_URLL + "customers/" + Login_preference.getcustomer_id(getActivity());
-        return api.address("Bearer " + Login_preference.gettoken(getActivity()), url);
+        Log.e("debug_111", "=" + Login_preference.gettoken(parent));
+        Log.e("custormid", "=" + Login_preference.gettoken(parent));
+        String url = ApiClientcusome.MAIN_URLL + "customers/" + Login_preference.getcustomer_id(parent);
+        return api.address("Bearer " + Login_preference.gettoken(parent), url);
     }
 
     public  Call<ResponseBody> callcartdataapi() {
-        Log.e("debugcustomertoen","="+Login_preference.getCustomertoken(getActivity()));
+        Log.e("debugcustomertoen","="+Login_preference.getCustomertoken(parent));
 
-        return api.getpricedata("Bearer " + Login_preference.getCustomertoken(getActivity()));
+        return api.getpricedata("Bearer " + Login_preference.getCustomertoken(parent));
     }
 
     private void callPaymentInformationApi() {
@@ -494,33 +544,20 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
                         subtotal_incl_tax= totalsobj.optString("subtotal_incl_tax");
                         tax_amount= totalsobj.optString("tax_amount");
                         total_qty_ordered= totalsobj.optString("items_qty");
+                        Log.e("base_grand_total", "=" + base_grand_total);
+                        tv_subtotal_value.setText(base_subtotal+" "+Login_preference.getcurrencycode(parent));
+                        tv_taxt_value.setText(base_tax_amount+" "+Login_preference.getcurrencycode(parent));
+                        tv_discount_value.setText(discount_amount+" "+Login_preference.getcurrencycode(parent));
 
-                        tv_subtotal_value.setText(base_subtotal+" "+Login_preference.getcurrencycode(getActivity()));
-                        tv_taxt_value.setText(base_tax_amount+" "+Login_preference.getcurrencycode(getActivity()));
-                        tv_discount_value.setText(discount_amount+" "+Login_preference.getcurrencycode(getActivity()));
-                        tv_total_value.setText(subtotal_incl_tax+" "+Login_preference.getcurrencycode(getActivity()));
+
+                      callDecimalPointFunction(base_grand_total);
+                       tv_total_value.setText(base_grand_total+" "+Login_preference.getcurrencycode(parent));
+
 
                         JSONArray itemsArray = totalsobj.getJSONArray("items");
                         for (int i=0; i < itemsArray.length(); i++)
                         {
                             JSONObject item_obj=itemsArray.getJSONObject(i);
-                            // cart_base_discount_amount=item_obj.optString("base_discount_amount");
-                            // cart_base_original_price=item_obj.optString("price");
-                            // cart_base_price=item_obj.optString("base_price");
-                            //  cart_base_price_incl_tax=item_obj.optString("base_price_incl_tax");
-                            // cart_base_row_invoiced=item_obj.optString("base_row_invoiced");
-                            //  cart_base_row_total=item_obj.optString("base_row_total");
-                            //cart_base_tax_amount=item_obj.optString("base_tax_amount");
-                            // cart_discount_amount=item_obj.optString("discount_amount");
-                            //  cart_discount_percent=item_obj.optString("discount_percent");
-                            //  cart_name=item_obj.optString("name");
-                            //  cart_original_price=item_obj.optString("price");
-                            //cart_price=item_obj.optString("base_price");
-                            // cart_price_incl_tax=item_obj.optString("price_incl_tax");
-                            //  cart_product_id=item_obj.optString("item_id");
-                            //  cart_qty_ordered=item_obj.optString("qty");
-                            //   cart_row_total=item_obj.optString("row_total");
-                            //  cart_row_total_incl_tax=item_obj.optString("row_total_incl_tax");
 
 
                             if(cart_free_shipping.equalsIgnoreCase(""))
@@ -671,30 +708,51 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
                                 "&entity[subtotal_incl_tax]="+subtotal_incl_tax+"&entity[tax_amount]="+tax_amount+"&total_qty_ordered="+total_qty_ordered;
 
 
-                        cartItemsUrl=cart_base_discount_amount+"&"+cart_base_original_price+"&"+cart_base_price+
-                                "&"+cart_base_price_incl_tax+"&"+cart_base_price_incl_tax+"&"+cart_discount_amount+"&"+cart_base_row_total+"&"+
-                                cart_row_total_incl_tax+"&"+cart_row_total+"&"+cart_qty_ordered+"&"+cart_product_id+"&"+cart_price_incl_tax+
-                                "&"+cart_price+"&"+cart_original_price+"&"+cart_name+"&"+cart_discount_percent+"&"+cart_discount_amount+"&"+
-                                cart_base_row_invoiced+"&"+cart_free_shipping+"&"+cart_base_tax_invoiced;
+                        /*cart_base_tax_invoiced="",cart_base_row_invoiced="",cart_base_discount_amount="",cart_base_original_price="",cart_base_price="",cart_base_price_incl_tax=""
+                                ,cart_base_row_total="",cart_base_tax_amount="",cart_discount_amount="",cart_discount_percent="",cart_name="",cart_original_price="",cart_price="",
+                                cart_price_incl_tax="",cart_product_id="",cart_qty_ordered="",cart_row_total="",cart_row_total_incl_tax="",cart_free_shipping=""
+                        */
+                        cartItemsUrl=cart_base_tax_invoiced
+                                +"&"+cart_base_row_invoiced+"&"+
+                                cart_base_discount_amount+ "&"+
+                                cart_base_original_price+"&"+
+                                cart_base_price+"&"+
+                                cart_base_price_incl_tax+"&"+
+                                cart_base_row_total+"&"+
+                                cart_base_tax_amount+"&"+
+                                cart_discount_amount+"&"+
+                                cart_discount_percent+"&"+
+                                cart_name+ "&"+
+                                cart_original_price+"&"+
+                                cart_price+"&"+
+                                cart_price_incl_tax+"&"+
+                                cart_product_id+"&"+
+                                cart_qty_ordered+"&"+
+                                cart_row_total+"&"+
+                                cart_row_total_incl_tax+"&"+
+                                cart_free_shipping;
 
 
-                        Log.e("cartdiscountamount_212", "" +cart_base_discount_amount);
-                        Log.e("cart_base_riginalprice", "" +cart_base_original_price);
-                        Log.e("cart_base_price", "" +cart_base_price);
+                        Log.e("cart_base_tax_invoiced", "" +cart_base_tax_invoiced);
                         Log.e("cart_base_row_invoiced", "" +cart_base_row_invoiced);
-                        Log.e("cart_basepricencl_tax", "" +cart_base_price_incl_tax);
-                        Log.e("cart_discount_amount", "" +cart_discount_amount);
+                        Log.e("cart_basediscout_amount", "" +cart_base_discount_amount);
+                        Log.e("cart_baseoriginal_price", "" +cart_base_original_price);
+                        Log.e("cart_base_price", "" +cart_base_price);
+                        Log.e("cart_baseprice_incl_tax", "" +cart_base_price_incl_tax);
                         Log.e("cart_base_row_total", "" +cart_base_row_total);
-                        Log.e("cart_row_total_incl_tax", "" +cart_row_total_incl_tax);
-                        Log.e("cart_row_total", "" +cart_row_total);
-                        Log.e("cart_qty_ordered", "" +cart_qty_ordered);
-                        Log.e("cart_product_id", "" +cart_product_id);
-                        Log.e("cart_price_incl_tax", "" +cart_price_incl_tax);
-                        Log.e("cart_price", "" +cart_price);
-                        Log.e("cart_original_price", "" +cart_original_price);
-                        Log.e("cart_name", "" +cart_name);
-                        Log.e("cart_discount_percent", "" +cart_discount_percent);
+                        Log.e("cart_base_tax_amount", "" +cart_base_tax_amount);
                         Log.e("cart_discount_amount", "" +cart_discount_amount);
+                        Log.e("cart_discount_percent", "" +cart_discount_percent);
+                        Log.e("cart_name", "" +cart_name);
+                        Log.e("cart_original_price", "" +cart_original_price);
+                        Log.e("cart_price", "" +cart_price);
+                        Log.e("cart_price_incl_tax", "" +cart_price_incl_tax);
+                        Log.e("cart_product_id", "" +cart_product_id);
+                        Log.e("cart_qty_ordered", "" +cart_qty_ordered);
+                        Log.e("cart_row_total", "" +cart_row_total);
+                        Log.e("cart_row_total_incl_tax", "" +cart_row_total_incl_tax);
+                        Log.e("cart_free_shipping", "" +cart_free_shipping);
+
                         Log.e("halfUrl", "========" +halfUrl);
                         Log.e("cartItemsUrl", "========" +cartItemsUrl);
 
@@ -711,10 +769,24 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
                 Log.e("debug_175125", "pages: " + t);
             }
         });
+    }
+
+    private void callDecimalPointFunction(String base_grand_total) {
+        if(base_grand_total.contains("."))
+        {
+            Log.e("base_grand_total5555", "pages: " +base_grand_total);
+            String[] arrOfStr = base_grand_total.split(".");
+            Log.e("arrOfStr74", "pages: " + arrOfStr.length);
+//            Log.e("arrOfStr75", "pages: " + arrOfStr[0]);
+//            Log.e("arrOfStr76", "pages: " + arrOfStr[1]);
+        }else {
+            Log.e("arrOfStr755", "pages: " + base_grand_total+".00");
+        }
+
     }
 
     private void AllocateMemory() {
@@ -800,7 +872,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // String error=  t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
                 Log.e("debug_175125", "pages: " + t);
             }
         });
@@ -810,21 +882,21 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
     private void AttachRecyclerView() {
         //payment method
         paymentInfoAdapter = new NewPaymentMethodAdapter(getActivity(),paymentMethodArrayList);
-        recv_payment_information.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recv_payment_information.setLayoutManager(new LinearLayoutManager(parent));
         recv_payment_information.setItemAnimator(new DefaultItemAnimator());
         recv_payment_information.setAdapter(paymentInfoAdapter);
         // shiping method
         shippingMethodAdapter = new NewShippingMethodAdapter(getActivity(),modelList);
-        recv_shipping_method.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recv_shipping_method.setLayoutManager(new LinearLayoutManager(parent));
         recv_shipping_method.setItemAnimator(new DefaultItemAnimator());
         recv_shipping_method.setAdapter(shippingMethodAdapter);
     }
 
     //call shipping method api
     private Call<ResponseBody> callNewShippingModelApi() {
-        Log.e("debug_185", "aaa" + Login_preference.gettoken(getActivity()));
+        Log.e("debug_185", "aaa" + Login_preference.gettoken(parent));
         String url="http://dkbraende.demoproject.info/rest//V1/carts/192001/shipping-methods";
-        return api.getshipping("Bearer "+Login_preference.gettoken(getActivity()),url);
+        return api.getshipping("Bearer "+Login_preference.gettoken(parent),url);
     }
 
     private void getNewShippingModel() {
@@ -877,20 +949,20 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 // String error=  t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
                 Log.e("debug_175125", "pages: " + t);
             }
         });
     }
 
     private Call<ResponseBody> callpayment() {
-        Log.e("debug_185ss", "aaa" + Login_preference.gettoken(getActivity()));
-        Log.e("quote", "aaa" +Login_preference.getquote_id(getActivity()));
+        Log.e("debug_185ss", "aaa" + Login_preference.gettoken(parent));
+        Log.e("quote", "aaa" +Login_preference.getquote_id(parent));
         Log.e("cartid", "aaa" + cartid);
-        //http://dkbraende.demoproject.info/rest//V1/carts/"+Login_preference.getquote_id(getActivity())+"/payment-methods"
-        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getdkQuoteId(getActivity())+"/payment-methods";
+        //http://dkbraende.demoproject.info/rest//V1/carts/"+Login_preference.getquote_id(parent())+"/payment-methods"
+        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getdkQuoteId(parent)+"/payment-methods";
         Log.e("cartid222", "aaa" + url);
-        return api.getpaymentmethod("Bearer "+Login_preference.gettoken(getActivity()),url);
+        return api.getpaymentmethod("Bearer "+Login_preference.gettoken(parent),url);
     }
 
     @Override
@@ -927,18 +999,24 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             Log.e("res634111", "clikeddd" );
             if(passaddress==null || passaddress.equalsIgnoreCase("") || passaddress=="")
             {
-                Toast.makeText(getActivity(), "Please Add Billing Address", Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "Please Add Billing Address", Toast.LENGTH_SHORT).show();
             }
            else if (shiping_method_order == null || shiping_method_order == "" || shiping_method_order == "null"){
-                Toast.makeText(getActivity(), "Please Select Shipping Method", Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "Please Select Shipping Method", Toast.LENGTH_SHORT).show();
             } else if (payment_method_order == null || payment_method_order == "" || payment_method_order == "null") {
-                Toast.makeText(getActivity(), "Please Select Payment Method", Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "Please Select Payment Method", Toast.LENGTH_SHORT).show();
             }else {
-                if (CheckNetwork.isNetworkAvailable(getActivity())) {
-                    CallCreateOrderApi();
+                if (CheckNetwork.isNetworkAvailable(parent)) {
+                    if(isShippingAddress==false)
+                    {
+                        Toast.makeText(parent, ""+parent.getResources().getString(R.string.shippingadd), Toast.LENGTH_SHORT).show();
+                    }else {
+
+                        CallCreateOrderApi();
+                    }
                 } else {
                     //    noInternetDialog(NavigationActivity.this);
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -946,27 +1024,27 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         }else if(v==tv_apply)
          {
 
-             if(tv_apply.getText().equals(getActivity().getResources().getString(R.string.apply)))
+             if(tv_apply.getText().equals(parent.getResources().getString(R.string.apply)))
              {
                  String code=edt_coupon_code.getText().toString();
                  if(code.equalsIgnoreCase("") || code.length()==0)
                  {
 
                  }else {
-                     if (CheckNetwork.isNetworkAvailable(getActivity())) {
+                     if (CheckNetwork.isNetworkAvailable(parent)) {
                          callCopounCodeApi(code);
                      } else {
                          //    noInternetDialog(NavigationActivity.this);
-                         Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                         Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
                      }
                  }
-             }else if(tv_apply.getText().equals(getActivity().getResources().getString(R.string.remove)))
+             }else if(tv_apply.getText().equals(parent.getResources().getString(R.string.remove)))
              {
-                 if (CheckNetwork.isNetworkAvailable(getActivity())) {
+                 if (CheckNetwork.isNetworkAvailable(parent)) {
                      callremoveCodeApi();
                  } else {
                      //    noInternetDialog(NavigationActivity.this);
-                     Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
                  }
              }
 
@@ -975,15 +1053,15 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
     }
 
     private void callremoveCodeApi() {
-        hideKeyboard(getActivity());
+        hideKeyboard(parent);
         lv_checkout_progress.setVisibility(View.VISIBLE);
         cordinator_checkout.setVisibility(View.GONE);
         ApiInterface customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
-        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getquote_id(getActivity())+"/coupons";
+        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getquote_id(parent)+"/coupons";
         Log.e("debug_url","="+url);
-        Log.e("token","="+ Login_preference.gettoken(getActivity()));
+        Log.e("token","="+ Login_preference.gettoken(parent));
 
-        Call<Boolean> homevideos = customeapi.deletecopouncode("Bearer "+Login_preference.gettoken(getActivity()),url);
+        Call<Boolean> homevideos = customeapi.deletecopouncode("Bearer "+Login_preference.gettoken(parent),url);
         homevideos.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -995,10 +1073,10 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
 
                     if(response.body()==true)
                     {
-                        Toast.makeText(getActivity(), "Copoun Code Removed  Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent, "Coupon Code Removed  Successfully", Toast.LENGTH_SHORT).show();
                         edt_coupon_code.setText("");
-                        tv_apply.setText(getActivity().getResources().getString(R.string.apply));
-                        tv_apply.setTextColor(getActivity().getResources().getColor(R.color.black));
+                        tv_apply.setText(parent.getResources().getString(R.string.apply));
+                        tv_apply.setTextColor(parent.getResources().getColor(R.color.black));
                     }
                 }else {
                     lv_checkout_progress.setVisibility(View.GONE);
@@ -1007,7 +1085,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             }
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
                 lv_checkout_progress.setVisibility(View.GONE);
                 cordinator_checkout.setVisibility(View.VISIBLE);
@@ -1016,7 +1094,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         });
     }
     private void callCopounCodeApi(String code) {
-        hideKeyboard(getActivity());
+        hideKeyboard(parent);
         lv_checkout_progress.setVisibility(View.VISIBLE);
         cordinator_checkout.setVisibility(View.GONE);
         addcoponcode(code).enqueue(new Callback<Boolean>() {
@@ -1036,12 +1114,12 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
                     if(response.body()==true)
                     {
 
-                        Toast.makeText(getActivity(), "Copoun Code Added  Successfully", Toast.LENGTH_SHORT).show();
-                        tv_apply.setText(getActivity().getResources().getString(R.string.remove));
-                        tv_apply.setTextColor(getActivity().getResources().getColor(R.color.colorAccent));
+                        Toast.makeText(parent, "Coupon Code Added  Successfully", Toast.LENGTH_SHORT).show();
+                        tv_apply.setText(parent.getResources().getString(R.string.remove));
+                        tv_apply.setTextColor(parent.getResources().getColor(R.color.colorAccent));
                     }
                 }else {
-                      Toast.makeText(getActivity(), "The coupon code isn't valid. Verify the code and try again.", Toast.LENGTH_SHORT).show();
+                      Toast.makeText(parent, "The Coupon code isn't valid. Verify the code and try again.", Toast.LENGTH_SHORT).show();
                     lv_checkout_progress.setVisibility(View.GONE);
                     cordinator_checkout.setVisibility(View.VISIBLE);
                 }
@@ -1052,7 +1130,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
             public void onFailure(Call<Boolean> call, Throwable t) {
                 lv_checkout_progress.setVisibility(View.GONE);
                 cordinator_checkout.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), ""+getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, ""+parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -1060,11 +1138,11 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
         ApiInterface customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
 
         //http://dkbraende.demoproject.info/rest/V1/carts/192029/coupons/test
-        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getquote_id(getActivity())+"/coupons/"+code;
+        String url=ApiClientcusome.MAIN_URLL+"carts/"+Login_preference.getquote_id(parent)+"/coupons/"+code;
         Log.e("debug_url","="+url);
-        Log.e("token","="+ Login_preference.gettoken(getActivity()));
+        Log.e("token","="+ Login_preference.gettoken(parent));
 
-        return customeapi.addCoponCode("Bearer "+Login_preference.gettoken(getActivity()),url);
+        return customeapi.addCoponCode("Bearer "+Login_preference.gettoken(parent),url);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -1073,7 +1151,7 @@ public class NewCheckoutFragment extends Fragment implements View.OnClickListene
 
 
             case android.R.id.home:
-                getActivity().onBackPressed();
+                parent.onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

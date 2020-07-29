@@ -21,15 +21,12 @@ import com.dolphin.zanders.Model.Manufacturerslist_model.GetManufacturelistModel
 import com.dolphin.zanders.Model.NewOrderDetailModel.NewOrderDetailModel;
 import com.dolphin.zanders.Model.NewOrderModel.NewOrderModel;
 import com.dolphin.zanders.Model.NewProductListModel.NewProductListModel;
-import com.dolphin.zanders.Model.NewShippingModel;
 import com.dolphin.zanders.Model.OrderView_model.OrderviewModel;
 import com.dolphin.zanders.Model.Ordermodel.OrderModel;
 import com.dolphin.zanders.Model.PaymentMethodModel.PaymentMehtodModel;
 import com.dolphin.zanders.Model.PrivacyModel;
 import com.dolphin.zanders.Model.ProductDetailModel.GetProductdetails;
-import com.dolphin.zanders.Model.ProductDetailModelNew.ProductDetailModelNEW;
 import com.dolphin.zanders.Model.ProductlistModel.GetCategoryProductlist;
-import com.dolphin.zanders.Model.RegisterModel.RegisterModel;
 import com.dolphin.zanders.Model.RemoveProductFomCart.RemoveCartProductModel;
 import com.dolphin.zanders.Model.RemoveWishlistModel.RemoveFromWishlistModel;
 import com.dolphin.zanders.Model.Shipingmethod.ShippingMethodModel;
@@ -42,37 +39,34 @@ import com.dolphin.zanders.Model.Wishlistcheck_model.WishlistproductcheckModel;
 import com.dolphin.zanders.Model.change_password.Changepassword;
 import com.dolphin.zanders.Model.porduct_showcustome.ProductModel;
 
-import java.util.ArrayList;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 
 public interface ApiInterface {
     //remove coponun code api
-   //http://dkbraende.demoproject.info/rest/V1/carts/192029/coupons
+    //http://dkbraende.demoproject.info/rest/V1/carts/192029/coupons
     @DELETE()
     Call<Boolean> deletecopouncode(@Header("Authorization") String authHeader, @Url String url);
 
 
     //add copon code
     //http://dkbraende.demoproject.info/rest/V1/carts/192029/coupons/test
-     //pass auth token
-     @PUT()
-     Call<Boolean> addCoponCode(@Header("Authorization") String authHeader, @Url String url);
+    //pass auth token
+    @PUT()
+    Call<Boolean> addCoponCode(@Header("Authorization") String authHeader, @Url String url);
 
-     //orderdetail
+    //orderdetail
     //http://dkbraende.demoproject.info/rest/V1/orders/61989
     //pass auth token
     @GET()
@@ -83,7 +77,7 @@ public interface ApiInterface {
     //http://dkbraende.demoproject.info/rest/V1/orders/?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=12517&searchCriteria[filterGroups][0][filters][0][conditionType]=eq
     @GET()
     Call<NewOrderModel> getorderListData(@Header("Authorization") String authHeader,
-                                       @Url String url);
+                                         @Url String url);
 
 
     //search first api
@@ -98,7 +92,7 @@ public interface ApiInterface {
 
     @GET()
     Call<ResponseBody> getSearchList(@Header("Authorization") String authHeader,
-                                      @Url String url);
+                                     @Url String url);
 
 
     //delete address api
@@ -178,11 +172,10 @@ public interface ApiInterface {
                                 @Query("password") String password);*/
 
 
-
-   //get auth token
+    //get auth token
     //http://dkbraende.demoproject.info/rest/V1/store/storeConfigs
-   @GET("store/storeConfigs")
-   Call<ResponseBody> getcurrenycode(@Header("Authorization") String authHeader);
+    @GET("store/storeConfigs")
+    Call<ResponseBody> getcurrenycode(@Header("Authorization") String authHeader);
 
 
     @POST()
@@ -196,13 +189,13 @@ public interface ApiInterface {
 
     @GET("products")
     Call<ResponseBody> getproducts(@Header("Authorization") String authHeader,
-                                @Query("searchCriteria[filterGroups][0][filters][0][field]") String categoryid,
-                                @Query("searchCriteria[filterGroups][0][filters][0][value]") String id);
+                                   @Query("searchCriteria[filterGroups][0][filters][0][field]") String categoryid,
+                                   @Query("searchCriteria[filterGroups][0][filters][0][value]") String id);
 
     @GET("products")
     Call<NewProductListModel> getproductslist(@Header("Authorization") String authHeader,
-                                          @Query("searchCriteria[filterGroups][0][filters][0][field]") String categoryid,
-                                          @Query("searchCriteria[filterGroups][0][filters][0][value]") String id);
+                                              @Query("searchCriteria[filterGroups][0][filters][0][field]") String categoryid,
+                                              @Query("searchCriteria[filterGroups][0][filters][0][value]") String id);
 
 
     //product detail
@@ -285,7 +278,7 @@ public interface ApiInterface {
 
     //category list
     ///http://testgz.shop2.gzanders.com/mobileapi/getcategorylist.php
-   //http://dkbraende.demoproject.info/rest//V1/categories
+    //http://dkbraende.demoproject.info/rest//V1/categories
     @GET("categories")
     Call<CategoriesModel> categories(@Header("Authorization") String authHeader);
 
@@ -293,12 +286,6 @@ public interface ApiInterface {
     //forget passwprd
     @PUT()
     Call<Boolean> forgetpassword(@Header("Authorization") String authHeader, @Url String url);
-
-
-
-
-
-
 
 
     /////*************************************************************************************************************************************
@@ -642,30 +629,33 @@ public interface ApiInterface {
     @PUT()
     Call<ResponseBody> createorder(@Header("Authorization") String authHeader, @Url String url);
 
+    @PUT("orders/create?")
+    Call<ResponseBody> callcreateorder(@Header("Authorization") String authHeader, @Body String url);
+
 
     //store group
     //http://dkbraende.demoproject.info/rest/V1/store/storeGroups
     @GET("store/storeGroups")
     Call<ResponseBody> getstorename(@Header("Authorization") String authHeader);
 
-//http://dkbraende.demoproject.info/customapi/AppHomePage.php?store=1
-  @GET()
-  Call<Homedata> gethomedata(@Url String url);
+    //http://dkbraende.demoproject.info/customapi/AppHomePage.php?store=1
+    @GET()
+    Call<Homedata> gethomedata(@Url String url);
 
-  //store group
-  //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
-  @GET("cmsPage/13")
-  Call<PrivacyModel> getprivacy();
+    //store group
+    //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+    @GET("cmsPage/13")
+    Call<PrivacyModel> getprivacy();
 
- //store group
- //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
- @GET("cmsPage/3")
- Call<PrivacyModel> getaboutus();
+    //store group
+    //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+    @GET("cmsPage/3")
+    Call<PrivacyModel> getaboutus();
 
-  //store group
-  //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
-  @GET("cmsPage/4")
-  Call<PrivacyModel> gettrems();
+    //store group
+    //http://dkbraende.demoproject.info/rest/V1/cmsPage/:pageId
+    @GET("cmsPage/4")
+    Call<PrivacyModel> gettrems();
 
 
 }

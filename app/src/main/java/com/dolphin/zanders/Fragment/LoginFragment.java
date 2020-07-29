@@ -35,6 +35,7 @@ import com.dolphin.zanders.Model.CartWishlistCountModel.CountModel;
 import com.dolphin.zanders.Model.CartlistModel.Cartlist;
 import com.dolphin.zanders.Model.CartlistModel.CartlistInnerData;
 import com.dolphin.zanders.Model.LoginModel.Login_Model;
+import com.dolphin.zanders.Model.NewCartListModel;
 import com.dolphin.zanders.Preference.Login_preference;
 import com.dolphin.zanders.R;
 import com.dolphin.zanders.Retrofit.ApiClient;
@@ -72,19 +73,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     EditText et_Email_login, et_Email_password;
     //CheckBox chk_rememberme;
     LinearLayout lv_login, lv_login_main;
-    TextView tv_forgot_password,tv_createanewaccount;
+    TextView tv_forgot_password, tv_createanewaccount;
     String email, password;
     Snackbar snackbar;
     ApiInterface apiInterface;
     Toolbar toolbar_login;
     LinearLayout lv_login_progress;
-    String screen,subcat_id,subcatename;
+    String screen, subcat_id, subcatename;
     Bundle bundle;
     ScrollView scroll_login;
     NavigationActivity parent;
     MenuItem login;
     View v;
-    ApiInterface api,customeapi;
+    ApiInterface api, customeapi;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -97,7 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_login, container, false);
         //parent.getSupportActionBar().hide();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        parent=(NavigationActivity) getActivity();
+        parent = (NavigationActivity) getActivity();
         customeapi = ApiClientcusome.getClient().create(ApiInterface.class);
 
         AllocateMemory();
@@ -111,20 +112,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         toolbar_login.setTitle(" ");
         toolbar_login.setNavigationIcon(R.drawable.ic_close_black_36dp);
         toolbar_login.setTitleTextColor(parent.getResources().getColor(R.color.black));
-       // zanderstestacc@gmail.com
+        // zanderstestacc@gmail.com
         //    123456
-      // et_Email_login.setText("zanderstestacc@gmail.com");
-      // et_Email_password.setText("IL8944");
+        // et_Email_login.setText("zanderstestacc@gmail.com");
+        // et_Email_password.setText("IL8944");
         if (bundle != null) {
             screen = bundle.getString("screen");
             subcatename = bundle.getString("subcatename");
             subcat_id = bundle.getString("subcat_id");
-        }else {
-            Log.e("screen_95",""+screen);
-            Log.e("screen_95",""+bundle);
+        } else {
+            Log.e("screen_95", "" + screen);
+            Log.e("screen_95", "" + bundle);
         }
-        Log.e("screen_97",""+screen);
-        Log.e("bundle_97",""+bundle);
+        Log.e("screen_97", "" + screen);
+        Log.e("bundle_97", "" + bundle);
         lv_login.setOnClickListener(this);
         tv_forgot_password.setOnClickListener(this);
         tv_createanewaccount.setOnClickListener(this);
@@ -164,8 +165,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 et_Email_login.setError(parent.getResources().getString(R.string.enteremail));
                 et_Email_login.requestFocus();
 
-            }else if(isValidEmailAddress(et_Email_login.getText().toString())==false)
-            {
+            } else if (isValidEmailAddress(et_Email_login.getText().toString()) == false) {
                 et_Email_login.setError(parent.getResources().getString(R.string.entervalidemail));
                 et_Email_login.requestFocus();
             } else if (et_Email_password.getText().length() == 0) {
@@ -179,18 +179,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             } else {
                 if (CheckNetwork.isNetworkAvailable(parent)) {
-                    CallLoginApi(email,password);
+                    CallLoginApi(email, password);
                     //Loginapi(email, password);
                 } else {
                     Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
                 }
             }
-        }else if (view == tv_forgot_password){
+        } else if (view == tv_forgot_password) {
             Forgotpassword myFragment = new Forgotpassword();
             parent.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
                     0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
                     0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
-        }else if (view== tv_createanewaccount){
+        } else if (view == tv_createanewaccount) {
             Registration_Fragment myFragment = new Registration_Fragment();
             parent.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
                     0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
@@ -199,36 +199,43 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void CallLoginApi(String email, String password) {
-        get_Customer_tokenapi(email,password);
+        get_Customer_tokenapi(email, password);
     }
 
     private void get_Customer_tokenapi(String email, String password) {
         scroll_login.setVisibility(View.GONE);
         lv_login_progress.setVisibility(View.VISIBLE);
-        Log.e("response201tokenff",""+Login_preference.gettoken(getActivity()));
-        Log.e("email",""+email);
-        Log.e("password",""+password);
-        String url="http://dkbraende.demoproject.info/rest/V1/integration/customer/token?username="+email+"&password="+password;
+        Log.e("response201tokenff", "" + Login_preference.gettoken(getActivity()));
+        Log.e("email", "" + email);
+        Log.e("password", "" + password);
+        String url = "http://dkbraende.demoproject.info/rest/V1/integration/customer/token?username=" + email + "&password=" + password;
         Call<String> customertoken = customeapi.getcustomerToken(url);
         customertoken.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("response20066",""+response.toString());
-                Log.e("response20166",""+response.body());
-              if(response.code()==200)
-              {
-                  Login_preference.setCustomertoken(getActivity(),response.body());
-                  CallCustomerData();
+                Log.e("response20066", "" + response.toString());
+                Log.e("response20166", "" + response.body());
+                if (response.code() == 200) {
+                    Login_preference.setCustomertoken(getActivity(), response.body());
+                    CallCustomerData();
 
-                  Login_preference.settokenemail(getActivity(),email);
-                  Login_preference.settokenepassword(getActivity(),password);
-              }else {
-                  Toast.makeText(getActivity(), "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.", Toast.LENGTH_SHORT).show();
-                  scroll_login.setVisibility(View.VISIBLE);
-                  lv_login_progress.setVisibility(View.GONE);
-              }
+                    Login_preference.settokenemail(getActivity(), email);
+                    Login_preference.settokenepassword(getActivity(), password);
+                } else if (response.code() == 400) {
+                    scroll_login.setVisibility(View.VISIBLE);
+                    lv_login_progress.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.loginerror), Toast.LENGTH_SHORT).show();
+
+                } else if (response.code() == 401) {
+                    scroll_login.setVisibility(View.VISIBLE);
+                    lv_login_progress.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.loginerror), Toast.LENGTH_SHORT).show();
+
+                    //NavigationActivity.get_Customer_tokenapi();
+                }
 
             }
+
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -238,40 +245,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void CallCustomerData() {
-        Call<ResponseBody> customertoken = customeapi.loginn("Bearer "+Login_preference.getCustomertoken(getActivity()));
+        Call<ResponseBody> customertoken = customeapi.loginn("Bearer " + Login_preference.getCustomertoken(getActivity()));
 
         customertoken.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("res_login",""+response.toString());
-                Log.e("res_logintoken",""+Login_preference.getCustomertoken(getActivity()));
-                Log.e("res_login",""+response.body());
-                if(response.code()==200)
-                {
+                Log.e("res_login", "" + response.toString());
+                Log.e("res_logintoken", "" + Login_preference.getCustomertoken(getActivity()));
+                Log.e("res_login", "" + response.body());
+                if (response.code() == 200) {
                     try {
-                        JSONObject jsonObject=new JSONObject(response.body().string());
-                        Log.e("jsonObject","fff"+jsonObject);
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.e("jsonObject", "fff" + jsonObject);
 
-                        String email=jsonObject.getString("email");
-                        String firstname=jsonObject.getString("firstname");
-                        String lastname=jsonObject.getString("lastname");
-                        String id=jsonObject.getString("id");
-                        Log.e("email","fff"+email);
-                        Log.e("firstname","fff"+firstname);
-                        Log.e("iddd","fff"+id);
+                        String email = jsonObject.getString("email");
+                        String firstname = jsonObject.getString("firstname");
+                        String lastname = jsonObject.getString("lastname");
+                        String id = jsonObject.getString("id");
+                        Log.e("email", "fff" + email);
+                        Log.e("firstname", "fff" + firstname);
+                        Log.e("iddd", "fff" + id);
                         Login_preference.setLogin_flag(parent, "1");
                         Login_preference.setcustomer_id(parent, id);
-                        Login_preference.setemail(parent,email);
+                        Login_preference.setemail(parent, email);
                         Login_preference.setfirstname(parent, firstname);
                         Login_preference.setlastname(parent, lastname);
-                        Login_preference.setstoreid(getActivity(),jsonObject.optString("store_id"));
-                        Login_preference.setgrouppid(getActivity(),jsonObject.optString("group_id"));
+                        Login_preference.setstoreid(getActivity(), jsonObject.optString("store_id"));
+                        Login_preference.setgrouppid(getActivity(), jsonObject.optString("group_id"));
 
                         getstoreName();
 
                         get_Customer_QuoteId();
                         callWishlistCountApi();
-                        Intent intent=new Intent(getActivity(),NavigationActivity.class);
+                        callCartCcountApi();
+
+                        Intent intent = new Intent(getActivity(), NavigationActivity.class);
                         startActivity(intent);
                         getActivity().finish();
 
@@ -284,12 +292,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     }
                     scroll_login.setVisibility(View.GONE);
                     lv_login_progress.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     scroll_login.setVisibility(View.VISIBLE);
                     lv_login_progress.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -298,34 +306,123 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    public Call<ResponseBody> callcartlistapi() {
+        Log.e("email_237", "=" + Login_preference.getCustomertoken(parent));
+        return customeapi.getcartlistapi("Bearer " + Login_preference.getCustomertoken(parent));
+    }
+
+    private void callCartCcountApi() {
+        callcartlistapi().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody cartlist = response.body();
+
+                if (response.code() == 200 || response.isSuccessful()) {
+
+                    try {
+                        JSONArray jsonArray = new JSONArray(response.body().string());
+                        Log.e("jsonArray111", "=" + jsonArray.length());
+
+
+                        if (jsonArray.length() == 0) {
+
+
+                            if (getActivity() != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                View notificationBadge = LayoutInflater.from(getActivity()).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(parent,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(parent,cartitem_count);
+                                }
+                                itemView.addView(notificationBadge);
+
+                            }
+
+
+                        } else {
+
+                            if (getActivity() != null) {
+                                String cartitem_count = String.valueOf(jsonArray.length());
+                                BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
+                                //cart item count
+                                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(3);
+                                NavigationActivity.notificationBadge = LayoutInflater.from(getActivity()).inflate(R.layout.badge_row, menuView, false);
+                                tv_bottomcount = (TextView) NavigationActivity.notificationBadge.findViewById(R.id.badge);
+                                if (cartitem_count.equalsIgnoreCase("null") || cartitem_count.equals("") || cartitem_count.equals("0")) {
+                                    tv_bottomcount.setVisibility(View.GONE);
+                                    Login_preference.setCart_item_count(parent,"0");
+                                } else {
+                                    tv_bottomcount.setVisibility(View.VISIBLE);
+                                    tv_bottomcount.setText(cartitem_count);
+                                    Login_preference.setCart_item_count(parent,cartitem_count);
+                                }
+                                itemView.addView(NavigationActivity.notificationBadge);
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    //  cartid= String.valueOf(jsonArray.getJSONObject(0).getInt("item_id"));
+                                }
+                            }
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    NavigationActivity.get_Customer_tokenapi();
+                    //  CallCartlistApi();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Log.e("debug_175125", "pages: " + t);
+            }
+        });
+    }
+
     private void getstoreName() {
-        Log.e("customertoken",""+Login_preference.getCustomertoken(getActivity()));
-        Call<ResponseBody> getstorenamee = customeapi.getstorename("Bearer "+Login_preference.gettoken(getActivity()));
+        Log.e("customertoken", "" + Login_preference.getCustomertoken(getActivity()));
+        Call<ResponseBody> getstorenamee = customeapi.getstorename("Bearer " + Login_preference.gettoken(getActivity()));
         getstorenamee.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("res_quoteid",""+response.toString());
-                Log.e("resquoteiddd",""+response.body());
-                if(response.isSuccessful() || response.code()==200)
-                {
+                Log.e("res_quoteid", "" + response.toString());
+                Log.e("resquoteiddd", "" + response.body());
+                if (response.isSuccessful() || response.code() == 200) {
 
                     try {
-                        JSONArray jsonArray=new JSONArray(response.body().string());
+                        JSONArray jsonArray = new JSONArray(response.body().string());
 
-                        for (int i=0;i<jsonArray.length();i++)
-                        {
-                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-                            Log.e("jsonObject",""+jsonObject);
-                            Log.e("default_store_id",""+jsonObject.optString("default_store_id"));
-                            Log.e("login",""+Login_preference.getstoreid(getActivity()));
-                            if(Login_preference.getstoreid(getActivity()).equalsIgnoreCase(jsonObject.optString("default_store_id")))
-                            {
-                                if(getActivity()!=null) {
-                                    Log.e("name","="+jsonObject.optString("name"));
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Log.e("jsonObject", "" + jsonObject);
+                            Log.e("default_store_id", "" + jsonObject.optString("default_store_id"));
+                            if (getActivity() != null) {
+                                Log.e("login", "" + Login_preference.getstoreid(getActivity()));
+                                if (Login_preference.getstoreid(getActivity()).equalsIgnoreCase(jsonObject.optString("default_store_id"))) {
+                                    if (getActivity() != null) {
+                                        Log.e("name", "=" + jsonObject.optString("name"));
 
-                                    Login_preference.setstoreName(getActivity(), jsonObject.optString("name"));
+                                        Login_preference.setstoreName(getActivity(), jsonObject.optString("name"));
+                                    }
                                 }
                             }
+
 
                         }
 
@@ -336,8 +433,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         e.printStackTrace();
                     }
 
-                }else { }
+                } else {
+                }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -347,22 +446,23 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void get_Customer_QuoteId() {
-        Log.e("customertoken",""+Login_preference.getCustomertoken(getActivity()));
-        Call<Integer> customertoken = customeapi.getQuoteid("Bearer "+Login_preference.getCustomertoken(getActivity()),
-                "http://dkbraende.demoproject.info/rest/V1/carts/mine/?customerId="+Login_preference.getcustomer_id(parent));
+        Log.e("customertoken", "" + Login_preference.getCustomertoken(getActivity()));
+        Call<Integer> customertoken = customeapi.getQuoteid("Bearer " + Login_preference.getCustomertoken(getActivity()),
+                "http://dkbraende.demoproject.info/rest/V1/carts/mine/?customerId=" + Login_preference.getcustomer_id(parent));
         customertoken.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.e("res_quoteid",""+response.toString());
-                Log.e("resquoteiddd",""+response.body());
-                if(response.isSuccessful() || response.code()==200)
-                {
-                    if(getActivity()!=null) {
+                Log.e("res_quoteid", "" + response.toString());
+                Log.e("resquoteiddd", "" + response.body());
+                if (response.isSuccessful() || response.code() == 200) {
+                    if (getActivity() != null) {
                         Login_preference.setquote_id(getActivity(), String.valueOf(response.body()));
                         Login_preference.setdkQuoteId(getActivity(), String.valueOf(response.body()));
                     }
-                }else { }
+                } else {
+                }
             }
+
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -373,19 +473,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     private void callWishlistCountApi() {
-        Log.e("response201tokenff",""+Login_preference.gettoken(getActivity()));
-        Call<ResponseBody> customertoken = customeapi.defaultWishlistCount("Bearer "+Login_preference.getCustomertoken(getActivity()));
+        Log.e("response201tokenff", "" + Login_preference.gettoken(getActivity()));
+        Call<ResponseBody> customertoken = customeapi.defaultWishlistCount("Bearer " + Login_preference.getCustomertoken(getActivity()));
         customertoken.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("response200gffgdf",""+response.toString());
-                Log.e("response201fgd",""+response.body());
-                if(response.code()==200 || response.isSuccessful())
-                {
+                Log.e("response200gffgdf", "" + response.toString());
+                Log.e("response201fgd", "" + response.body());
+                if (response.code() == 200 || response.isSuccessful()) {
                     try {
                         JSONArray jsonObject = new JSONArray(response.body().string());
-                        String count= jsonObject.getJSONObject(0).getString("total_items");
-                        if(getActivity()!=null) {
+
+
+                        String count = jsonObject.getJSONObject(0).getString("total_items");
+
+                        if (getActivity() != null) {
                             BottomNavigationMenuView menuView1 = (BottomNavigationMenuView) bottom_navigation.getChildAt(0);
 
                             BottomNavigationItemView itemView_wishlist = (BottomNavigationItemView) menuView1.getChildAt(2);
@@ -400,20 +502,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                                 tv_wishlist_count.setText(count);
                                 Login_preference.set_wishlist_count(getActivity(), count);
+
+
                             }
+
                             itemView_wishlist.addView(wishlist_badge);
+
                         }
-                        Log.e("wishcount",""+count);
+
+
+                        Log.e("wishcount", "" + count);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
 
                 }
 
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -439,41 +548,37 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<Login_Model> call, Response<Login_Model> response) {
                 Login_Model login_model = response.body();
-                Log.e("debug1111",""+ response.body());
-                Log.e("debug1111dsgdf",""+ response);
-                Log.e("debug_mesahge_165",""+login_model.getMessage());
+                Log.e("debug1111", "" + response.body());
+                Log.e("debug1111dsgdf", "" + response);
+                Log.e("debug_mesahge_165", "" + login_model.getMessage());
                 if (login_model.getStatus().equalsIgnoreCase("Success")) {
                     scroll_login.setVisibility(View.GONE);
                     lv_login_progress.setVisibility(View.GONE);
                     login_home.setVisible(false);
-                    Log.e("debug_mesahge",""+login_model.getMessage());
+                    Log.e("debug_mesahge", "" + login_model.getMessage());
                     Toast.makeText(parent, "Login succesfully", Toast.LENGTH_SHORT).show();
-                    if(getActivity()!=null)
-                    {
+                    if (getActivity() != null) {
                         Login_preference.setLogin_flag(parent, "1");
                         Login_preference.setcustomer_id(parent, login_model.getCustomerId());
                         Login_preference.setemail(parent, login_model.getEmail());
                         Login_preference.setfirstname(parent, login_model.getFirstname());
                         Login_preference.setlastname(parent, login_model.getLastname());
                     }
-                    Log.e("bundle_197",""+bundle);
-                    Log.e("screen",""+screen);
+                    Log.e("bundle_197", "" + bundle);
+                    Log.e("screen", "" + screen);
                     if (CheckNetwork.isNetworkAvailable(parent)) {
-                        if(Login_preference.getLogin_flag(parent).equalsIgnoreCase("1"))
-                        {
+                        if (Login_preference.getLogin_flag(parent).equalsIgnoreCase("1")) {
                             CallCartWishlistCount();
                         }
                     } else {
                         //    noInternetDialog(NavigationActivity.this);
                         Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
                     }
-                    if(bundle==null)
-                    {
-                        Intent intent=new Intent(getActivity(),NavigationActivity.class);
+                    if (bundle == null) {
+                        Intent intent = new Intent(getActivity(), NavigationActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-                    }else if(screen.equalsIgnoreCase("offer"))
-                    {
+                    } else if (screen.equalsIgnoreCase("offer")) {
                         OfferFragment myFragment = new OfferFragment();
                         parent.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
@@ -498,34 +603,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment).commit();
                     } //Search
-                    else if(screen.equalsIgnoreCase("Search"))
-                    {
+                    else if (screen.equalsIgnoreCase("Search")) {
                         SearchFragment myFragment = new SearchFragment();
                         parent.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment).commit();
-                    }
-                   else if(screen.equalsIgnoreCase("Favourites"))
-                    {
+                    } else if (screen.equalsIgnoreCase("Favourites")) {
                         FavouriteFragment myFragment = new FavouriteFragment();
                         parent.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment).commit();
-                    }
-                    else if(screen.equalsIgnoreCase("Account"))
-                    {
+                    } else if (screen.equalsIgnoreCase("Account")) {
                         AccountFragment myFragment = new AccountFragment();
                         parent.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment).commit();
-                    }
-                   else if(screen.equalsIgnoreCase("Cart"))
-                    {
+                    } else if (screen.equalsIgnoreCase("Cart")) {
                         CartFragment myFragment = new CartFragment();
                         parent.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment).commit();
-                    }  else{
+                    } else {
                         Bundle b = new Bundle();
                         String title = "login";
                         b.putString("title", "" + title);
@@ -534,28 +632,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         myFragment.setArguments(b);
                         activity.getSupportFragmentManager().beginTransaction()
                                 .setCustomAnimations(R.anim.fade_in,
-                                0, 0, R.anim.fade_out)
+                                        0, 0, R.anim.fade_out)
                                 .replace(R.id.framlayout, myFragment)
                                 .commit();
                     }
-                } else if(login_model.getStatus().equalsIgnoreCase("error")){
+                } else if (login_model.getStatus().equalsIgnoreCase("error")) {
                     scroll_login.setVisibility(View.VISIBLE);
                     lv_login_progress.setVisibility(View.GONE);
                     Toast.makeText(getContext(), login_model.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<Login_Model> call, Throwable t) {
                 scroll_login.setVisibility(View.VISIBLE);
                 lv_login_progress.setVisibility(View.GONE);
-                Toast.makeText(parent, ""+parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private Call<Login_Model> callLoginApi() {
-        Log.e("debug_email","df"+email);
-        Log.e("debug_email","df"+password);
+        Log.e("debug_email", "df" + email);
+        Log.e("debug_email", "df" + password);
         return apiInterface.login(email, password);
     }
 
@@ -567,26 +666,23 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 CountModel countModel = response.body();
 
                 Log.e("statussssss", "" + countModel.getStatus());
-                if (countModel.getStatus().equalsIgnoreCase("Success"))
-                {
+                if (countModel.getStatus().equalsIgnoreCase("Success")) {
                     //show cart count
                     Log.e("debug_count", "" + countModel.getItemsCount());
-                    String item_count = null,count_wishlist = null;
-                    if(countModel.getItemsCount()==0)
-                    {
-                        Login_preference.setCart_item_count(parent,"");
-                      //  item_count = String.valueOf(countModel.getItemsCount());
-                    }else {
-                        Login_preference.setCart_item_count(parent,String.valueOf( countModel.getItemsCount()));
+                    String item_count = null, count_wishlist = null;
+                    if (countModel.getItemsCount() == 0) {
+                        Login_preference.setCart_item_count(parent, "");
+                        //  item_count = String.valueOf(countModel.getItemsCount());
+                    } else {
+                        Login_preference.setCart_item_count(parent, String.valueOf(countModel.getItemsCount()));
                         item_count = String.valueOf(countModel.getItemsCount());
                     }
-                    if(countModel.getWishlist()==0)
-                    {
+                    if (countModel.getWishlist() == 0) {
                         //wishlist count
                         Login_preference.set_wishlist_count(parent, "");
                         //count_wishlist = String.valueOf(countModel.getWishlist());
 
-                    }else {
+                    } else {
                         //wishlist count
                         Login_preference.set_wishlist_count(parent, String.valueOf(countModel.getWishlist()));
                         count_wishlist = String.valueOf(countModel.getWishlist());
@@ -603,7 +699,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     //show wishlist count
                     Log.e("item_qtyfav", "" + item_count);
 
-                    if ( count_wishlist == null || count_wishlist.equalsIgnoreCase("null") || count_wishlist.equals("")) {
+                    if (count_wishlist == null || count_wishlist.equalsIgnoreCase("null") || count_wishlist.equals("")) {
                         Log.e("count_40fav", "" + String.valueOf(countModel.getWishlist()));
                         tv_wishlist_count.setVisibility(View.GONE);
                     } else {
@@ -611,11 +707,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Log.e("count_80fav", "" + String.valueOf(countModel.getWishlist()));
                         NavigationActivity.Check_String_NULL_Value(tv_wishlist_count, String.valueOf(countModel.getWishlist()));
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(parent, countModel.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<CountModel> call, Throwable t) {
                 // String error=  t.printStackTrace();

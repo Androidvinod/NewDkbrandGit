@@ -158,7 +158,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
 
         Log.e("debug_filter_search", "" + Filterlist_Adapter.filter_child_value_list);
 
-        if (CheckNetwork.isNetworkAvailable(getActivity())) {
+        if(getActivity()!=null)
+        {
+            if (CheckNetwork.isNetworkAvailable(getActivity())) {
 
             if(Login_preference.getLogin_flag(getActivity()).equalsIgnoreCase("1"))
             {
@@ -167,6 +169,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
 
         } else {
             Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
+        }
+
+
         }
 
         // clicklistner
@@ -179,25 +184,30 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if (CheckNetwork.isNetworkAvailable(getActivity())) {
-                        Log.e("debug_66", "" + searhkey);
-                        searhkey = textView.getText().toString();
-                        int length = searhkey.length();
-                        Log.e("text_length_157_", "" + length);
-                        if (length >= 3) {
-                            hideKeyboard(getActivity());
-                            if (CheckNetwork.isNetworkAvailable(getActivity())) {
-                                CallSearchValueApi(searhkey);
-                            } else {
-                                Toast.makeText(getContext(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), getActivity().getResources().getString(R.string.vall), Toast.LENGTH_SHORT).show();
-                        }
 
-                    } else {
-                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                    if(getActivity()!=null)
+                    {
+                        if (CheckNetwork.isNetworkAvailable(getActivity())) {
+                            Log.e("debug_66", "" + searhkey);
+                            searhkey = textView.getText().toString();
+                            int length = searhkey.length();
+                            Log.e("text_length_157_", "" + length);
+                            if (length >= 3) {
+                                hideKeyboard(getActivity());
+                                if (CheckNetwork.isNetworkAvailable(getActivity())) {
+                                    CallSearchValueApi(searhkey);
+                                } else {
+                                    Toast.makeText(getContext(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), getActivity().getResources().getString(R.string.vall), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }
                 return true;
             }
@@ -264,7 +274,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                if(getActivity()!=null)
+                {
+                    Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
@@ -272,8 +286,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
 
     private Call<ResponseBody> getwishlistdata() {
         ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
-        Log.e("debug_11token22","=="+ Login_preference.getCustomertoken(getActivity()));
-        return api.defaultgetWishlistData("Bearer "+Login_preference.getCustomertoken(getActivity()));
+
+        if(getActivity()!=null)
+        {
+            Log.e("debug_11token22","=="+ Login_preference.getCustomertoken(getActivity()));
+
+        }
+
+        return api.defaultgetWishlistData("Bearer "+Login_preference.getCustomertoken(parent));
     }
 
     private void CallSearchValueApi(String searhkey) {
@@ -295,7 +315,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
 
                         if(jsonObject1.optString("items")==null || jsonObject1.optString("items").equalsIgnoreCase("null"))
                         {
-                            Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+                            if(getActivity()!=null)
+                            {
+                                Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
                             lvnodata_searchist.setVisibility(View.VISIBLE);
                             lv_productlist_progress.setVisibility(View.GONE);
                             lv_main_productlist.setVisibility(View.GONE);
@@ -307,7 +333,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
                         if (jsonArray.length() == 0 || jsonArray==null || jsonArray.equals("null")) {
                             Log.e("jso_else", "=" + jsonArray);
 
-                            Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+                            if(getActivity()!=null)
+                            {
+                                Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+
+                            }
                         } else {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 try {
@@ -353,7 +383,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                if(getActivity()!=null)
+                {
+                    Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
     }
@@ -391,7 +426,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
                         JSONArray itemarray=jsonObject.getJSONArray("items");
                         if(itemarray.length()==0 || itemarray.isNull(0))
                         {
-                            Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+                            if(getActivity()!=null)
+                            {
+                                Toast.makeText(getActivity(), "No Search Result Found", Toast.LENGTH_SHORT).show();
+
+                            }
+
                             lvnodata_searchist.setVisibility(View.VISIBLE);
                             lv_main_productlist.setVisibility(View.GONE);
                             lv_main_productlist.setVisibility(View.GONE);
@@ -431,9 +471,40 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
                                 }
                                 //---------------------------------------------------------------------------------------
 
-                                String isWishliste,imagge,wishlist_item_id = null,tier_prices;
+                                String isWishliste,imagge = null,wishlist_item_id = null,tier_prices;
 
-                                imagge=itemobject.optJSONArray("media_gallery_entries").optJSONObject(0).optString("file");
+
+                                JSONArray media_gallery_array=itemobject.optJSONArray("media_gallery_entries");
+                                for(int j=0;j<media_gallery_array.length();j++)
+                                {
+                                    JSONObject jsonObject1=media_gallery_array.getJSONObject(j);
+                                    JSONArray typesarray=jsonObject1.optJSONArray("types");
+                                    Log.e("typesarraylength", "=" +typesarray.length());
+                                    if(typesarray.length()==0 || typesarray==null)
+                                    {
+                                        Log.e("if333", "=" );
+                                    }else {
+
+                                        for (int k=0;k<typesarray.length();k++)
+                                        {
+                                            Log.e("small44", "=" +typesarray.get(k).equals("small_image"));
+                                            if( typesarray.get(k).equals("thumbnail"))
+                                            {
+                                                imagge=jsonObject1.optString("file");
+                                            }else {
+                                               // imagge=jsonObject1.optString("file");
+                                            }
+
+                                        }
+
+
+
+                                        Log.e("imagge444", "=" +imagge);
+                                    }
+
+                                }
+                                
+                               // imagge=itemobject.optJSONArray("media_gallery_entries").optJSONObject(0).optString("file");
                                 JSONArray tierpricearray=itemobject.getJSONArray("tier_prices");
 
                                 if(tierpricearray.length()==0)
@@ -612,30 +683,31 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Se
 */
     private Call<ProductModel> getcategory(String searchValue) {
         Log.e("catid_113", "=" + catid);
-        return apiInterface.products("Bearer "+ Login_preference.gettoken(getActivity()),"category_id",catid);
+        return apiInterface.products("Bearer "+ Login_preference.gettoken(parent),"category_id",catid);
     }
 
 
     private Call<ResponseBody> getsearchapi(String searchValuee) {
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Log.e("debug_213n22", "==" + Login_preference.gettoken(getActivity()));
+        Log.e("debug_213n22", "==" + Login_preference.gettoken(parent
+        ));
         Log.e("searchValuee22", "==" + searchValuee);
         //http://dkbraende.demoproject.info/rest/all/V1/products?searchCriteria[filterGroups][0][filters][0][field]=entity_id&searchCriteria[filterGroups][0][filters][0][value]=364,227&searchCriteria[filterGroups][0][filters][0][conditionType]=fineset
         String url=ApiClientcusome.MAIN_URLL+"products?searchCriteria[filterGroups][0][filters][0][field]=entity_id&searchCriteria[filterGroups][0][filters][0][value]="
                 +searchValuee+"&searchCriteria[filterGroups][0][filters][0][conditionType]=fineset";
 
         Log.e("debug_searchvalue", "==" + url);
-        return api.getSearchList("Bearer " + Login_preference.gettoken(getActivity()),url);
+        return api.getSearchList("Bearer " + Login_preference.gettoken(parent),url);
     }
 
 
     private Call<ResponseBody> getsearchValue(String searhkey) {
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Log.e("debug_11token22", "==" + Login_preference.gettoken(getActivity()));
+        Log.e("debug_11token22", "==" + Login_preference.gettoken(parent));
         ////http://dkbraende.demoproject.info/rest/V1/search?searchCriteria[requestName]=quick_search_container&searchCriteria[filter_groups][0][filters][0][field]=search_term&searchCriteria[filter_groups][0][filters][0][value]=brændetårn&fields=items[id]
         String url=ApiClientcusome.MAIN_URLL+"search?searchCriteria[requestName]=quick_search_container&searchCriteria[filter_groups][0][filters][0][field]=search_term&searchCriteria[filter_groups][0][filters][0][value]="+searhkey+"&fields=items[id]";
         Log.e("debug_333", "==" + url);
-        return api.getSearchValue("Bearer " + Login_preference.gettoken(getActivity()),url);
+        return api.getSearchValue("Bearer " + Login_preference.gettoken(parent),url);
     }
 
 

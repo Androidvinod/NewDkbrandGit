@@ -12,7 +12,7 @@ public class Payment {
     private Object accountStatus;
     @SerializedName("additional_information")
     @Expose
-    private List<Object> additionalInformation = null;
+    private List<String> additionalInformation = null;
     @SerializedName("cc_last4")
     @Expose
     private Object ccLast4;
@@ -34,11 +34,11 @@ public class Payment {
         this.accountStatus = accountStatus;
     }
 
-    public List<Object> getAdditionalInformation() {
+    public List<String> getAdditionalInformation() {
         return additionalInformation;
     }
 
-    public void setAdditionalInformation(List<Object> additionalInformation) {
+    public void setAdditionalInformation(List<String> additionalInformation) {
         this.additionalInformation = additionalInformation;
     }
 

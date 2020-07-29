@@ -31,10 +31,8 @@ import com.dolphin.zanders.Adapter.NewOrderListAdapter;
 import com.dolphin.zanders.Model.NewOrderModel.Item;
 import com.dolphin.zanders.Model.NewOrderModel.NewOrderModel;
 import com.dolphin.zanders.Model.Ordermodel.Order;
-import com.dolphin.zanders.Model.Ordermodel.OrderModel;
 import com.dolphin.zanders.Preference.Login_preference;
 import com.dolphin.zanders.R;
-import com.dolphin.zanders.Retrofit.ApiClient;
 import com.dolphin.zanders.Retrofit.ApiClientcusome;
 import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
@@ -85,7 +83,11 @@ public class MyOrderFragment extends Fragment {
         apiInterface = ApiClientcusome.getClient().create(ApiInterface.class);
         setHasOptionsMenu(true);
         AttachRecyclerView();
-        parent=(NavigationActivity) getActivity();
+        if(getActivity()!=null)
+        {
+            parent=(NavigationActivity) getActivity();
+        }
+
         hideKeyboard(parent);
 
         ((NavigationActivity) parent).setSupportActionBar(toolbar_myorders);
@@ -182,6 +184,8 @@ public class MyOrderFragment extends Fragment {
                 lv_nodata_muorder.setVisibility(View.GONE);
                 nested_scroll_myorder.setVisibility(View.VISIBLE);
                 lv_progress_myorder_bottom.setVisibility(View.GONE);
+
+                Log.e("debug_186","="+t.getLocalizedMessage());
                 Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
 
             }
@@ -200,13 +204,13 @@ public class MyOrderFragment extends Fragment {
 
         //http://dkbraende.demoproject.info/rest/V1/orders/?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]=12517&searchCriteria[filterGroups][0][filters][0][conditionType]=eq
         String url=ApiClientcusome.MAIN_URLL+"orders/?searchCriteria[filterGroups][0][filters][0][field]=customer_id&searchCriteria[filterGroups][0][filters][0][value]="
-                +Login_preference.getcustomer_id(getActivity())+"&searchCriteria[filterGroups][0][filters][0][conditionType]=eq";
-        Log.e("authtoken","dff"+Login_preference.gettoken(getActivity()));
-        Log.e("customertoken","dff"+Login_preference.getCustomertoken(getActivity()));
+                +Login_preference.getcustomer_id(parent)+"&searchCriteria[filterGroups][0][filters][0][conditionType]=eq";
+        Log.e("authtoken","dff"+Login_preference.gettoken(parent));
+        Log.e("customertoken","dff"+Login_preference.getCustomertoken(parent));
         Log.e("url22","dff"+url);
 
 
-        return apiInterface.getorderListData("Bearer "+Login_preference.gettoken(getActivity()),url);
+        return apiInterface.getorderListData("Bearer "+Login_preference.gettoken(parent),url);
     }
 
     private void AttachRecyclerView() {

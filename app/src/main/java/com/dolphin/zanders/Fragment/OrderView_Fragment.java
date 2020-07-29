@@ -115,7 +115,7 @@ public class OrderView_Fragment extends Fragment {
         shimmer_shipping=v.findViewById(R.id.shimmer_shipping);
         toolbar_orderdetails=v.findViewById(R.id.toolbar_orderdetails);
 
-        productlistvieworder_adapter = new Productlistvieworder_Adapter(parent);
+        productlistvieworder_adapter = new Productlistvieworder_Adapter(getActivity());
         linearLayoutManager = new LinearLayoutManager(parent,LinearLayoutManager.VERTICAL, false);
         rv_productlist.setLayoutManager(linearLayoutManager);
         rv_productlist.setAdapter(productlistvieworder_adapter);
@@ -207,10 +207,10 @@ public class OrderView_Fragment extends Fragment {
                     tv_purchashordernumber.setText("Purchase Order Number : "+response.body().getIncrementId());
                     tv_shippickupdate.setText("Ship/Pick Up Date : "+response.body().getCreatedAt());
 
-                    tv_subtotal_value.setText(String.valueOf(response.body().getBaseSubtotal())+" "+Login_preference.getcurrencycode(getActivity()));
-                    tv_grandtotal.setText(String.valueOf(response.body().getSubtotalInclTax())+" "+Login_preference.getcurrencycode(getActivity()));
-                    tv_salestex.setText(String.valueOf(response.body().getBaseTaxAmount())+" "+Login_preference.getcurrencycode(getActivity()));
-                    tv_discount_valueeeeee.setText(String.valueOf(response.body().getDiscountAmount())+" "+Login_preference.getcurrencycode(getActivity()));
+                    tv_subtotal_value.setText(String.valueOf(response.body().getBaseSubtotal())+" "+Login_preference.getcurrencycode(parent));
+                    tv_grandtotal.setText(String.valueOf(response.body().getBaseGrandTotal())+" "+Login_preference.getcurrencycode(parent));
+                    tv_salestex.setText(String.valueOf(response.body().getBaseTaxAmount())+" "+Login_preference.getcurrencycode(parent));
+                    tv_discount_valueeeeee.setText(String.valueOf(response.body().getDiscountAmount())+" "+Login_preference.getcurrencycode(parent));
 
                     List<Item> results = response.body().getItems();
                     shimmer_shipping.setVisibility(View.GONE);
@@ -226,15 +226,16 @@ public class OrderView_Fragment extends Fragment {
             public void onFailure(Call<NewOrderDetailModel> call, Throwable t) {
                 lv_vieworder_progress.setVisibility(View.GONE);
                 Toast.makeText(parent, "" + t, Toast.LENGTH_SHORT).show();
+                Log.e("failure_239", "=" + t.getLocalizedMessage());
             }
         });
     }
     private Call<NewOrderDetailModel> callorderviewapi(String orderid) {
         String url="http://dkbraende.demoproject.info/rest/V1/orders/"+orderid;
         Log.e( "debug_url", "" + url);
-        Log.e("debug_cusotoken_205", "" + Login_preference.getCustomertoken(getActivity()));
-        Log.e("debug_authtoken_205", "" + Login_preference.gettoken(getActivity()));
-        return api.orderDetail("Bearer "+Login_preference.gettoken(getActivity()),url);
+        Log.e("debug_cusotoken_205", "" + Login_preference.getCustomertoken(parent));
+        Log.e("debug_authtoken_205", "" + Login_preference.gettoken(parent));
+        return api.orderDetail("Bearer "+Login_preference.gettoken(parent),url);
     }
 
     @Override

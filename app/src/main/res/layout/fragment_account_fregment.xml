@@ -76,7 +76,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="?attr/actionBarSize"
                 android:orientation="vertical">
                 <LinearLayout
                     android:id="@+id/lv_account_dashbord"
@@ -551,6 +550,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <View
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/linecolor"/>

@@ -2,11 +2,10 @@ package com.dolphin.zanders.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -26,32 +25,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dolphin.zanders.Activity.NavigationActivity;
-import com.dolphin.zanders.Model.LoginModel.Login_Model;
-import com.dolphin.zanders.Model.RegisterModel.RegisterModel;
-import com.dolphin.zanders.Model.RegisterModel.RegisterModelerror;
 import com.dolphin.zanders.Preference.Login_preference;
 import com.dolphin.zanders.R;
-import com.dolphin.zanders.Retrofit.ApiClient;
 import com.dolphin.zanders.Retrofit.ApiClientcusome;
 import com.dolphin.zanders.Retrofit.ApiInterface;
 import com.dolphin.zanders.Util.CheckNetwork;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
-
-import static com.dolphin.zanders.Fragment.HomeFragment_new.login_home;
 
 public class Registration_Fragment extends Fragment implements View.OnClickListener {
     Toolbar toolbar_reg;
@@ -135,6 +124,7 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
         lv_register_progress=v.findViewById(R.id.lv_register_progress);
         lv_register_main=v.findViewById(R.id.lv_register_main);
         tv_alredayaccount=v.findViewById(R.id.tv_alredayaccount);
+
 
     }
 
@@ -235,11 +225,12 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
         Log.e("login_password", "" + firstname);
 
         callregisterApi(firstname,lastname,email,passowrd,psw).enqueue(new Callback<ResponseBody>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.e("code","="+ response.code());
                 Log.e("success","="+ response.isSuccessful());
-                if(response.code()==200)
+                if(response.code()==200 || response.isSuccessful())
                 {
                     //ResponseBody login_model = response.body();
                     try {
@@ -272,9 +263,8 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
                         e.printStackTrace();
                     }
 
-                } else
+                } else if(response.code()==400)
                 {
-                    /*if (response.code()==400)*/
                     scroll_register.setVisibility(View.VISIBLE);
                     lv_register_progress.setVisibility(View.GONE);
                     Log.e("codedddddddddddddd","="+ response.code());
@@ -282,41 +272,14 @@ public class Registration_Fragment extends Fragment implements View.OnClickListe
                     Log.e("response","="+ response);
                     try {
                         Log.e("responseeeeee","="+ response.errorBody().string());
-                       /* JSONObject    jsonObject = new JSONObject(response.errorBody().string());
-                        Log.e("jsonObject","="+jsonObject);
-
-                        if(jsonObject.has("message"))
-                        {
-
-                            String userMessage = jsonObject.optString("message");
-                            Log.e("userMessage","="+response.errorBody());
-                            Toast.makeText(parent, "=="+userMessage, Toast.LENGTH_SHORT).show();
-                        }*/
-
-                        Toast.makeText(getActivity(), "A customer with the same email address already exists in an associated website.", Toast.LENGTH_LONG).show();
-
-                            // Now use error.getMessage()
-
+                        Toast.makeText(getActivity(), ""+getActivity().getResources().getString(R.string.registererror), Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                   /* try {
 
-                        Log.e("codedddddddddddddd","="+ response.code());
-                        Log.e("codedres","="+ response.body());
-                        Log.e("response","="+ response);
-                        Log.e("response","="+ response.errorBody().string());
-                      //  Log.e("coded==","="+ response.body().string());
-                       *//* JSONObject    jsonObject = new JSONObject(response.body().string());
-                        Log.e("jsonObject","="+ jsonObject);
-                        Log.e("jsonObject","="+ response);
-                        String msg=jsonObject.getString("message");
-                        Log.e("codedmessage","="+ msg);
-                   *//*     Toast.makeText(parent, ""+response.errorBody().string(), Toast.LENGTH_SHORT).show();
-
-                    } catch (JSONException | IOException e) {
-                        e.printStackTrace();
-                    }*/
+                }else if(response.code()==401)
+                {
+                    NavigationActivity.get_Customer_tokenapi();
                 }
             }
             @Override

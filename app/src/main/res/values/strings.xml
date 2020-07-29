@@ -97,7 +97,7 @@
     <string name="no">No</string>
     <string name="intcon">Please Check your Internet Connection</string>
     <!-- address book -->
-    <string name="defaultmessge">Default Billing Address</string>
+    <string name="defaultmessge">Standard faktureringsadresse</string>
     <string name="defaultmessgeshipping">Default Shipping Address</string>
     <string name="additionaladdress">Additional Address Entries</string>
     <string name="addbook">Address Book</string>
@@ -119,8 +119,8 @@
     <string name="Favourites">Wishlist</string>
     <string name="offers">Offers</string>
     <string name="cartlist">Cart list</string>
-    <string name="price">Pris : </string>
-    <string name="special">Special Pris : </string>
+    <string name="price">Price : </string>
+    <string name="special">Special Price : </string>
     <string name="quantity">Please enter quantity</string>
     <string name="quantity_messge">Please enter a number greater than 0</string>
     <string name="addtowishlist">Add to Wishlist</string>
@@ -246,12 +246,22 @@
 
     <string name="entercity">Please Enter City</string>
     <string name="entercountry">Please Enter Land</string>
-    <string name="enterpostalcode">Please Enter Postnummer</string>
-    <string name="entervalidmobileno">Please enter valid mobile no</string>
+    <string name="enterpostalcode">Please Enter Post nummer</string>
+    <string name="entervalidmobileno">Please Enter Valid Mobile Number</string>
     <string name="selectcountry">Select Land</string>
     <string name="selectecountry">Select Land</string>
     <string name="privacypolicy">Privacy Policy</string>
-    <string name="vouchercode">Copoun Code</string>
-    <string name="spprice">Sp. Pris :</string>
+    <string name="vouchercode">Coupon Code</string>
+    <string name="spprice">Sp. Price :</string>
     <string name="remove">REMOVE</string>
+    <string name="loginerror">The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.</string>
+    <string name="registererror">A customer with the same email address already exists in an associated website.</string>
+    <string name="addresss">Address</string>
+    <string name="addtocartsuccess">Add to cart SuccessFully</string>
+    <string name="addtowishlistsucess">Add to wishlist sucessFully</string>
+    <string name="removeformwishlistsuccess">Remove from wishlist successFully</string>
+    <string name="emptywishlist">Wishlist is Empty</string>
+    <string name="saltax">Sales Tax :</string>
+    <string name="shippingadd">Please Selcet Shipping Address</string>
+    <string name="productoutofstock">Product is Out of Stock</string>
 </resources>

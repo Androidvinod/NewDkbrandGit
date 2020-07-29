@@ -100,7 +100,7 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
         lv_editinfo.setOnClickListener(this);
         lv_add_addrss.setOnClickListener(this);
 
-        if(Login_preference.getfirstname(getActivity()) == null  || Login_preference.getfirstname(getActivity()).equalsIgnoreCase("null"))
+        if(Login_preference.getfirstname(parent) == null  || Login_preference.getfirstname(parent).equalsIgnoreCase("null"))
         {
             tv_name.setText("");
             tv_name.setText("");
@@ -108,12 +108,12 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
             tv_name.setVisibility(View.GONE);
             tv_name.setVisibility(View.GONE);
         }else {
-            tv_name.setText(Login_preference.getfirstname(getActivity()) +" "+Login_preference.getlastname(getActivity()));
-            tv_name.setText(Login_preference.getfirstname(getActivity()) +" "+Login_preference.getlastname(getActivity()));
+            tv_name.setText(Login_preference.getfirstname(parent) +" "+Login_preference.getlastname(parent));
+            tv_name.setText(Login_preference.getfirstname(parent) +" "+Login_preference.getlastname(parent));
 
         }
 
-        tv_email.setText(Login_preference.getemail(getActivity()));
+        tv_email.setText(Login_preference.getemail(parent));
 
         return v;
     }
@@ -136,7 +136,7 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
                     Log.e("status",""+response.body());
                     Log.e("store_id",""+response.body().getStoreId());
 
-                    Login_preference.setstoreid(getActivity(), String.valueOf(response.body().getStoreId()));
+                    Login_preference.setstoreid(parent, String.valueOf(response.body().getStoreId()));
 
                     AddressModell addressModell=response.body();
                     List<Address> additionalAddresses = response.body().getAddresses();
@@ -191,9 +191,9 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
 
     private Call<AddressModell> calladdressgapi() {
         Log.e("debug_111",""+Login_preference.getcustomer_id(parent));
-        Log.e("debug_111token",""+Login_preference.gettoken(getActivity()));
+        Log.e("debug_111token",""+Login_preference.gettoken(parent));
 
-        return api.address("Bearer "+Login_preference.gettoken(getActivity()),"http://dkbraende.demoproject.info/rest//V1/customers/"+Login_preference.getcustomer_id(parent));
+        return api.address("Bearer "+Login_preference.gettoken(parent),"http://dkbraende.demoproject.info/rest/V1/customers/"+Login_preference.getcustomer_id(parent));
     }
 
 
@@ -215,10 +215,14 @@ public class AccountDashboard extends Fragment implements View.OnClickListener {
         tv_account_dash.setTypeface(NavigationActivity.montserrat_semibold);
 
 
-        addressbookAdapter = new Addressbook_Adapter(parent,screen);
-        recv_addresss.setLayoutManager(new LinearLayoutManager(parent, LinearLayoutManager.VERTICAL, false));
-        recv_addresss.setItemAnimator(new DefaultItemAnimator());
-        recv_addresss.setAdapter(addressbookAdapter);
+        if(getActivity()!=null)
+        {
+            addressbookAdapter = new Addressbook_Adapter(getActivity(),screen);
+            recv_addresss.setLayoutManager(new LinearLayoutManager(parent, LinearLayoutManager.VERTICAL, false));
+            recv_addresss.setItemAnimator(new DefaultItemAnimator());
+            recv_addresss.setAdapter(addressbookAdapter);
+        }
+
 
     }
 

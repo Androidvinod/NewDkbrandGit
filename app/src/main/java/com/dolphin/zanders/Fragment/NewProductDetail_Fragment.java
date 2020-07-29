@@ -92,6 +92,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
     TierPriceAdapter tierPriceAdapter;
     List<TierPriceModel> tierPriceModelList=new ArrayList<>();
     double special_price,price,tierprice;
+    NavigationActivity parent;
     public NewProductDetail_Fragment() {
         // Required empty public constructor
     }
@@ -103,36 +104,43 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_product_detail__new, container, false);
         AllocateMemory(v);
-
+        if(getActivity()!=null)
+        {
+            parent=(NavigationActivity) getActivity();
+        }
         api = ApiClientcusome.getClient().create(ApiInterface.class);
         setHasOptionsMenu(true);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             product_id = bundle.getString("product_id");
             product_name = bundle.getString("product_name");
-
-            Log.e("product_id", "" + product_id);
-            if (CheckNetwork.isNetworkAvailable(getActivity())) {
-
-                if(Login_preference.getLogin_flag(getActivity()).equalsIgnoreCase("1"))
-                {
-                    callWishistApi();
-                }
-
-                Productdetailsapiiiii(product_id);
-               // Call_Product_detailsapi(product_id);
-
-            } else {
-                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
-            }
         }
 
-        ((NavigationActivity) getActivity()).setSupportActionBar(toolbar_product_detail);
-        ((NavigationActivity) getActivity()).getSupportActionBar()
-                .setDisplayHomeAsUpEnabled(true);
-        ((NavigationActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_36dp);
-        toolbar_product_detail.setTitleTextColor(getActivity().getResources().getColor(R.color.black));
-        tv_product_detail.setText(product_name);
+        if(parent!=null)
+        {
+            ((NavigationActivity) parent).setSupportActionBar(toolbar_product_detail);
+            ((NavigationActivity) parent).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(true);
+            ((NavigationActivity) parent).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_keyboard_arrow_left_black_36dp);
+            toolbar_product_detail.setTitleTextColor(parent.getResources().getColor(R.color.black));
+            tv_product_detail.setText(product_name);
+
+        }
+
+        Log.e("product_id", "" + product_id);
+        if (CheckNetwork.isNetworkAvailable(parent)) {
+
+            if(Login_preference.getLogin_flag(parent).equalsIgnoreCase("1"))
+            {
+                callWishistApi();
+            }
+
+            Productdetailsapiiiii(product_id);
+            // Call_Product_detailsapi(product_id);
+
+        } else {
+            Toast.makeText(parent, parent.getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
+        }
 
         lv_pdetail_addtocart.setOnClickListener(this);
         lv_pdetail_addtowishlist.setOnClickListener(this);
@@ -163,7 +171,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                         if(product_id.equalsIgnoreCase(String.valueOf(wishlitProductidList.get(i))))
                         {
                             iswishlist=true;
-                            tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.removeformwishlist));
+                            tv_pdetail_wishlist.setText(parent.getResources().getString(R.string.removeformwishlist));
 
                             Log.e("debug_152", "=" + wishlitItemId.size());
                             Log.e("product_id22", "=" + product_id);
@@ -181,22 +189,23 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
                           //  wishlist_item_id="0";
                           //  iswishlist=false;
-                          //  tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.addtowishlist));
+                          //  tv_pdetail_wishlist.setText(parent().getResources().getString(R.string.addtowishlist));
 
                         }
                     }
 
 
 
+                    if(parent!=null) {
 
-                    if(iswishlist==false && wishlist_item_id.equalsIgnoreCase("0"))
-                    {
-                        tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.addtowishlist));
 
-                    }else {
-                        tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.removeformwishlist));
+                        if (iswishlist == false && wishlist_item_id.equalsIgnoreCase("0")) {
+                            tv_pdetail_wishlist.setText(parent.getResources().getString(R.string.addtowishlist));
+
+                        } else {
+                            tv_pdetail_wishlist.setText(parent.getResources().getString(R.string.removeformwishlist));
+                        }
                     }
-
 
 
                     try {
@@ -211,7 +220,10 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                         JSONObject itemarrayJSONObject = itemarray.getJSONObject(0);
                         //  tv_daily_special_product_name.setText(itemarray.get(0).getName());
                         tv_daily_special_product_name.setText(itemarrayJSONObject.getString("name"));
-                        tv_rifles_lv_price.setText(itemarrayJSONObject.optString("price") + " "+Login_preference.getcurrencycode(getActivity()));
+                        if(parent!=null) {
+                            tv_rifles_lv_price.setText(itemarrayJSONObject.optString("price") + " "+Login_preference.getcurrencycode(parent));
+                        }
+
                         price= Double.parseDouble(itemarrayJSONObject.getString("price"));
                         tv_rifles_Specialprice.setText(" ");
                         sku=itemarrayJSONObject.getString("sku");
@@ -230,7 +242,10 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                             }
                             if(attributeobject.getString("attribute_code").equals("special_price")){
                                 String value= String.valueOf(Html.fromHtml(String.valueOf(attributeobject.getString("value"))));
-                                tv_rifles_Specialprice.setText(value +" "+Login_preference.getcurrencycode(getActivity()));
+                                if(parent!=null) {
+                                    tv_rifles_Specialprice.setText(value +" "+Login_preference.getcurrencycode(parent));
+                                }
+
                                 tv_rifles_Specialprice.setVisibility(View.VISIBLE);
                                 tv_rifles_Specialprice_title.setVisibility(View.VISIBLE);
                                 special_price= Double.parseDouble(attributeobject.getString("value"));
@@ -316,7 +331,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
                 lv_productdetails_progress.setVisibility(View.GONE);
                 Log.e("emptyyyyfdfgfdg","eeeeeeeeeee"+t.getMessage());
             }
@@ -347,7 +362,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
     private Call<ResponseBody> callproductdetailsgetapi(String product_id) {
         Log.e("debug_11","=="+product_id);
-        return api.productsdetail("Bearer "+Login_preference.gettoken(getActivity()),"entity_id","eq",product_id);
+        return api.productsdetail("Bearer "+Login_preference.gettoken(parent),"entity_id","eq",product_id);
     }
 
 
@@ -414,7 +429,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -422,8 +437,8 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
     private Call<ResponseBody> getwishlistdata() {
         ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
-        Log.e("debug_11token22","=="+ Login_preference.getCustomertoken(getActivity()));
-        return api.defaultgetWishlistData("Bearer "+Login_preference.getCustomertoken(getActivity()));
+        Log.e("debug_11token22","=="+ Login_preference.getCustomertoken(parent));
+        return api.defaultgetWishlistData("Bearer "+Login_preference.getCustomertoken(parent));
     }
 
     private void AllocateMemory(View v) {
@@ -447,8 +462,8 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
         tv_rifles_lv_price = v.findViewById(R.id.tv_rifles_lv_price);
         tv_rifles_Specialprice = v.findViewById(R.id.tv_rifles_Specialprice);
 
-        pDetailImageSliderAdapter = new PDetailImageSliderAdapter(getContext(),medialist);
-        recycler_product_image.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        pDetailImageSliderAdapter = new PDetailImageSliderAdapter(getActivity(),medialist);
+        recycler_product_image.setLayoutManager(new LinearLayoutManager(parent, LinearLayoutManager.HORIZONTAL, false));
         recycler_product_image.setAdapter(pDetailImageSliderAdapter);
         recyclerIndicator.attachToRecyclerView(recycler_product_image);
         SnapHelper snapHelper = new LinearSnapHelper(); // Or PagerSnapHelper
@@ -465,69 +480,79 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(v==lv_pdetail_addtocart)
-        {if (CheckNetwork.isNetworkAvailable(getActivity())) {
-
-            if(Login_preference.getLogin_flag(getActivity()).equalsIgnoreCase("1"))
+        {
+            if(parent!=null)
             {
-                CallAddtoCartApi();
-            }else {
-                Bundle b = new Bundle();
-                // b.putString("screen", "" + screen);
-                b.putString("subcat_id", "" + subcat_id);
-                b.putString("subcatename", "" + subcatename);
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                LoginFragment myFragment = new LoginFragment();
-                myFragment.setArguments(b);
-                activity.getSupportFragmentManager()
-                        .beginTransaction().setCustomAnimations
-                        (R.anim.fade_in,
-                                0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
+                if (CheckNetwork.isNetworkAvailable(parent)) {
 
+                    if(Login_preference.getLogin_flag(parent).equalsIgnoreCase("1"))
+                    {
+                        CallAddtoCartApi();
+                    }else {
+                        Bundle b = new Bundle();
+                        // b.putString("screen", "" + screen);
+                        b.putString("subcat_id", "" + subcat_id);
+                        b.putString("subcatename", "" + subcatename);
+                        AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                        LoginFragment myFragment = new LoginFragment();
+                        myFragment.setArguments(b);
+                        activity.getSupportFragmentManager()
+                                .beginTransaction().setCustomAnimations
+                                (R.anim.fade_in,
+                                        0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
+
+                    }
+
+                } else {
+                    Toast.makeText(parent, parent.getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
+                }
             }
 
-        } else {
-            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.intcon), Toast.LENGTH_SHORT).show();
-        }
 
         }else if(v==lv_pdetail_addtowishlist)
         {
-            if(iswishlist==true)
+
+            if(parent!=null)
             {
-                //remove wishlist
-                Log.e("wish_remove_id", "=" + wishlist_item_id);
-                if (Login_preference.getLogin_flag(getActivity()).equalsIgnoreCase("1")) {
-                    if (CheckNetwork.isNetworkAvailable(getActivity())) {
-                        callRemoveFromWishlistApi(wishlist_item_id);
-                    } else {
-                        Toast.makeText(getActivity(), getActivity().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                if(iswishlist==true)
+                {
+                    //remove wishlist
+                    Log.e("wish_remove_id", "=" + wishlist_item_id);
+                    if (Login_preference.getLogin_flag(parent).equalsIgnoreCase("1")) {
+                        if (CheckNetwork.isNetworkAvailable(parent)) {
+                            callRemoveFromWishlistApi(wishlist_item_id);
+                        } else {
+                            Toast.makeText(parent, parent.getResources().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        LoginFragment myFragment = new LoginFragment();
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
+                                0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
+                                0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
                     }
-                }else {
-                    LoginFragment myFragment = new LoginFragment();
-                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
-                }
-            }else if(iswishlist==false)
-            {
-                //add wishlsit
-                Log.e("wish_remove_add", "=" + wishlist_item_id);
+                }else if(iswishlist==false)
+                {
+                    //add wishlsit
+                    Log.e("wish_remove_add", "=" + wishlist_item_id);
 
-                if (Login_preference.getLogin_flag(getActivity()).equalsIgnoreCase("1")) {
-                    if (CheckNetwork.isNetworkAvailable(getActivity())) {
-                        CallAddtoWishlistApi_list(product_id);
+                    if (Login_preference.getLogin_flag(parent).equalsIgnoreCase("1")) {
+                        if (CheckNetwork.isNetworkAvailable(parent)) {
+                            CallAddtoWishlistApi_list(product_id);
+                        } else {
+                            Toast.makeText(parent, parent.getString(R.string.internet), Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getActivity(), getActivity().getString(R.string.internet), Toast.LENGTH_SHORT).show();
+
+                        LoginFragment myFragment = new LoginFragment();
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
+                                0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
+                                0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
                     }
-                } else {
 
-                    LoginFragment myFragment = new LoginFragment();
-                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out).setCustomAnimations(R.anim.fade_in,
-                            0, 0, R.anim.fade_out).replace(R.id.framlayout, myFragment).addToBackStack(null).commit();
                 }
-
             }
-        }
+            }
+
 
     }
     private void CallAddtoWishlistApi_list( final String prod_id) {
@@ -550,8 +575,13 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
                         //itemList.get(position).setIsWishlisted("true");
                         iswishlist=true;
-                        tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.removeformwishlist));
+                        if(parent!=null)
+                        {
 
+                            tv_pdetail_wishlist.setText(parent.getResources().getString(R.string.removeformwishlist));
+                            Toast.makeText(parent, ""+parent.getResources().getString(R.string.addtowishlistsucess), Toast.LENGTH_SHORT).show();
+
+                        }
                         callWishlistCountApi();
 
                                 Bundle b = new Bundle();
@@ -598,7 +628,10 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
                 // Log.e("error_wish",""+t);
                 Log.e("debug_remivr", "" + t.getMessage());
-                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                if(parent!=null)
+                {
+                    Toast.makeText(parent, parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -611,12 +644,12 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
         ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
         Log.e("debug_11111", "==" + itemid);
-        Log.e("debug_11token", "==" + Login_preference.getCustomertoken(getActivity()));
+        Log.e("debug_11token", "==" + Login_preference.getCustomertoken(parent));
         ///http://dkbraende.demoproject.info/rest//V1/carts/mine/items/162920
 
         String url = ApiClientcusome.MAIN_URLL + "wishlist/add/" + itemid;
         Log.e("url1111", "==" + url);
-        return api.defaultaddtowishlist("Bearer " + Login_preference.getCustomertoken(getActivity()), url);
+        return api.defaultaddtowishlist("Bearer " + Login_preference.getCustomertoken(parent), url);
     }
 
 
@@ -634,8 +667,13 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                 if (response.code() == 200) {
 
 
+                    if(parent!=null)
+                    {
+                        tv_pdetail_wishlist.setText(parent.getResources().getString(R.string.addtowishlist));
+                        Toast.makeText(parent, ""+parent.getResources().getString(R.string.removeformwishlistsuccess), Toast.LENGTH_SHORT).show();
+                    }
 
-                    tv_pdetail_wishlist.setText(getActivity().getResources().getString(R.string.addtowishlist));
+
                     iswishlist=false;
                     wishlist_item_id="0";
                     callWishlistCountApi();
@@ -658,9 +696,12 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                 nested_scroll_detail.setVisibility(View.VISIBLE);
                 lv_productdetails_progress.setVisibility(View.GONE);
 
-
+                if(parent!=null)
+                {
+                    Toast.makeText(parent, "" + parent.getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+                }
                 // String error=  t.printStackTrace();
-                Toast.makeText(getActivity(), "" + getActivity().getResources().getString(R.string.wentwrong), Toast.LENGTH_SHORT).show();
+
                 Log.e("debug_175125", "pages: " + t);
             }
         });
@@ -676,18 +717,24 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
         String url = ApiClientcusome.MAIN_URLL + "wishlist/delete/" + itemid;
         Log.e("url11", "==" + url);
-        return api.removeitemfromWishlistt("Bearer " + Login_preference.getCustomertoken(getActivity()), url);
+
+        return api.removeitemfromWishlistt("Bearer " + Login_preference.getCustomertoken(parent), url);
     }
 
 
     private void CallAddtoCartApi() {
         lv_productdetails_progress.setVisibility(View.VISIBLE);
         nested_scroll_detail.setVisibility(View.GONE);
-        String url=ApiClientcusome.MAIN_URLL+"carts/mine/items?cartItem[quoteId]="+Login_preference.getdkQuoteId(getActivity())+"&cartItem[qty]=1"+"&cartItem[sku]="+sku;
-        Log.e("skuu","="+sku);
-        Log.e("customertoken","="+Login_preference.getCustomertoken(getActivity()));
-        Log.e("customertoken","="+url);
-        Call<ResponseBody> addtocart = api.getaddtocartapi("Bearer "+Login_preference.getCustomertoken(getActivity()), url);
+        String url = null;
+        if(parent!=null)
+        {
+             url=ApiClientcusome.MAIN_URLL+"carts/mine/items?cartItem[quoteId]="+Login_preference.getdkQuoteId(parent)+"&cartItem[qty]=1"+"&cartItem[sku]="+sku;
+            Log.e("skuu","="+sku);
+            Log.e("customertoken","="+Login_preference.getCustomertoken(parent));
+            Log.e("customertoken","="+url);
+        }
+
+        Call<ResponseBody> addtocart = api.getaddtocartapi("Bearer "+Login_preference.getCustomertoken(parent), url);
         addtocart.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -710,8 +757,11 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                             String sku=jsonObject.getString("sku");
                             String item_id=jsonObject.getString("item_id");
                             String qty=jsonObject.getString("qty");
+                            if(parent!=null)
+                            {
+                                Toast.makeText(parent, ""+parent.getResources().getString(R.string.addtocartsuccess), Toast.LENGTH_SHORT).show( );
+                            }
 
-                            Toast.makeText(getActivity(), "Add to cart SuccessFully", Toast.LENGTH_SHORT).show( );
                             Log.e("jsonObject","="+jsonObject);
                             Log.e("name","="+name);
                             Log.e("price","="+price);
@@ -727,10 +777,22 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
                         e.printStackTrace();
                     }
 
-                }else {
+                }else if(response.code()==400){
+                    Toast.makeText(parent,
+                            ""+parent.getResources().getString(R.string.productoutofstock), Toast.LENGTH_SHORT).show();
+                    lv_productdetails_progress.setVisibility(View.GONE);
+                    nested_scroll_detail.setVisibility(View.VISIBLE);
+                }else if(response.code()==401)
+                {
+                    lv_productdetails_progress.setVisibility(View.GONE);
+                    nested_scroll_detail.setVisibility(View.VISIBLE);
                     NavigationActivity.get_Customer_tokenapi();
                     CallAddtoCartApi();
                 }
+
+
+
+
 
 
 
@@ -739,7 +801,11 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                if(parent!=null)
+                {
+
+                    Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
                 t.printStackTrace();
             }
         });
@@ -748,9 +814,13 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
     //wishlist count
     private void callWishlistCountApi() {
-        Log.e("response201tokenff", "" + Login_preference.getCustomertoken(getActivity()));
+        if(parent!=null)
+        {
+            Log.e("response201tokenff", "" + Login_preference.getCustomertoken(parent));
+        }
+
         ApiInterface api = ApiClientcusome.getClient().create(ApiInterface.class);
-        Call<ResponseBody> customertoken = api.defaultWishlistCount("Bearer " + Login_preference.getCustomertoken(getActivity()));
+        Call<ResponseBody> customertoken = api.defaultWishlistCount("Bearer " + Login_preference.getCustomertoken(parent));
         customertoken.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -762,10 +832,10 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
                         String count = jsonObject.getJSONObject(0).getString("total_items");
                         tv_wishlist_count.setText(count);
-                        if(getActivity()!=null)
+                        if(parent!=null)
                         {
 
-                            Login_preference.set_wishlist_count(getActivity(), count);
+                            Login_preference.set_wishlist_count(parent, count);
                         }
                         Log.e("wishcount", "" + count);
                     } catch (JSONException e) {
@@ -781,7 +851,11 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                if(parent!=null)
+                {
+                    Toast.makeText(parent, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
                 t.printStackTrace();
             }
         });
@@ -799,7 +873,7 @@ public class NewProductDetail_Fragment extends Fragment implements View.OnClickL
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                getActivity().onBackPressed();
+                parent.onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

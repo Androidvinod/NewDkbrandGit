@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/lightblue"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/lv_login_progress"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progressbar_ui"/>
+    </LinearLayout>
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -44,7 +55,8 @@
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:text="Kunde login"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_20"
+                        android:fontFamily="@font/montserratbold"
                         android:textStyle="bold"
                         android:visibility="visible" />
                 </LinearLayout>
@@ -59,17 +71,6 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:id="@+id/lv_login_progress"
-        android:layout_height="match_parent">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateDrawable="@drawable/progressbar_ui"/>
-    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scroll_login"

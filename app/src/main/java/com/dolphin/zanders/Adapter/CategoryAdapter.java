@@ -104,7 +104,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             AppCompatActivity activity = (AppCompatActivity) v.getContext();
                             b.putString("subcat_id", String.valueOf(datum.getId()));
                             b.putString("subcatename",datum.getName());
-                            b.putString("screen","subcategory");
+                            b.putString("screen","category");
 
                             NewProductListFragment myFragment = new NewProductListFragment();
                             myFragment.setArguments(b);

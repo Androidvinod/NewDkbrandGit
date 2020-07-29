@@ -18,13 +18,15 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginBottom="@dimen/padding10"
-        android:layout_marginTop="@dimen/padding5"
+        android:layout_marginTop="@dimen/padding10"
         android:weightSum="4">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
+            android:layout_gravity="center|top"
+            android:gravity="top|center"
             android:orientation="vertical">
 
             <LinearLayout
@@ -37,6 +39,7 @@
                     android:id="@+id/iv_cartlist_product"
                     android:layout_width="match_parent"
                     android:src="@drawable/logo_app"
+                    android:scaleType="fitXY"
                     android:layout_height="match_parent" />
 
             </LinearLayout>
@@ -44,6 +47,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_gravity="center|top"
+            android:gravity="top|center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin10"
@@ -62,7 +67,6 @@
                     android:layout_width="match_parent"
                     android:layout_weight="0.5"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="dfdgdg"
@@ -73,7 +77,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/lv_delete"
+                    android:id="@+id/lv_delete_cart"
                     android:gravity="center|end"
                     android:layout_width="match_parent"
                     android:layout_weight="3.5"
@@ -86,21 +90,18 @@
                 </LinearLayout>
             </LinearLayout>
 
-
-
             <TextView
                 android:id="@+id/tv_cartlist_product_sku"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="dfdgdg"
+                android:gravity="center|start"
                 android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/text_12"
                 android:textStyle="bold" />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"

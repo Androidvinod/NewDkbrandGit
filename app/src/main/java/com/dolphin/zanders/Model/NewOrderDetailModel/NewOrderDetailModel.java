@@ -12,25 +12,25 @@ public class NewOrderDetailModel {
     private String baseCurrencyCode;
     @SerializedName("base_discount_amount")
     @Expose
-    private Integer baseDiscountAmount;
+    private Double baseDiscountAmount;
     @SerializedName("base_grand_total")
     @Expose
-    private Integer baseGrandTotal;
+    private Double baseGrandTotal;
     @SerializedName("base_shipping_amount")
     @Expose
-    private Integer baseShippingAmount;
+    private Double baseShippingAmount;
     @SerializedName("base_subtotal")
     @Expose
-    private Integer baseSubtotal;
+    private Double baseSubtotal;
     @SerializedName("base_tax_amount")
     @Expose
-    private Integer baseTaxAmount;
+    private Double baseTaxAmount;
     @SerializedName("base_total_due")
     @Expose
-    private Integer baseTotalDue;
+    private Double baseTotalDue;
     @SerializedName("billing_address_id")
     @Expose
-    private Integer billingAddressId;
+    private Double billingAddressId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -42,22 +42,22 @@ public class NewOrderDetailModel {
     private String customerFirstname;
     @SerializedName("customer_group_id")
     @Expose
-    private Integer customerGroupId;
+    private Double customerGroupId;
     @SerializedName("customer_id")
     @Expose
-    private Integer customerId;
+    private Double customerId;
     @SerializedName("customer_lastname")
     @Expose
     private String customerLastname;
     @SerializedName("discount_amount")
     @Expose
-    private Integer discountAmount;
+    private Double discountAmount;
     @SerializedName("entity_id")
     @Expose
-    private Integer entityId;
+    private Double entityId;
     @SerializedName("grand_total")
     @Expose
-    private Integer grandTotal;
+    private Double grandTotal;
     @SerializedName("increment_id")
     @Expose
     private String incrementId;
@@ -66,25 +66,25 @@ public class NewOrderDetailModel {
     private String protectCode;
     @SerializedName("shipping_amount")
     @Expose
-    private Integer shippingAmount;
+    private Double shippingAmount;
     @SerializedName("store_name")
     @Expose
     private String storeName;
     @SerializedName("subtotal")
     @Expose
-    private Integer subtotal;
+    private Double subtotal;
     @SerializedName("subtotal_incl_tax")
     @Expose
-    private Integer subtotalInclTax;
+    private Double subtotalInclTax;
     @SerializedName("tax_amount")
     @Expose
-    private Integer taxAmount;
+    private Double taxAmount;
     @SerializedName("total_due")
     @Expose
-    private Integer totalDue;
+    private Double totalDue;
     @SerializedName("total_item_count")
     @Expose
-    private Integer totalItemCount;
+    private Double totalItemCount;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
@@ -112,59 +112,59 @@ public class NewOrderDetailModel {
         this.baseCurrencyCode = baseCurrencyCode;
     }
 
-    public Integer getBaseDiscountAmount() {
+    public Double getBaseDiscountAmount() {
         return baseDiscountAmount;
     }
 
-    public void setBaseDiscountAmount(Integer baseDiscountAmount) {
+    public void setBaseDiscountAmount(Double baseDiscountAmount) {
         this.baseDiscountAmount = baseDiscountAmount;
     }
 
-    public Integer getBaseGrandTotal() {
+    public Double getBaseGrandTotal() {
         return baseGrandTotal;
     }
 
-    public void setBaseGrandTotal(Integer baseGrandTotal) {
+    public void setBaseGrandTotal(Double baseGrandTotal) {
         this.baseGrandTotal = baseGrandTotal;
     }
 
-    public Integer getBaseShippingAmount() {
+    public Double getBaseShippingAmount() {
         return baseShippingAmount;
     }
 
-    public void setBaseShippingAmount(Integer baseShippingAmount) {
+    public void setBaseShippingAmount(Double baseShippingAmount) {
         this.baseShippingAmount = baseShippingAmount;
     }
 
-    public Integer getBaseSubtotal() {
+    public Double getBaseSubtotal() {
         return baseSubtotal;
     }
 
-    public void setBaseSubtotal(Integer baseSubtotal) {
+    public void setBaseSubtotal(Double baseSubtotal) {
         this.baseSubtotal = baseSubtotal;
     }
 
-    public Integer getBaseTaxAmount() {
+    public Double getBaseTaxAmount() {
         return baseTaxAmount;
     }
 
-    public void setBaseTaxAmount(Integer baseTaxAmount) {
+    public void setBaseTaxAmount(Double baseTaxAmount) {
         this.baseTaxAmount = baseTaxAmount;
     }
 
-    public Integer getBaseTotalDue() {
+    public Double getBaseTotalDue() {
         return baseTotalDue;
     }
 
-    public void setBaseTotalDue(Integer baseTotalDue) {
+    public void setBaseTotalDue(Double baseTotalDue) {
         this.baseTotalDue = baseTotalDue;
     }
 
-    public Integer getBillingAddressId() {
+    public Double getBillingAddressId() {
         return billingAddressId;
     }
 
-    public void setBillingAddressId(Integer billingAddressId) {
+    public void setBillingAddressId(Double billingAddressId) {
         this.billingAddressId = billingAddressId;
     }
 
@@ -192,19 +192,19 @@ public class NewOrderDetailModel {
         this.customerFirstname = customerFirstname;
     }
 
-    public Integer getCustomerGroupId() {
+    public Double getCustomerGroupId() {
         return customerGroupId;
     }
 
-    public void setCustomerGroupId(Integer customerGroupId) {
+    public void setCustomerGroupId(Double customerGroupId) {
         this.customerGroupId = customerGroupId;
     }
 
-    public Integer getCustomerId() {
+    public Double getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Double customerId) {
         this.customerId = customerId;
     }
 
@@ -216,27 +216,27 @@ public class NewOrderDetailModel {
         this.customerLastname = customerLastname;
     }
 
-    public Integer getDiscountAmount() {
+    public Double getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(Integer discountAmount) {
+    public void setDiscountAmount(Double discountAmount) {
         this.discountAmount = discountAmount;
     }
 
-    public Integer getEntityId() {
+    public Double getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(Integer entityId) {
+    public void setEntityId(Double entityId) {
         this.entityId = entityId;
     }
 
-    public Integer getGrandTotal() {
+    public Double getGrandTotal() {
         return grandTotal;
     }
 
-    public void setGrandTotal(Integer grandTotal) {
+    public void setGrandTotal(Double grandTotal) {
         this.grandTotal = grandTotal;
     }
 
@@ -256,11 +256,11 @@ public class NewOrderDetailModel {
         this.protectCode = protectCode;
     }
 
-    public Integer getShippingAmount() {
+    public Double getShippingAmount() {
         return shippingAmount;
     }
 
-    public void setShippingAmount(Integer shippingAmount) {
+    public void setShippingAmount(Double shippingAmount) {
         this.shippingAmount = shippingAmount;
     }
 
@@ -272,43 +272,43 @@ public class NewOrderDetailModel {
         this.storeName = storeName;
     }
 
-    public Integer getSubtotal() {
+    public Double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(Integer subtotal) {
+    public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
 
-    public Integer getSubtotalInclTax() {
+    public Double getSubtotalInclTax() {
         return subtotalInclTax;
     }
 
-    public void setSubtotalInclTax(Integer subtotalInclTax) {
+    public void setSubtotalInclTax(Double subtotalInclTax) {
         this.subtotalInclTax = subtotalInclTax;
     }
 
-    public Integer getTaxAmount() {
+    public Double getTaxAmount() {
         return taxAmount;
     }
 
-    public void setTaxAmount(Integer taxAmount) {
+    public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
     }
 
-    public Integer getTotalDue() {
+    public Double getTotalDue() {
         return totalDue;
     }
 
-    public void setTotalDue(Integer totalDue) {
+    public void setTotalDue(Double totalDue) {
         this.totalDue = totalDue;
     }
 
-    public Integer getTotalItemCount() {
+    public Double getTotalItemCount() {
         return totalItemCount;
     }
 
-    public void setTotalItemCount(Integer totalItemCount) {
+    public void setTotalItemCount(Double totalItemCount) {
         this.totalItemCount = totalItemCount;
     }
 
